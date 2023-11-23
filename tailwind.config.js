@@ -21,6 +21,8 @@ module.exports = {
       },
     },
     screens: {
+      "sm-min": { min: "468.98px" },
+      "sm-max": { max: "468.98px" },
       "md-min": { min: "767.98px" },
       "md-max": { max: "767.98px" },
     },

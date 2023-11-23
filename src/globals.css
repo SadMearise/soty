@@ -92,7 +92,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+html,
+body,
+#root {
   display: block;
   height: 100%;
   width: 100%;
