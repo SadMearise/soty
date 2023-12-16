@@ -7,9 +7,14 @@ module.exports = {
       white: "#ffffff",
       "white-50": "#f6f6f6",
       black: "#000000",
-      grey: "#a7a7a7",
-      "grey-50": "#878787",
-      dark: "#121212",
+      grey: {
+        100: "#a7a7a7",
+        200: "#878787",
+      },
+      dark: {
+        100: "#121212",
+        200: "#282828",
+      },
     },
     animation: {
       slidedown: "slidedown 1s ease-in-out",
