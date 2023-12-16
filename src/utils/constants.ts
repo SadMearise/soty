@@ -11,10 +11,24 @@ export const URI = "http://localhost:3000/";
 export const TOKEN_NAME_FROM_PARAMS = "access_token";
 export const LOCAL_STORAGE_KEYS = {
   token: "token",
+  authInProgress: "authInProgress",
 };
 
 export const LINKS = {
-  home: { path: "/", title: "Soty - Web Player" },
-  error: { path: "*", title: "Страница не найдена" },
-  login: { path: "/login", title: "Войти - Soty" },
+  home: { route: "/", title: "Soty - Web Player" },
+  error: { route: "*", title: "Страница не найдена" },
+  login: { route: "/login", title: "Войти - Soty" },
+  search: { route: "/search", title: "Soty - Поиск" },
 };
+
+export const LEFT_BAR_LINKS = [
+  { name: "Главная", route: LINKS.home.route, label: "home", icon: "/icons/home.svg" },
+  { name: "Поиск", route: LINKS.search.route, label: "search", icon: "/icons/search.svg" },
+];
+
+export enum TooltipPosition {
+  Top = "top",
+  Bottom = "bottom",
+  Left = "left",
+  Right = "right",
+}
