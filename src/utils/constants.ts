@@ -5,8 +5,9 @@ export const CLIENT_DATA: ClientData = {
   clientId: import.meta.env.VITE_CTP_CLIENT_ID || "",
 };
 
-export const RESPONSE_TYPE = "token";
+export const USER_ENDPOINT = "https://api.spotify.com/v1/me";
 export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+export const RESPONSE_TYPE = "token";
 export const URI = "http://localhost:3000/";
 export const TOKEN_NAME_FROM_PARAMS = "access_token";
 export const LOCAL_STORAGE_KEYS = {
@@ -31,4 +32,8 @@ export enum TooltipPosition {
   Bottom = "bottom",
   Left = "left",
   Right = "right",
+}
+
+export enum HTTPMethods {
+  Get = "GET",
 }
