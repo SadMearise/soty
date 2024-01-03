@@ -1,5 +1,7 @@
 import { ClientData } from "../models";
 
+export const PROJECT_NAME = "Soty";
+
 export const CLIENT_DATA: ClientData = {
   clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET || "",
   clientId: import.meta.env.VITE_CTP_CLIENT_ID || "",
@@ -16,16 +18,12 @@ export const LOCAL_STORAGE_KEYS = {
 };
 
 export const LINKS = {
-  home: { route: "/", title: "Soty - Web Player" },
+  home: { route: "/", title: `${PROJECT_NAME} - Web Player` },
   error: { route: "*", title: "Страница не найдена" },
-  login: { route: "/login", title: "Войти - Soty" },
-  search: { route: "/search", title: "Soty - Поиск" },
+  login: { route: "/login", title: `Войти - ${PROJECT_NAME}` },
+  search: { route: "/search", title: `${PROJECT_NAME} - Поиск` },
+  profile: { route: "/profile", title: "Профиль" },
 };
-
-export const LEFT_BAR_LINKS = [
-  { name: "Главная", route: LINKS.home.route, label: "home", icon: "/icons/home.svg" },
-  { name: "Поиск", route: LINKS.search.route, label: "search", icon: "/icons/search.svg" },
-];
 
 export enum TooltipPosition {
   Top = "top",

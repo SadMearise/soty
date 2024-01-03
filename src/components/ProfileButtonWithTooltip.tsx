@@ -1,18 +1,17 @@
 import { FC } from "react";
 import withTooltip from "../hocs/withTooltip";
 import { TooltipPosition } from "../utils/constants";
-import useUsername from "../utils/hooks/useUsername";
 import IconButton from "./IconButton";
 import Tooltip from "./Tooltip";
+import { User } from "../models";
 
 type ProfileButtonWithTooltipProps = {
   position: TooltipPosition;
+  username: User["display_name"];
 };
 
-const ProfileButtonWithTooltip: FC<ProfileButtonWithTooltipProps> = ({ position }) => {
-  const username = useUsername();
-
-  const ProfileWithTooltip = withTooltip(() => {
+const ProfileButtonWithTooltip: FC<ProfileButtonWithTooltipProps> = ({ position, username }) => {
+  const profileIcon = () => {
     return (
       <IconButton
         label="profile"
@@ -23,7 +22,9 @@ const ProfileButtonWithTooltip: FC<ProfileButtonWithTooltipProps> = ({ position 
         {username[0]}
       </IconButton>
     );
-  }, Tooltip);
+  };
+
+  const ProfileWithTooltip = withTooltip(profileIcon, Tooltip);
 
   return (
     <ProfileWithTooltip

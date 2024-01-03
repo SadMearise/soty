@@ -1,7 +1,7 @@
 import { FC } from "react";
-import LoginHeader from "../components/LoginHeader";
-import PageContainer from "../components/PageContainer";
-import LoginSection from "../components/LoginSection";
+import LoginHeader from "./Header";
+import PageContainer from "../../components/PageContainer";
+import LoginSection from "./Section";
 
 type LoginProps = {
   handleLogin: () => void;

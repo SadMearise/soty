@@ -1,6 +1,7 @@
 import { FC } from "react";
-import withButtonStyles from "../hocs/withButtonStyles";
-import BaseButton from "./BaseButton";
+import withButtonStyles from "../../hocs/withButtonStyles";
+import BaseButton from "../../components/BaseButton";
+import { PROJECT_NAME } from "../../utils/constants";
 
 type LoginSectionProps = {
   handleLogin: () => void;
@@ -21,7 +22,7 @@ const LoginSection: FC<LoginSectionProps> = ({ handleLogin, animation }) => {
     <section className={`${classes.section} ${animation}`}>
       <div className={classes.container}>
         <div className={classes.body}>
-          <h1 className={classes.title}>Войти в Soty</h1>
+          <h1 className={classes.title}>Войти в {PROJECT_NAME}</h1>
           <Button
             variant="default-green"
             width="full"

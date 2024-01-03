@@ -1,20 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import { LINKS } from "./utils/constants";
 import Search from "./pages/Search";
 import RequireAuth from "./hocs/RequireAuth";
-import { useAppDispatch } from "./store/hooks";
-import { login } from "./store/features/oAuth/oAuthSlice";
 import HomeLayout from "./layout/HomeLayout";
+import useLogin from "./utils/hooks/useLogin";
 
 const App = () => {
-  const dispatch = useAppDispatch();
-
-  const handleLogin = () => {
-    dispatch(login());
-  };
+  const handleLogin = useLogin();
 
   return (
     <Routes>

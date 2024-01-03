@@ -1,4 +1,4 @@
-import Logo from "./Logo";
+import Logo from "../../components/Logo";
 
 const classes = {
   container: "bg-black px-[52px] py-8",

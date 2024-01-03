@@ -7,7 +7,7 @@ type WithTooltipProps = {
 
 const classes = {
   wrapper: "relative text-[0px]",
-  body: "absolute",
+  body: "absolute z-50",
   "tooltip-position-top": "bottom-full left-1/2 translate-x-[-50%] mb-2",
   "tooltip-position-bottom": "top-full left-1/2 translate-x-[-50%] mt-2",
   "tooltip-position-left": "right-full top-1/2 translate-y-[-50%] mr-2",

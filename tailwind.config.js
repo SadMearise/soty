@@ -25,6 +25,9 @@ module.exports = {
         to: { opacity: 1, transform: "none" },
       },
     },
+    boxShadow: {
+      default: "0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2)",
+    },
     screens: {
       "sm-min": { min: "468.98px" },
       "sm-max": { max: "468.98px" },

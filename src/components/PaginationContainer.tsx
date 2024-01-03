@@ -1,29 +1,17 @@
-import { useNavigate } from "react-router-dom";
 import { FC } from "react";
 import Pagination from "./Pagination";
 import withTooltip from "../hocs/withTooltip";
 import IconButton from "./IconButton";
 import { TooltipPosition } from "../utils/constants";
 import Tooltip from "./Tooltip";
+import useRouterPagination from "../utils/hooks/useRouterPagination";
 
-type RouterPaginationProps = {
+type PaginationContainerProps = {
   startedHistoryLength: number;
 };
 
-const RouterPagination: FC<RouterPaginationProps> = ({ startedHistoryLength }) => {
-  const navigate = useNavigate();
-
-  const { state, length } = window.history;
-  const prevButtonIsDisabled = state.idx === 0;
-  const nextButtonIsDisabled = length - state.idx === startedHistoryLength;
-
-  const goBack = () => {
-    navigate(-1);
-  };
-
-  const goForward = () => {
-    navigate(1);
-  };
+const PaginationContainer: FC<PaginationContainerProps> = ({ startedHistoryLength }) => {
+  const { prevButtonIsDisabled, nextButtonIsDisabled, goBack, goForward } = useRouterPagination(startedHistoryLength);
 
   const prevButton = () => {
     return (
@@ -92,4 +80,4 @@ const RouterPagination: FC<RouterPaginationProps> = ({ startedHistoryLength }) =
   );
 };
 
-export default RouterPagination;
+export default PaginationContainer;

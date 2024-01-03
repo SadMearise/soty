@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { LINKS } from "../utils/constants";
+import { LINKS, PROJECT_NAME } from "../utils/constants";
 
 type LogoProps = {
   size?: string;
@@ -30,7 +30,7 @@ const Logo: FC<LogoProps> = ({ size = "sm", isTitle = true }) => {
         alt="logo"
         src="/images/logo.png"
       />
-      {isTitle && <span className={classes.text}>Soty</span>}
+      {isTitle && <span className={classes.text}>{PROJECT_NAME}</span>}
     </Link>
   );
 };

@@ -41,6 +41,7 @@ module.exports = {
     "react/state-in-constructor": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": ["error", "only-multiline"],
+    "react/jsx-wrap-multilines": ["error", { declaration: "parens-new-line" }],
     "no-multiple-empty-lines": [
       "error",
       {

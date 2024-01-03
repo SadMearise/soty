@@ -6,7 +6,6 @@ const fetchUser = async (): Promise<User | undefined> => {
   try {
     const response = await fetch(USER_ENDPOINT, {
       method: HTTPMethods.Get,
-
       headers: {
         Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.token)}`,
       },

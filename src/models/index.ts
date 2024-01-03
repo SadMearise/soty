@@ -31,3 +31,9 @@ export type User = {
   type: string;
   uri: string;
 };
+
+export type ProfileMenuItem = {
+  name: string;
+  href?: string;
+  onClick?: () => void;
+};
