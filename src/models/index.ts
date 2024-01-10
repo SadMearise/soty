@@ -1,9 +1,10 @@
-export type ClientData = {
+export interface ClientData {
   clientSecret: string;
   clientId: string;
-};
+  scope: string;
+}
 
-export type User = {
+export interface User {
   country?: string;
   display_name: string;
   email?: string;
@@ -30,10 +31,18 @@ export type User = {
   product: string;
   type: string;
   uri: string;
-};
+}
 
-export type ProfileMenuItem = {
+export interface ProfileMenuItem {
   name: string;
   href?: string;
   onClick?: () => void;
-};
+}
+
+export interface Token {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  scope: string;
+}

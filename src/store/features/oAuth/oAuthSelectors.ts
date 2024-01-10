@@ -4,6 +4,6 @@ export const selectIsAuthenticated = (state: RootState) => {
   return state.oAuth.isAuthenticated;
 };
 
-export const selectIsAuthInProgress = (state: RootState) => {
-  return state.oAuth.isAuthInProgress;
+export const selectIsAuthProgress = (state: RootState) => {
+  return state.oAuth.isAuthProgress;
 };

@@ -5,16 +5,26 @@ export const PROJECT_NAME = "Soty";
 export const CLIENT_DATA: ClientData = {
   clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET || "",
   clientId: import.meta.env.VITE_CTP_CLIENT_ID || "",
+  scope: import.meta.env.VITE_CTP_SCOPE || "",
 };
 
-export const USER_ENDPOINT = "https://api.spotify.com/v1/me";
-export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-export const RESPONSE_TYPE = "token";
-export const URI = "http://localhost:3000/";
+export const ENDPOINTS = {
+  auth: "https://accounts.spotify.com/authorize",
+  user: "https://api.spotify.com/v1/me",
+  token: "https://accounts.spotify.com/api/token",
+  "new-releases": "",
+};
+
+export const RESPONSE_TYPE = "code";
+export const CODE_CHALLENGE_METHOD = "S256";
+export const REDIRECT_URI = "http://localhost:3000/";
 export const TOKEN_NAME_FROM_PARAMS = "access_token";
 export const LOCAL_STORAGE_KEYS = {
-  token: "token",
-  authInProgress: "authInProgress",
+  authCode: "authCode",
+  authProgress: "authProgress",
+  accessToken: "accessToken",
+  refreshToken: "refreshToken",
+  codeVerifier: "codeVerifier",
 };
 
 export const LINKS = {
@@ -32,6 +42,11 @@ export enum TooltipPosition {
   Right = "right",
 }
 
-export enum HTTPMethods {
+export enum HTTPMethod {
   Get = "GET",
+  Post = "POST",
+}
+
+export enum HTTPStatusCode {
+  Unauthorized = 401,
 }

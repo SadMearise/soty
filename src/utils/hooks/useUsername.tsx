@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchUser from "../../services/User";
+import fetchUser from "../../services/user";
 
 const useUsername = () => {
   const [username, setUsername] = useState("");
