@@ -8,7 +8,8 @@ import { LINKS, TooltipPosition } from "../utils/constants";
 import ProfileButtonWithTooltip from "../components/ProfileButtonWithTooltip";
 import DropdownMenu from "../components/DropdownMenu";
 import useUsername from "../utils/hooks/useUsername";
-import useProfileItems from "../utils/hooks/useProfileItems";
+import useLogout from "../utils/hooks/useLogout";
+import { ProfileMenuItem } from "../models";
 
 const navigateItems = [
   { name: "Главная", route: LINKS.home.route, label: "home", icon: "/icons/home.svg" },
@@ -16,7 +17,15 @@ const navigateItems = [
 ];
 
 const HomeLayout = () => {
-  const { menuItems, isOpen, toggleMenu, buttonRef } = useProfileItems();
+  const handleLogout = useLogout();
+  const menuItems: ProfileMenuItem[] = [
+    { name: "Профиль", href: LINKS.profile.route },
+    {
+      name: "Выйти",
+      onClick: handleLogout,
+    },
+  ];
+
   const { length, state } = window.history;
   const startedHistoryLength = state.idx === 0 ? length : length - state.idx;
 
@@ -71,9 +80,6 @@ const HomeLayout = () => {
                     />
                   }
                   menuItems={menuItems}
-                  isOpen={isOpen}
-                  toggleMenu={toggleMenu}
-                  buttonRef={buttonRef}
                 />
               </header>
               <Outlet />

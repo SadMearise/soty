@@ -1,14 +1,12 @@
-import { FC, ReactNode, RefObject } from "react";
+import { FC, ReactNode, useState, useRef } from "react";
 import ProfileList from "./ProfileList";
 import ProfileItem from "./ProfileItem";
 import { ProfileMenuItem } from "../models";
+import useClickOutside from "../utils/hooks/useClickOutside";
 
 type DropdownMenuProps = {
   buttonElement: ReactNode;
   menuItems: ProfileMenuItem[];
-  isOpen: boolean;
-  toggleMenu: () => void;
-  buttonRef: RefObject<HTMLDivElement>;
 };
 
 const classes = {
@@ -17,7 +15,18 @@ const classes = {
     "absolute right-0 mt-3 max-w-[350px] min-w-[160px] p-1 shadow-default bg-dark-200 whitespace-nowrap rounded overflow-auto",
 };
 
-const DropdownMenu: FC<DropdownMenuProps> = ({ buttonElement, menuItems, isOpen, toggleMenu, buttonRef }) => {
+const DropdownMenu: FC<DropdownMenuProps> = ({ buttonElement, menuItems }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useClickOutside(buttonRef, () => {
+    return setIsOpen(false);
+  });
+
   return (
     <div className={classes.wrapper}>
       <div
