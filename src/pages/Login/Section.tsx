@@ -1,14 +1,11 @@
 import { FC } from "react";
-import withButtonStyles from "../../hocs/withButtonStyles";
-import BaseButton from "../../components/BaseButton";
 import { PROJECT_NAME } from "../../utils/constants";
+import Button from "../../components/Button";
 
 type LoginSectionProps = {
   handleLogin: () => void;
   animation?: string;
 };
-
-const Button = withButtonStyles(BaseButton);
 
 const classes: Record<string, string> = {
   section: "h-full flex items-center justify-center",
@@ -24,10 +21,11 @@ const LoginSection: FC<LoginSectionProps> = ({ handleLogin, animation }) => {
         <div className={classes.body}>
           <h1 className={classes.title}>Войти в {PROJECT_NAME}</h1>
           <Button
-            variant="default-green"
-            width="full"
-            label="login"
-            action={handleLogin}
+            as="button"
+            className="btn btn-default-green w-full"
+            aria-label="login"
+            type="button"
+            onClick={handleLogin}
           >
             Войти
           </Button>

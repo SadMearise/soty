@@ -1,9 +1,6 @@
-import LinkButton from "../components/LinkButton";
+import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
-import withButtonStyles from "../hocs/withButtonStyles";
 import { LINKS } from "../utils/constants";
-
-const Link = withButtonStyles(LinkButton);
 
 const classes = {
   content:
@@ -28,9 +25,8 @@ const Error = () => {
         <h1 className={classes.title}>Страница не найдена</h1>
         <p className={classes.text}>Мы не нашли нужную страницу.</p>
         <Link
-          variant="big-white"
-          href={LINKS.home.route}
-          tabIndex={0}
+          className="btn btn-big-white"
+          to={LINKS.home.route}
         >
           Главная
         </Link>

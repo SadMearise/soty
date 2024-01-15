@@ -1,6 +1,5 @@
 import { FC } from "react";
-import BaseButton from "./BaseButton";
-import LinkButton from "./LinkButton";
+import Button from "./Button";
 
 type ProfileItemProps = {
   name: string;
@@ -15,23 +14,26 @@ const classes = {
 const ProfileItem: FC<ProfileItemProps> = ({ name, href, onClick }) => {
   if (href) {
     return (
-      <LinkButton
-        className={classes.item}
+      <Button
+        as="link"
+        styles={classes.item}
         href={href}
       >
         {name}
-      </LinkButton>
+      </Button>
     );
   }
 
   return (
-    <BaseButton
-      className={classes.item}
-      label={name}
+    <Button
+      as="button"
+      styles={classes.item}
+      aria-label={name}
+      type="button"
       onClick={onClick}
     >
       {name}
-    </BaseButton>
+    </Button>
   );
 };
 

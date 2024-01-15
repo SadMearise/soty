@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import BaseButton from "./BaseButton";
+import Button from "./Button";
 
 type IconButtonProps = {
   label: string;
@@ -14,14 +14,16 @@ const classes: Record<string, string> = {
 
 const IconButton: FC<PropsWithChildren<IconButtonProps>> = ({ children, action, label, disabled }) => {
   return (
-    <BaseButton
-      label={label}
-      styles={classes.button}
-      action={action}
+    <Button
+      as="button"
+      type="button"
+      aria-label={label}
+      onClick={action}
+      className={classes.button}
       disabled={disabled}
     >
       <span className={classes.icon}>{children}</span>
-    </BaseButton>
+    </Button>
   );
 };
 
