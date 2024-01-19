@@ -12,7 +12,8 @@ export const ENDPOINTS = {
   auth: "https://accounts.spotify.com/authorize",
   user: "https://api.spotify.com/v1/me",
   token: "https://accounts.spotify.com/api/token",
-  "new-releases": "",
+  newReleases: "https://api.spotify.com/v1/browse/new-releases",
+  featuredPlaylists: "https://api.spotify.com/v1/browse/featured-playlists",
 };
 
 export const RESPONSE_TYPE = "code";
