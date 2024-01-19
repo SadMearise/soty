@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LINKS, PROJECT_NAME } from "../utils/constants";
 
 type LogoProps = {
-  size?: string;
+  size?: "xs" | "sm" | "md";
   isTitle?: boolean;
 };
 
@@ -13,7 +13,7 @@ const classes: Record<string, string> = {
   text: "text-white",
 };
 
-const sizeStyles: Record<string, string> = {
+const sizes: Record<string, string> = {
   xs: "w-6",
   sm: "w-9",
   md: "w-[60px] md-max:w-6",
@@ -26,7 +26,7 @@ const Logo: FC<LogoProps> = ({ size = "sm", isTitle = true }) => {
       to={LINKS.home.route}
     >
       <img
-        className={`${classes.image} ${sizeStyles[size]}`}
+        className={`${classes.image} ${sizes[size]}`}
         alt="logo"
         src="/images/logo.png"
       />
