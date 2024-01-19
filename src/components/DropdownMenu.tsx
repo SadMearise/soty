@@ -12,7 +12,7 @@ type DropdownMenuProps = {
 const classes = {
   wrapper: "relative",
   navigation:
-    "absolute right-0 mt-3 max-w-[350px] min-w-[160px] p-1 shadow-default bg-dark-200 whitespace-nowrap rounded overflow-auto",
+    "absolute right-0 mt-3 max-w-[350px] min-w-[160px] p-1 shadow-default bg-dark-200 whitespace-nowrap rounded overflow-auto z-20",
 };
 
 const DropdownMenu: FC<DropdownMenuProps> = ({ buttonElement, menuItems }) => {
