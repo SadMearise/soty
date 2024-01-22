@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import CircleIcon from "../CircleIcon";
-import SvgGenerator from "./SvgGenerator";
+import SvgGenerator from "../SvgGenerator";
 import { Image, PlaylistItem } from "../../models";
 
 type FrontPlaylistItemProps = Pick<PlaylistItem, "name"> & Pick<Image, "url">;

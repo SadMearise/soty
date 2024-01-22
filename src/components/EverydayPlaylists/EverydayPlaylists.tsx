@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { PlaylistItem } from "../../models";
-import PlaylistList from "./PlaylistList";
-import PlaylistCard from "./PlaylistCard";
+import PlaylistList from "./EverydayPlaylistList";
+import PlaylistCard from "./EverydayPlaylistCard";
 
 type EverydayPlaylistsProps = {
   playlists: PlaylistItem[];
