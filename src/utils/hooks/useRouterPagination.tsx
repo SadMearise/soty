@@ -1,19 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const useRouterPagination = (startedHistoryLength: number) => {
-  const navigate = useNavigate();
-
-  const { state, length } = window.history;
-  const prevButtonIsDisabled = state.idx === 0;
-  const nextButtonIsDisabled = length - state.idx === startedHistoryLength;
+const useRouterPagination = (historyStack: string[], startedHistoryLength?: number) => {
+  const [prevButtonIsDisabled, setPrevButtonIsDisabled] = useState(true);
+  const [nextButtonIsDisabled, setNextButtonIsDisabled] = useState(true);
 
   const goBack = () => {
-    navigate(-1);
+    window.history.back();
   };
 
   const goForward = () => {
-    navigate(1);
+    window.history.forward();
   };
+
+  useEffect(() => {
+    if (historyStack && startedHistoryLength) {
+      setPrevButtonIsDisabled(window.history.state.idx === 0);
+      setNextButtonIsDisabled(window.history.state.idx + startedHistoryLength === window.history.length);
+    }
+  }, [historyStack, startedHistoryLength]);
 
   return { prevButtonIsDisabled, nextButtonIsDisabled, goBack, goForward };
 };

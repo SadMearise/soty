@@ -19,20 +19,18 @@ const sizes: Record<string, string> = {
   md: "w-[60px] md-max:w-6",
 };
 
-const Logo: FC<LogoProps> = ({ size = "sm", isTitle = true }) => {
-  return (
-    <Link
-      className={classes.logo}
-      to={LINKS.home.route}
-    >
-      <img
-        className={`${classes.image} ${sizes[size]}`}
-        alt="logo"
-        src="/images/logo.png"
-      />
-      {isTitle && <span className={classes.text}>{PROJECT_NAME}</span>}
-    </Link>
-  );
-};
+const Logo: FC<LogoProps> = ({ size = "sm", isTitle = true }) => (
+  <Link
+    className={classes.logo}
+    to={LINKS.home.route}
+  >
+    <img
+      className={`${classes.image} ${sizes[size]}`}
+      alt="logo"
+      src="/images/logo.png"
+    />
+    {isTitle && <span className={classes.text}>{PROJECT_NAME}</span>}
+  </Link>
+);
 
 export default Logo;

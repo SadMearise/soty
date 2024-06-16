@@ -1,27 +1,27 @@
 /* eslint-disable react/button-has-type */
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, MouseEvent, PropsWithChildren } from "react";
 
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+export type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   as: "link";
 };
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   as: "button";
   type: "submit" | "reset" | "button";
   "aria-label": string;
+  onClick?: (event: MouseEvent<HTMLElement>) => void | Promise<void> | (() => void);
 };
 
 type ButtonOrLinkProps = {
-  onClick?: () => void;
   styles?: string;
 } & (AnchorProps | ButtonProps);
 
-const Button: FC<PropsWithChildren<ButtonOrLinkProps>> = ({ children, onClick, styles, ...props }) => {
+const Button: FC<PropsWithChildren<ButtonOrLinkProps>> = ({ children, styles, ...props }) => {
   if (props.as === "link") {
     return (
       <a
         className={styles}
-        {...props}
+        {...(props as AnchorProps)}
       >
         {children}
       </a>
@@ -30,8 +30,7 @@ const Button: FC<PropsWithChildren<ButtonOrLinkProps>> = ({ children, onClick, s
   return (
     <button
       className={styles}
-      onClick={onClick}
-      {...props}
+      {...(props as ButtonProps)}
     >
       {children}
     </button>

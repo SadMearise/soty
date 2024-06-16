@@ -1,13 +1,11 @@
 import { LOCAL_STORAGE_KEYS } from "../constants";
-import { getLocalStorage, setLocalStorage } from "./localStorage";
+import { getLocalStorage, setLocalStorage } from ".";
 
 const generateRandomString = (length: number) => {
   const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const values = crypto.getRandomValues(new Uint8Array(length));
 
-  return values.reduce((acc, x) => {
-    return acc + possible[x % possible.length];
-  }, "");
+  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
 };
 
 export const getCodeVerifier = () => {

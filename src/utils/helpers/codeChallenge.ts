@@ -1,6 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from "../constants";
-import { setCodeVerifier } from "./codeVerifier";
-import { getLocalStorage } from "./localStorage";
+import { setCodeVerifier, getLocalStorage } from ".";
 
 const sha256 = async (plain: string) => {
   const encoder = new TextEncoder();
@@ -9,13 +8,12 @@ const sha256 = async (plain: string) => {
 };
 
 const base64encode = (input: ArrayBuffer) => {
-  return btoa(String.fromCharCode(...new Uint8Array(input)))
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+  const base64 = btoa(String.fromCharCode(...new Uint8Array(input)));
+
+  return base64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 };
 
-const getCodeChallenge = async () => {
+export const getCodeChallenge = async () => {
   setCodeVerifier();
   const codeVerifier = getLocalStorage(LOCAL_STORAGE_KEYS.codeVerifier)!;
 
@@ -24,5 +22,3 @@ const getCodeChallenge = async () => {
 
   return codeChallenge;
 };
-
-export default getCodeChallenge;

@@ -66,7 +66,7 @@ module.exports = {
     "react/no-array-index-key": "off",
     "react/jsx-props-no-spreading": "off",
     "no-confusing-arrow": ["error", { allowParens: true }],
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": "off",
     quotes: ["error", "double"],
     "no-shadow": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
@@ -89,6 +89,7 @@ module.exports = {
       },
     ],
     "react/require-default-props": "off",
+    "prefer-destructuring": ["error", { object: true, array: false }],
   },
   settings: {
     react: {

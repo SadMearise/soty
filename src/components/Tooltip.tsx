@@ -5,11 +5,9 @@ type TooltipProps = {
 };
 
 const classes = {
-  tooltip: "py-1 px-2 bg-dark-200 text-white text-sm whitespace-nowrap rounded shadow-default",
+  tooltip: "py-1 px-2 bg-dark-200 text-white text-sm whitespace-nowrap rounded shadow-primary",
 };
 
-const Tooltip: FC<TooltipProps> = ({ tooltipText }) => {
-  return <span className={`${classes.tooltip}`}>{tooltipText}</span>;
-};
+const Tooltip: FC<TooltipProps> = ({ tooltipText }) => <span className={`${classes.tooltip}`}>{tooltipText}</span>;
 
 export default Tooltip;

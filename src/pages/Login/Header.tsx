@@ -1,15 +1,13 @@
-import Logo from "../../components/Logo";
+import { Logo } from "../../components";
 
 const classes = {
   container: "bg-black px-[52px] py-8",
 };
 
-const LoginHeader = () => {
-  return (
-    <div className={classes.container}>
-      <Logo />
-    </div>
-  );
-};
+const Header = () => (
+  <div className={classes.container}>
+    <Logo />
+  </div>
+);
 
-export default LoginHeader;
+export default Header;

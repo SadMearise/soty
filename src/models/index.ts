@@ -1,86 +1,4 @@
-export interface ClientData {
-  clientSecret: string;
-  clientId: string;
-  scope: string;
-}
-
-export interface PaginationInfo {
-  href: string;
-  limit: number;
-  next: string;
-  offset: number;
-  previous: string;
-  total: number;
-}
-
-export interface Image {
-  url: string;
-  height: number;
-  width: number;
-}
-
-export interface Followers {
-  href: string;
-  total: number;
-}
-
-export interface Tracks {
-  href: string;
-  total: number;
-}
-
-export interface Restrictions {
-  reason: string;
-}
-
-export interface ExternalUrls {
-  spotify: string;
-}
-
-export interface ExplicitContent {
-  filter_enabled: boolean;
-  filter_locked: boolean;
-}
-
-export interface Artist {
-  external_urls: ExternalUrls;
-  href: string;
-  id: string;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface Owner {
-  external_urls: ExternalUrls;
-  followers: Followers;
-  href: string;
-  id: string;
-  type: string;
-  uri: string;
-  display_name: string;
-}
-
-export interface User {
-  country?: string;
-  display_name: string;
-  email?: string;
-  explicit_content?: ExplicitContent;
-  external_urls: ExternalUrls;
-  followers: Followers;
-  href: string;
-  id: string;
-  images: Image[];
-  product: string;
-  type: string;
-  uri: string;
-}
-
-export interface ProfileMenuItem {
-  name: string;
-  href?: string;
-  onClick?: () => void;
-}
+import { AlbumType, CopyrightType, TracklistType, ReleaseDatePrecision, RestrictionsReason } from "../types/enums";
 
 export interface Token {
   access_token: string;
@@ -89,48 +7,254 @@ export interface Token {
   refresh_token: string;
   scope: string;
 }
-export interface PlaylistItem {
-  collaborative: boolean;
-  description: string;
-  external_urls: ExternalUrls;
+
+export interface PaginationInfo {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+}
+
+export interface ExternalUrls {
+  spotify: string;
+}
+
+export interface ExternalIds {
+  isrc: string;
+  ean: string;
+  upc: string;
+}
+
+export interface Image {
+  url: string;
+  height: number | null;
+  width: number | null;
+}
+
+export interface Restrictions {
+  reason: RestrictionsReason;
+}
+
+export interface ExplicitContent {
+  filter_enabled: boolean;
+  filter_locked: boolean;
+}
+
+export interface BaseInfo {
+  external_urls: Partial<ExternalUrls>;
   href: string;
   id: string;
-  images: Image[];
-  name: string;
-  owner: Owner;
-  public: boolean;
-  snapshot_id: string;
-  tracks: Tracks;
-  type: string;
   uri: string;
 }
 
-export interface AlbumItem {
-  album_type: string;
+export interface Copyright {
+  text: string;
+  type: CopyrightType;
+}
+
+export interface BaseArtist extends Partial<BaseInfo> {
+  name: string;
+  type: "artist";
+}
+
+export interface Followers {
+  href: string | null;
+  total: number;
+}
+
+export interface Artist extends Partial<BaseInfo> {
+  followers: Partial<Followers>;
+  genres: string[];
+  images: Image[];
+  name: string;
+  popularity: string;
+  type: "artist";
+}
+
+export interface Owner extends Partial<BaseInfo> {
+  followers: Partial<Followers>;
+  type: "user";
+  display_name: string | null;
+}
+
+export interface UserProfile extends Partial<BaseInfo> {
+  display_name?: string;
+  followers?: Followers;
+  images?: Image[];
+  type?: "user";
+}
+
+export interface CurrentUserProfile extends UserProfile {
+  country?: string;
+  email?: string;
+  explicit_content?: Partial<ExplicitContent>;
+  product?: string;
+}
+
+export interface LinkedFrom extends Partial<BaseInfo> {
+  type: "track";
+}
+
+export interface BaseTrack extends Partial<BaseInfo> {
+  artists: Partial<BaseArtist>[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  is_playable: boolean;
+  linked_from: Partial<LinkedFrom>;
+  restrictions: Partial<Restrictions>;
+  name: string;
+  preview_url: string | null;
+  track_number: number;
+  type: "track";
+  is_local: boolean;
+}
+
+export interface TracksLink {
+  href: string;
+  total: number;
+}
+
+export interface Tracks extends PaginationInfo {
+  items: Partial<BaseTrack>[];
+}
+
+export interface AlbumItem extends BaseInfo {
+  album_type: AlbumType;
   total_tracks: number;
   available_markets: string[];
-  external_urls: ExternalUrls;
-  href: string;
-  id: string;
   images: Image[];
   name: string;
   release_date: string;
-  release_date_precision: string;
-  restrictions: Restrictions;
-  type: string;
-  uri: string;
-  artists: Artist[];
+  release_date_precision: ReleaseDatePrecision;
+  restrictions?: Partial<Restrictions>;
+  artists: Partial<BaseArtist>[];
+  type: TracklistType.Album;
 }
 
-export interface FeaturedPlaylists {
-  message: string;
-  playlists: PaginationInfo & {
-    items: PlaylistItem[];
-  };
-}
+// export interface Track extends Partial<BaseTrack> {
+//   album?: AlbumItem;
+//   external_ids?: ExternalIds;
+//   popularity?: number;
+// }
 
 export interface NewReleases {
-  album: PaginationInfo & {
+  albums: PaginationInfo & {
     items: AlbumItem[];
   };
+}
+
+export interface BasePlaylist extends Partial<BaseInfo> {
+  collaborative: boolean;
+  description: string;
+  images: Image[];
+  name: string;
+  owner: Partial<Owner>;
+  public: boolean;
+  snapshot_id: string;
+  tracks: Partial<TracksLink>;
+  type: TracklistType.Playlist;
+}
+
+export interface TrackObject extends Partial<Omit<BaseTrack, "artists">> {
+  album: AlbumItem;
+  artists: Artist[];
+  external_ids: Partial<ExternalIds>;
+  popularity: number;
+}
+
+// interface EpisodeObject extends BaseInfo {
+//   audio_preview_url: string | null;
+//   description: string;
+//   html_description: string;
+//   duration_ms: number;
+//   explicit: boolean;
+//   images: Image[];
+//   is_externally_hosted: boolean;
+//   is_playable: boolean;
+//   languages: string[];
+//   name: string;
+//   release_date: string;
+//   release_date_precision: string;
+//   resume_point?: ResumePoint;
+//   type: "episode";
+//   restriction?: Partial<Restrictions>;
+//   show: Show;
+// }
+
+export interface AddedBy extends Partial<BaseInfo> {
+  type: "user";
+  followers: Partial<Followers>;
+}
+
+export interface TrackItem {
+  added_at: string;
+  added_by: Partial<AddedBy>;
+  is_local: boolean;
+  track: Partial<TrackObject>;
+}
+
+export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
+  followers?: Partial<Followers>;
+  tracks?: PaginationInfo & {
+    items: Partial<TrackItem>[];
+  };
+}
+// export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
+//   followers?: Partial<Followers>;
+//   tracks?: PaginationInfo & {
+//     items: {
+//       added_at?: string;
+//       added_by?: Partial<BaseInfo> & {
+//         type?: "user";
+//         followers?: Partial<Followers>;
+//       };
+//       is_local?: boolean;
+//       track?: Partial<TrackObject> | EpisodeObject;
+//     };
+//   };
+// }
+
+export interface Playlists {
+  message?: string;
+  playlists: PaginationInfo & {
+    items: Partial<BasePlaylist>[];
+  };
+}
+
+export interface CategoryItem {
+  href: string;
+  icons: Image[];
+  id: string;
+  name: string;
+}
+
+export interface Categories {
+  categories: PaginationInfo & {
+    items: CategoryItem[];
+  };
+}
+
+export interface Album extends AlbumItem {
+  tracks: Tracks;
+  copyrights: Partial<Copyright>[];
+  external_ids: Partial<ExternalIds>;
+  genres: string[];
+  label: string;
+  popularity: number;
+}
+
+export interface ArtistAlbumsItem extends AlbumItem {
+  album_group: string;
+}
+
+export interface ArtistAlbums extends PaginationInfo {
+  items: ArtistAlbumsItem[];
+}
+
+export interface UserPlaylists extends PaginationInfo {
+  items: Partial<BasePlaylist>[];
 }

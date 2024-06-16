@@ -1,20 +1,29 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
 import { LINKS } from "./utils/constants";
-import Search from "./pages/Search";
-import RequireAuth from "./hocs/RequireAuth";
-import HomeLayout from "./layout/HomeLayout";
-import useLogin from "./utils/hooks/useLogin";
+import { RequireAuth } from "./hocs";
+import { HomeLayout } from "./layout";
+import { useHistoryStack, useLogin } from "./utils/hooks";
+import { Album, Error, Home, Login, Playlist, Search, Section } from "./pages";
+
+const initSessionHistoryLength = () => {
+  if (!sessionStorage.getItem("startedHistoryLength")) {
+    sessionStorage.setItem("startedHistoryLength", `${window.history.length}`);
+  }
+};
 
 const App = () => {
   const handleLogin = useLogin();
+  useHistoryStack();
+
+  initSessionHistoryLength();
 
   return (
     <Routes>
       <Route element={<RequireAuth />}>
-        <Route element={<HomeLayout />}>
+        <Route
+          element={<HomeLayout />}
+          path={LINKS.home.route}
+        >
           <Route
             element={<Home />}
             path={LINKS.home.route}
@@ -23,15 +32,38 @@ const App = () => {
             element={<Search />}
             path={LINKS.search.route}
           />
+          <Route
+            element={<Section />}
+            path={`${LINKS.section.route}/*`}
+          />
+          <Route
+            element={<Album />}
+            path={`${LINKS.album.route}/:id`}
+          />
+          <Route
+            element={<Playlist />}
+            path={`${LINKS.playlist.route}/:id`}
+          />
         </Route>
       </Route>
 
       <Route
-        element={<Login handleLogin={handleLogin} />}
+        element={
+          <Login
+            handleLogin={handleLogin}
+            title={LINKS.login.title}
+          />
+        }
         path={LINKS.login.route}
       />
       <Route
-        element={<Error />}
+        element={
+          <Error
+            title="Страница не найдена"
+            text="Мы не нашли нужную страницу."
+            link={{ route: LINKS.home.route, text: "Главная" }}
+          />
+        }
         path={LINKS.error.route}
       />
     </Routes>
