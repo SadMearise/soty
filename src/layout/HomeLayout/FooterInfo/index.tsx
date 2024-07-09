@@ -5,7 +5,7 @@ import SocialsList from "./SocialsList";
 import TopCols from "./TopCols";
 
 const classes = {
-  wrapper: "pb-[40px]",
+  wrapper: "pb-[40px] pt-[40px]",
   top: "flex justify-between mb-[24px] pb-[40px] border-b border-solid border-dark-400",
   bottom: "flex items-start justify-between pt-[16px]",
   bottomCopy: "flex-[0_0_auto]",

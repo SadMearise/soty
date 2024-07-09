@@ -41,7 +41,7 @@ const Error: FC<ErrorProps> = ({ title, text, link }) => {
         {link && (
           <Link
             to={link.route}
-            className="btn btn-big-white"
+            className={classes.link}
           >
             {link.text}
           </Link>

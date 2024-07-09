@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AlbumItem, NewReleases, BasePlaylist, Playlists } from "../../models";
+import { AlbumItem, Albums, BasePlaylist, Playlists } from "../../models";
 import { fetchSection } from "../../services";
 
 const useSectionPlaylists = (endpoint: string, searchParams: string) => {
@@ -20,7 +20,7 @@ const useSectionPlaylists = (endpoint: string, searchParams: string) => {
         if ("playlists" in data) {
           setPlaylists((data as Playlists).playlists.items as BasePlaylist[]);
         } else if ("albums" in data) {
-          setPlaylists((data as NewReleases).albums.items);
+          setPlaylists((data as Albums).albums.items);
         }
       } catch (err) {
         if (err instanceof Error) {

@@ -8,7 +8,7 @@ type ProfileItemProps = {
 };
 
 const classes = {
-  item: "py-3 pr-2 pl-3 text-left rounded-sm hover:bg-white/10",
+  item: "py-3 pr-2 pl-3 text-left rounded-[2px] hover:bg-white/10",
 };
 
 const ProfileItem: FC<ProfileItemProps> = ({ name, href, onClick }) => {

@@ -5,7 +5,7 @@ type BlockContainerProps = {
 };
 
 const classes: Record<string, string> = {
-  block: "bg-dark-100 rounded-lg",
+  block: "bg-dark-100 rounded-[8px]",
 };
 
 const BlockContainer: FC<PropsWithChildren<BlockContainerProps>> = ({ styles, children }) => (

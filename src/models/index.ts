@@ -130,9 +130,9 @@ export interface AlbumItem extends BaseInfo {
   name: string;
   release_date: string;
   release_date_precision: ReleaseDatePrecision;
-  restrictions?: Partial<Restrictions>;
   artists: Partial<BaseArtist>[];
   type: TracklistType.Album;
+  restrictions?: Partial<Restrictions>;
 }
 
 // export interface Track extends Partial<BaseTrack> {
@@ -141,7 +141,7 @@ export interface AlbumItem extends BaseInfo {
 //   popularity?: number;
 // }
 
-export interface NewReleases {
+export interface Albums {
   albums: PaginationInfo & {
     items: AlbumItem[];
   };
@@ -253,8 +253,4 @@ export interface ArtistAlbumsItem extends AlbumItem {
 
 export interface ArtistAlbums extends PaginationInfo {
   items: ArtistAlbumsItem[];
-}
-
-export interface UserPlaylists extends PaginationInfo {
-  items: Partial<BasePlaylist>[];
 }

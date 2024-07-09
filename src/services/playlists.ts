@@ -1,4 +1,4 @@
-import { Playlist, Playlists, UserPlaylists } from "../models";
+import { Playlist, Playlists, PlaylistItems } from "../models";
 import { ENDPOINTS, LOCAL_STORAGE_KEYS } from "../utils/constants";
 import { getLocalStorage, getQueryParameterStringFromObject } from "../utils/helpers";
 import { fetchData } from ".";
@@ -71,10 +71,10 @@ export type UserPlaylistsParams = {
 };
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-list-users-playlists
-export const fetchUserPlaylists = async (id: string, searchParams?: UserPlaylistsParams): Promise<UserPlaylists> => {
+export const fetchUserPlaylists = async (id: string, searchParams?: UserPlaylistsParams): Promise<PlaylistItems> => {
   const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
 
-  const playlists: UserPlaylists = (await fetchData({
+  const playlists: PlaylistItems = (await fetchData({
     url: `${ENDPOINTS.users}/${id}/playlists${queryString}`,
     method: HTTPMethod.Get,
     headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),

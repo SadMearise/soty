@@ -1,4 +1,4 @@
-import { Album, NewReleases } from "../models";
+import { Album, Albums } from "../models";
 import { ENDPOINTS, LOCAL_STORAGE_KEYS } from "../utils/constants";
 import { getLocalStorage, getQueryParameterStringFromObject } from "../utils/helpers";
 import { fetchData } from ".";
@@ -11,10 +11,10 @@ export type NewReleasesParams = {
 };
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-new-releases
-export const fetchNewReleases = async (params?: NewReleasesParams): Promise<NewReleases> => {
+export const fetchNewReleases = async (params?: NewReleasesParams): Promise<Albums> => {
   const queryString = params ? `?${getQueryParameterStringFromObject(params)}` : "";
 
-  const newReleases: NewReleases = (await fetchData({
+  const newReleases: Albums = (await fetchData({
     url: `${ENDPOINTS.newReleases}${queryString}`,
     method: HTTPMethod.Get,
     headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),

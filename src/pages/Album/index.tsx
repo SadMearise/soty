@@ -16,7 +16,7 @@ import { Severity } from "../../types/enums";
 import useAlbumData from "./hooks/useAlbumData";
 
 const classes = {
-  section: "pb-[72px] pt-[24px]",
+  section: "pb-[32px] pt-[24px]",
 };
 
 const Album = () => {

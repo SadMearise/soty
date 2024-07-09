@@ -77,7 +77,7 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
             />
           </div>
         </div>
-        <h3 className={classes.itemTitle}>{name}</h3>
+        <h4 className={classes.itemTitle}>{name}</h4>
         <div className={classes.itemSubtitle}>{subtitle}</div>
         {type && (
           <Link

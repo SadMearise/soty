@@ -15,7 +15,7 @@ import useFavorite from "../Album/hooks/useFavorite";
 import usePlaylistData from "./hooks/usePlaylistData";
 
 const classes = {
-  section: "pb-[72px] pt-[24px]",
+  section: "pb-[32px] pt-[24px]",
 };
 
 const Playlist = () => {

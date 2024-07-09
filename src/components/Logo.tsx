@@ -8,7 +8,7 @@ type LogoProps = {
 };
 
 const classes: Record<string, string> = {
-  logo: "flex items-center gap-1",
+  logo: "flex items-center gap-[4px]",
   image: "h-auto",
   text: "text-white",
 };

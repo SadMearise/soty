@@ -8,7 +8,7 @@ type ProfileListProps = {
 
 const classes = {
   navigation:
-    "absolute right-0 mt-3 max-w-[350px] min-w-[160px] p-1 shadow-primary bg-dark-200 whitespace-nowrap rounded overflow-auto z-20",
+    "absolute right-0 mt-3 max-w-[350px] min-w-[160px] p-1 shadow-primary bg-dark-200 whitespace-nowrap rounded-[4px] overflow-auto z-20",
   list: "flex flex-col [&>*:last-child]:border-t-[1px] [&>*:last-child]:border-white/10",
 };
 

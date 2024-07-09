@@ -6,7 +6,7 @@ import { Container } from "../../containers";
 import useHomeData from "./hooks/useHomeData";
 
 const classes = {
-  wrapper: "flex flex-col gap-[24px] pt-[8px] pb-[72px]",
+  wrapper: "flex flex-col gap-[24px] pt-[8px] pb-[32px]",
 };
 
 const Home = () => {

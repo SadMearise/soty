@@ -26,7 +26,7 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
   const playlistIsPlaying = isPlaying && playingPlaylistId === id;
 
   const classes = {
-    item: "relative flex rounded bg-white/[.07] overflow-hidden transition-colors hover:bg-white/[.2] group",
+    item: "relative flex rounded-[4px] bg-white/[.07] overflow-hidden transition-colors hover:bg-white/[.2] group",
     itemLink: "absolute w-full h-full top-0 left-0",
     leftSide: "relative h-full aspect-square",
     leftSideImage: "block absolute h-full w-full top-0 left-0 object-cover",

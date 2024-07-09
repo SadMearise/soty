@@ -7,11 +7,11 @@ import { ERRORS } from "../../utils/constants";
 import { Container } from "../../containers";
 
 const classes = {
-  wrapper: "py-[72px]",
+  wrapper: "py-[32px]",
 };
 
 const Section = () => {
-  const { state } = useLocation();
+  const { state }: { state: { title: string } } = useLocation();
   const { "*": endpoint } = useParams();
   const searchParams = window.location.search;
 
