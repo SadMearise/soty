@@ -25,6 +25,7 @@ export const ENDPOINTS = {
   tracks: "https://api.spotify.com/v1/tracks",
   playlists: "https://api.spotify.com/v1/playlists",
   users: "https://api.spotify.com/v1/users",
+  search: "https://api.spotify.com/v1/search",
 };
 
 export const URI = "http://localhost:3000/";
@@ -52,6 +53,7 @@ export const LINKS = {
   section: { route: "section", title: `${PROJECT_NAME} - Веб-плеер` },
   playlist: { route: "playlist" },
   album: { route: "album" },
+  contentRestricted: { route: "restricted", title: `${PROJECT_NAME} - Content Restricted` },
 };
 
 export const CATEGORY_IDS = {

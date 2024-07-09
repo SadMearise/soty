@@ -42,6 +42,7 @@ import {
   RemoveUserSavedTracksParams,
   CheckUserSavedTracksParams,
 } from "./tracks";
+import { fetchSearchItem } from "./search";
 
 export {
   fetchNewReleases,
@@ -70,6 +71,7 @@ export {
   followPlaylist,
   unfollowPlaylist,
   fetchUserPlaylists,
+  fetchSearchItem,
 };
 
 export type {

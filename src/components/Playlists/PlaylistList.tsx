@@ -29,6 +29,15 @@ const PlaylistList: FC<PlaylistListProps> = ({ playlists, subtitleType, singleLi
     if (subtitleType === SubtitleType.ReleaseDate && "release_date" in playlist) {
       return playlist.release_date.slice(0, 4);
     }
+    if (subtitleType === SubtitleType.DateAndArtists && "release_date" && "artists" in playlist) {
+      return `${playlist.release_date.slice(0, 4)} • ${playlist.artists
+        .filter((artist) => artist.name)
+        .map((playlist) => playlist.name!)
+        .join(", ")}`;
+    }
+    if (subtitleType === SubtitleType.Owner && "owner" in playlist) {
+      return playlist.owner?.display_name || "unknown";
+    }
 
     return "";
   };

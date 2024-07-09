@@ -25,6 +25,10 @@ import Playback, { PlaybackProps } from "./Playback";
 import PlaybackWithEqualizer from "./PlaybackWithEqualizer";
 import DefaultTrackImage from "./DefaultTrackImage";
 import Alert from "./Alert";
+import SearchBar from "./SearchBar";
+import TagButton from "./TagButton";
+import CategoryCard from "./CategoryCard";
+import SectionH3Title from "./SectionH3Title";
 
 export {
   EverydayPlaylists,
@@ -54,6 +58,10 @@ export {
   PlaybackWithEqualizer,
   DefaultTrackImage,
   Alert,
+  SearchBar,
+  TagButton,
+  CategoryCard,
+  SectionH3Title,
 };
 
 export type { AnchorProps, ButtonProps, SvgGeneratorProps, PlaybackProps };

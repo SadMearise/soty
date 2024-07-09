@@ -3,7 +3,8 @@ import { LINKS } from "./utils/constants";
 import { RequireAuth } from "./hocs";
 import { HomeLayout } from "./layout";
 import { useHistoryStack, useLogin } from "./utils/hooks";
-import { Album, Error, Home, Login, Playlist, Search, Section } from "./pages";
+import { Album, ContentRestricted, Error, Home, Login, Playlist, Search, SearchWithQuery, Section } from "./pages";
+import { CATEGORY_FILTERS } from "./pages/SearchWithQuery/constants";
 
 const initSessionHistoryLength = () => {
   if (!sessionStorage.getItem("startedHistoryLength")) {
@@ -33,6 +34,17 @@ const App = () => {
             path={LINKS.search.route}
           />
           <Route
+            element={<SearchWithQuery />}
+            path={`${LINKS.search.route}/:query`}
+          />
+          {CATEGORY_FILTERS.map((filter, index) => (
+            <Route
+              key={index}
+              element={<SearchWithQuery categoryName={filter.name} />}
+              path={`${LINKS.search.route}/:query${filter.path}`}
+            />
+          ))}
+          <Route
             element={<Section />}
             path={`${LINKS.section.route}/*`}
           />
@@ -43,6 +55,10 @@ const App = () => {
           <Route
             element={<Playlist />}
             path={`${LINKS.playlist.route}/:id`}
+          />
+          <Route
+            element={<ContentRestricted />}
+            path={`${LINKS.contentRestricted.route}`}
           />
         </Route>
       </Route>

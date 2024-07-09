@@ -23,6 +23,7 @@ module.exports = {
         200: "#282828",
         300: "#181818",
         400: "#292929",
+        500: "#242424",
       },
       blue: "#0288d1",
       orange: "#f57c00",
@@ -66,6 +67,7 @@ module.exports = {
       secondary: "0 8px 8px rgba(0, 0, 0, 0.3)",
       tertiary: "0 8px 24px rgba(0, 0, 0, 0.5)",
       quaternary: "0 4px 60px rgba(0, 0, 0, 0.5)",
+      border: "0 0 0 1px rgba(255, 255, 255, 0.2)",
     },
     screens: {
       "sm-min": { min: "468.98px" },

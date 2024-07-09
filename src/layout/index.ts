@@ -1,3 +1,4 @@
 import HomeLayout from "./HomeLayout";
+import SearchLayout from "./SearchLayout";
 
-export { HomeLayout };
+export { HomeLayout, SearchLayout };

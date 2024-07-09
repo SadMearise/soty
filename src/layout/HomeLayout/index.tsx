@@ -8,6 +8,7 @@ import useAlert from "../../utils/hooks/useAlert";
 import Header from "./Header";
 import Main from "./Main";
 import AsidePanel from "./AsidePanel";
+import { SearchContextProvider } from "../../context/SearchContext";
 
 const classes = {
   wrapper: "h-full bg-black",
@@ -46,10 +47,12 @@ const HomeLayout = () => {
             }}
             defer
           >
-            <div className={classes.headerWrapper}>
-              <Header />
-            </div>
-            <Main />
+            <SearchContextProvider>
+              <div className={classes.headerWrapper}>
+                <Header />
+              </div>
+              <Main />
+            </SearchContextProvider>
           </OverlayScrollbarsComponent>
         </BlockContainer>
         <div className={classes.gridPlayingBar}>
