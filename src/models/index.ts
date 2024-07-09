@@ -218,11 +218,13 @@ export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
 //   };
 // }
 
+export interface PlaylistItems extends PaginationInfo {
+  items: Partial<BasePlaylist>[];
+}
+
 export interface Playlists {
   message?: string;
-  playlists: PaginationInfo & {
-    items: Partial<BasePlaylist>[];
-  };
+  playlists: PlaylistItems;
 }
 
 export interface CategoryItem {
