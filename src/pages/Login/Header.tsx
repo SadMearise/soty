@@ -6,7 +6,7 @@ const classes = {
 
 const Header = () => (
   <div className={classes.container}>
-    <Logo />
+    <Logo logoSrc="/images/logo.png" />
   </div>
 );
 

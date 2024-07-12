@@ -3,6 +3,7 @@ import { Logo, SvgGenerator } from "../../../components";
 import { NavigationItem } from "./types";
 import Navigation from "./Navigation";
 import { LINKS } from "../../../utils/constants";
+import MediaLibrary from "./MediaLibrary";
 
 const classes = {
   aside: "flex flex-col w-[306px] gap-[8px] mr-[8px]",
@@ -42,11 +43,16 @@ const AsidePanel = () => {
     <aside className={classes.aside}>
       <BlockContainer styles="p-6">
         <div className={classes.logoWrapper}>
-          <Logo size="xs" />
+          <Logo
+            logoSrc="/images/logo.png"
+            size="xs"
+          />
         </div>
         <Navigation navigationItems={navigationItems} />
       </BlockContainer>
-      <BlockContainer styles="h-full">Медиатека</BlockContainer>
+      <BlockContainer styles="h-full">
+        <MediaLibrary />
+      </BlockContainer>
     </aside>
   );
 };
