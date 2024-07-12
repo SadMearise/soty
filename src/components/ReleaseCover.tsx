@@ -71,7 +71,7 @@ const ReleaseCover: FC<ReleaseCoverProps> = ({ typeText, tracksDurationMs, relea
           <span className={`${classes.text} ${classes.separator}`}>{release.releaseDate.slice(0, 4)}</span>
         )}
         <span className={`${classes.text} ${classes.separator}`}>
-          {release.totalTracks} {getDeclension(release.totalTracks, ["трек", "трека", "треков"])},&nbsp;
+          {getDeclension(release.totalTracks, ["трек", "трека", "треков"])},&nbsp;
         </span>
         <span className={`${classes.text} ${classes.releaseDuration}`}>{getAlbumDuration(tracksDurationMs)}</span>
       </div>
