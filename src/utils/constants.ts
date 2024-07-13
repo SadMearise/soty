@@ -54,6 +54,7 @@ export const LINKS = {
   playlist: { route: "playlist" },
   album: { route: "album" },
   contentRestricted: { route: "restricted", title: `${PROJECT_NAME} - Content Restricted` },
+  tracks: { route: "tracks", title: `${PROJECT_NAME} - Любимые треки` },
 };
 
 export const CATEGORY_IDS = {

@@ -1,5 +1,8 @@
 export const getQueryParameterStringFromObject = (parameterObject: Record<string, string | number | string[]>) => {
   const keys = Object.keys(parameterObject);
+
+  if (!keys.length) return "";
+
   const queryString = keys
     .map((key) => {
       return Array.isArray(parameterObject[key])
@@ -8,5 +11,5 @@ export const getQueryParameterStringFromObject = (parameterObject: Record<string
     })
     .join("&");
 
-  return queryString;
+  return `?${queryString}`;
 };

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { DefaultTrackImage, FavoriteAction, TrackArtistsList } from "..";
+import { DefaultTrackImage, FavoriteAction, ArtistsList } from "..";
 import { AudioplayerTrackInfo } from "../../types";
 import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { FavoriteButtonSize } from "../FavoriteButton/enums";
@@ -33,7 +33,7 @@ const TrackInfo: FC<TrackInfoProps> = ({ image, name, artists, isFavorite, onFav
       </div>
       <div className={classes.trackInfoWrapper}>
         <span className={classes.trackName}>{name}</span>
-        <TrackArtistsList artists={artists} />
+        <ArtistsList artists={artists} />
       </div>
       <div className={classes.favoriteIcon}>
         <FavoriteAction

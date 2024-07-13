@@ -34,7 +34,7 @@ export const checkIfUserFollowsPlaylist = async (
   playlistId: string,
   searchParams: CheckIfUserFollowsPlaylistParams
 ): Promise<boolean[]> => {
-  const queryString = `?${getQueryParameterStringFromObject(searchParams)}`;
+  const queryString = `${getQueryParameterStringFromObject(searchParams)}`;
 
   const isSavedPlaylist: boolean[] = (await fetchData({
     url: `${ENDPOINTS.playlists}/${playlistId}/followers/contains${queryString}`,

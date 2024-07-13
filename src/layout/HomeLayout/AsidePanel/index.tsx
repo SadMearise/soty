@@ -6,7 +6,8 @@ import { LINKS } from "../../../utils/constants";
 import MediaLibrary from "./MediaLibrary";
 
 const classes = {
-  aside: "flex flex-col w-[306px] gap-[8px] mr-[8px]",
+  aside: "flex flex-col gap-[8px] h-full",
+  logoContainer: "p-6",
   logoWrapper: "mb-3",
   navigateIcon: "w-6 h-auto",
 };
@@ -41,7 +42,7 @@ const navigationItems: NavigationItem[] = [
 const AsidePanel = () => {
   return (
     <aside className={classes.aside}>
-      <BlockContainer styles="p-6">
+      <BlockContainer styles={classes.logoContainer}>
         <div className={classes.logoWrapper}>
           <Logo
             logoSrc="/images/logo.png"
@@ -50,9 +51,7 @@ const AsidePanel = () => {
         </div>
         <Navigation navigationItems={navigationItems} />
       </BlockContainer>
-      <BlockContainer styles="h-full">
-        <MediaLibrary />
-      </BlockContainer>
+      <MediaLibrary />
     </aside>
   );
 };

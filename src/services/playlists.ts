@@ -14,7 +14,7 @@ export type FeaturedPlaylistsParams = {
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-featured-playlists
 export const fetchFeaturedPlaylists = async (params?: FeaturedPlaylistsParams): Promise<Playlists> => {
-  const queryString = params ? `?${getQueryParameterStringFromObject(params)}` : "";
+  const queryString = params ? `${getQueryParameterStringFromObject(params)}` : "";
 
   const featuredPlaylists: Playlists = (await fetchData({
     url: `${ENDPOINTS.featuredPlaylists}${queryString}`,
@@ -35,7 +35,7 @@ export const fetchCategoryPlaylistsById = async (
   id: string,
   searchParams?: CategoryPlaylistsParams
 ): Promise<Playlists> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const categoryPlaylists: Playlists = (await fetchData({
     url: `${ENDPOINTS.categories}/${id}/playlists${queryString}`,
@@ -54,7 +54,7 @@ export type PlaylistParams = {
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-playlist
 export const fetchPlaylistById = async (id: string, searchParams?: PlaylistParams): Promise<Playlist> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const playlist: Playlist = (await fetchData({
     url: `${ENDPOINTS.playlists}/${id}${queryString}`,
@@ -72,12 +72,34 @@ export type UserPlaylistsParams = {
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-list-users-playlists
 export const fetchUserPlaylists = async (id: string, searchParams?: UserPlaylistsParams): Promise<PlaylistItems> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const playlists: PlaylistItems = (await fetchData({
     url: `${ENDPOINTS.users}/${id}/playlists${queryString}`,
     method: HTTPMethod.Get,
     headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
+  }))!;
+
+  return playlists;
+};
+
+type GetCurrentUserSavedPlaylistsParams = {
+  limit?: number;
+  offset?: number;
+};
+
+// API https://developer.spotify.com/documentation/web-api/reference/get-a-list-of-current-users-playlists
+export const fetchCurrentUserSavedPlaylists = async (
+  searchParams: GetCurrentUserSavedPlaylistsParams
+): Promise<PlaylistItems> => {
+  const queryString = `${getQueryParameterStringFromObject(searchParams)}`;
+
+  const playlists: PlaylistItems = (await fetchData({
+    url: `${ENDPOINTS.me}/playlists${queryString}`,
+    method: HTTPMethod.Get,
+    headers: new Headers({
+      Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}`,
+    }),
   }))!;
 
   return playlists;

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FavoriteAction, TrackArtistsList, TrackTime, PlaybackWithEqualizer } from "..";
+import { FavoriteAction, ArtistsList, TrackTime, PlaybackWithEqualizer } from "..";
 import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { FavoriteButtonSize } from "../FavoriteButton/enums";
 import { PREVIEW_TRACK_DURATION_MS } from "../../utils/constants";
@@ -69,7 +69,7 @@ const TracklistItem: FC<TracklistItemProps> = ({
         </div>
         <div className={`${classes.centerCol}${disabled ? ` ${classes.disabled}` : ""}`}>
           <span className={classes.trackTitle}>{name || "-"}</span>
-          <TrackArtistsList artists={artists} />
+          <ArtistsList artists={artists} />
         </div>
         <div className={`${classes.rightCol}${disabled ? ` ${classes.disabled}` : ""}`}>
           <div className={classes.favoriteIconWrapper}>

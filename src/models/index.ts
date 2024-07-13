@@ -135,12 +135,6 @@ export interface AlbumItem extends BaseInfo {
   restrictions?: Partial<Restrictions>;
 }
 
-// export interface Track extends Partial<BaseTrack> {
-//   album?: AlbumItem;
-//   external_ids?: ExternalIds;
-//   popularity?: number;
-// }
-
 export interface Albums {
   albums: PaginationInfo & {
     items: AlbumItem[];
@@ -166,25 +160,6 @@ export interface TrackObject extends Partial<Omit<BaseTrack, "artists">> {
   popularity: number;
 }
 
-// interface EpisodeObject extends BaseInfo {
-//   audio_preview_url: string | null;
-//   description: string;
-//   html_description: string;
-//   duration_ms: number;
-//   explicit: boolean;
-//   images: Image[];
-//   is_externally_hosted: boolean;
-//   is_playable: boolean;
-//   languages: string[];
-//   name: string;
-//   release_date: string;
-//   release_date_precision: string;
-//   resume_point?: ResumePoint;
-//   type: "episode";
-//   restriction?: Partial<Restrictions>;
-//   show: Show;
-// }
-
 export interface AddedBy extends Partial<BaseInfo> {
   type: "user";
   followers: Partial<Followers>;
@@ -203,20 +178,6 @@ export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
     items: Partial<TrackItem>[];
   };
 }
-// export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
-//   followers?: Partial<Followers>;
-//   tracks?: PaginationInfo & {
-//     items: {
-//       added_at?: string;
-//       added_by?: Partial<BaseInfo> & {
-//         type?: "user";
-//         followers?: Partial<Followers>;
-//       };
-//       is_local?: boolean;
-//       track?: Partial<TrackObject> | EpisodeObject;
-//     };
-//   };
-// }
 
 export interface PlaylistItems extends PaginationInfo {
   items: Partial<BasePlaylist>[];
@@ -255,4 +216,22 @@ export interface ArtistAlbumsItem extends AlbumItem {
 
 export interface ArtistAlbums extends PaginationInfo {
   items: ArtistAlbumsItem[];
+}
+
+export interface UserSavedItem {
+  added_at: string;
+  item: TrackObject;
+}
+
+export interface UserSavedAlbum {
+  added_at: string;
+  album: Album;
+}
+
+export interface UserSavedItems extends PaginationInfo {
+  items: UserSavedItem[];
+}
+
+export interface UserSavedAlbums extends PaginationInfo {
+  items: UserSavedAlbum[];
 }

@@ -15,7 +15,7 @@ type SearchItemParams = {
 
 // API https://developer.spotify.com/documentation/web-api/reference/search
 export const fetchSearchItem = async (searchParams: SearchItemParams): Promise<PlaylistItems | AlbumItems> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const searchResult: PlaylistItems | AlbumItems = (await fetchData({
     url: `${ENDPOINTS.search}${queryString}`,

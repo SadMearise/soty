@@ -27,7 +27,7 @@ export const fetchArtistAlbumsById = async (
   id: string,
   searchParams?: ArtistAlbumsByIdParams
 ): Promise<ArtistAlbums> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const albums: ArtistAlbums = (await fetchData({
     url: `${ENDPOINTS.artists}/${id}/albums${queryString}`,

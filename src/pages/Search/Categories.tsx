@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { CategoryCard, SectionH3Title } from "../../components";
 import { getRandomRGBColor } from "../../utils/helpers/color";
 import { CategoryItem } from "../../models";

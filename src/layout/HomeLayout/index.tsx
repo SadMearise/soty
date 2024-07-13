@@ -13,8 +13,8 @@ import { SearchContextProvider } from "../../context/SearchContext";
 const classes = {
   wrapper: "h-full bg-black",
   gridContainer:
-    "relative grid w-full h-full p-[8px] [grid-template-areas:'left-sidebar_main-view''now-playing-bar_now-playing-bar'] grid-rows-[1fr_auto] grid-cols-[auto_1fr]",
-  gridSidebar: "[grid-area:left-sidebar]",
+    "relative grid w-full h-screen p-[8px] [grid-template-areas:'left-sidebar_main-view''now-playing-bar_now-playing-bar'] grid-rows-[1fr_auto] grid-cols-[auto_1fr]",
+  gridSidebar: "[grid-area:left-sidebar] w-[306px] mr-[8px] h-full overflow-hidden",
   gridMainView: "w-full [grid-area:main-view] overflow-auto",
   gridPlayingBar: "[grid-area:now-playing-bar]",
   overlayScrollbars: "h-full scrollbar",

@@ -13,7 +13,7 @@ export type CategoriesParams = {
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-categories
 export const fetchCategories = async (searchParams?: CategoriesParams): Promise<Categories> => {
-  const queryString = searchParams ? `?${getQueryParameterStringFromObject(searchParams)}` : "";
+  const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
   const categories: Categories = (await fetchData({
     url: `${ENDPOINTS.categories}${queryString}`,

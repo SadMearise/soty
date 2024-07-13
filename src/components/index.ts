@@ -16,7 +16,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import ActionBar from "./ActionBar";
 import FavoriteButton from "./FavoriteButton";
 import FavoriteAction from "./FavoriteAction";
-import TrackArtistsList from "./TrackArtistsList";
+import ArtistsList from "./ArtistsList";
 import Audioplayer from "./Audioplayer";
 import VolumeBar from "./VolumeBar";
 import RangeSlider from "./RangeSlider";
@@ -29,6 +29,7 @@ import SearchBar from "./SearchBar";
 import TagButton from "./TagButton";
 import CategoryCard from "./CategoryCard";
 import SectionH3Title from "./SectionH3Title";
+import MediaLibraryItem from "./MediaLibraryItem";
 
 export {
   EverydayPlaylists,
@@ -49,7 +50,7 @@ export {
   ActionBar,
   FavoriteButton,
   FavoriteAction,
-  TrackArtistsList,
+  ArtistsList,
   Audioplayer,
   VolumeBar,
   RangeSlider,
@@ -62,6 +63,7 @@ export {
   TagButton,
   CategoryCard,
   SectionH3Title,
+  MediaLibraryItem,
 };
 
 export type { AnchorProps, ButtonProps, SvgGeneratorProps, PlaybackProps };
