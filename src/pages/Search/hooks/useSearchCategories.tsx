@@ -19,9 +19,9 @@ const useSearchCategories = (locationPathname: string) => {
         if (err instanceof Error) {
           setIsError(err.message);
         }
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     if (locationPathname === `/${LINKS.search.route}`) {

@@ -21,9 +21,9 @@ const SearchController = () => {
       if (err instanceof Error) {
         setIsError(err.message);
       }
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, value: string) => {

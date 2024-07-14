@@ -61,8 +61,9 @@ const usePlaylistData = () => {
         if (err instanceof Error) {
           setIsError(err.message);
         }
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchData();
