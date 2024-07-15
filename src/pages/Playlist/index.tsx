@@ -13,6 +13,7 @@ import { ERRORS, PROJECT_NAME } from "../../utils/constants";
 import { useAlert, useTitle } from "../../utils/hooks";
 import useFavorite from "../Album/hooks/useFavorite";
 import usePlaylistData from "./hooks/usePlaylistData";
+import { As } from "../../services/dataUtils";
 
 const classes = {
   section: "pb-[32px] pt-[24px]",
@@ -43,7 +44,11 @@ const Playlist = () => {
   const playlistIsPlaying = playingPlaylistId === playlist?.id && isPlaying;
 
   const handlePlaylistPlayback = async () => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo(playlist.type!, playlist.id!);
+    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
+      as: As.Tracklist,
+      type: playlist.type!,
+      id: playlist.id!,
+    });
 
     if (!tracksInfo.length) {
       displayCustomAlert(Severity.Error, "The Playlist cannot be played");
@@ -67,7 +72,7 @@ const Playlist = () => {
             name: playlist.name,
             totalTracks: playlist.tracks.total,
           }}
-          artist={{
+          owner={{
             imageUrl: userProfile.images && userProfile.images[1].url,
             name: userProfile.display_name,
           }}
@@ -88,6 +93,7 @@ const Playlist = () => {
           onPlaybackClick={handlePlaylistPlayback}
         />
         <Tracklist
+          as={As.Tracklist}
           id={playlist.id}
           type={playlist.type}
           tracks={playlist.tracks.items

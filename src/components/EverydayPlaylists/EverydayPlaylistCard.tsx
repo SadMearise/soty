@@ -10,6 +10,7 @@ import { AudioplayerTrackInfo } from "../../types";
 import { LINKS } from "../../utils/constants";
 import { Severity, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
+import { As } from "../../services/dataUtils";
 
 type EverydayPlaylistProps = {
   type: TracklistType;
@@ -38,7 +39,7 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
   const handlePlayback = async () => {
     if (!id) return;
 
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo(type, id);
+    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: As.Tracklist, type, id });
 
     if (!tracksInfo.length) {
       displayCustomAlert(Severity.Error, "The Playlist cannot be played");

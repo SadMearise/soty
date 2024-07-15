@@ -11,8 +11,9 @@ import { playback, setTracksInfo } from "../../store/features/audioplayer/audiop
 import { Severity, TracklistType } from "../../types/enums";
 import { BaseArtist } from "../../models";
 import { useAlert } from "../../utils/hooks";
+import { As } from "../../services/dataUtils";
 
-type Track = {
+export type Track = {
   id: string;
   name: string;
   artists: Partial<Pick<BaseArtist, "name" | "id">>[];
@@ -20,12 +21,21 @@ type Track = {
   previewUrl: string | null;
 };
 
-type TracklistProps = {
+type T = {
+  as: As.Tracklist;
   type: TracklistType;
+};
+
+type P = {
+  as: As.CurrentUserTracks;
+  ids: string[];
+};
+
+type TracklistProps = {
   id: string;
   tracks: Partial<Track>[];
   tracksPresence: boolean[];
-};
+} & (T | P);
 
 const classes = {
   wrapper: "mb-[32px]",
@@ -37,17 +47,30 @@ const classes = {
   text: "text-sm font-normal text-grey-100",
 };
 
-const Tracklist: FC<TracklistProps> = ({ type, id, tracks, tracksPresence }) => {
+const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props }) => {
   const dispatch = useAppDispatch();
   const { displayCustomAlert } = useAlert();
   const isPlaying = useAppSelector(selectIsPlaying);
   const playingTrack = useAppSelector(selectPlayingTrack);
 
   const handleTrackPlayback = async (trackIndex: number) => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo(type, id);
+    let tracksInfo: AudioplayerTrackInfo[] = [];
+    if (props.as === As.Tracklist) {
+      tracksInfo = await getAudioplayerTracksInfo({
+        as: props.as,
+        type: props.type,
+        id,
+      });
+    } else if (props.as === As.CurrentUserTracks) {
+      tracksInfo = await getAudioplayerTracksInfo({
+        as: props.as,
+        ids: props.ids,
+        currentUserTracks: tracks,
+      });
+    }
 
     if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Playlist cannot be played");
+      displayCustomAlert(Severity.Error, "The Track cannot be played");
     } else {
       dispatch(setTracksInfo(tracksInfo));
       dispatch(playback({ playingPlaylistId: id, trackIndex }));
@@ -77,11 +100,12 @@ const Tracklist: FC<TracklistProps> = ({ type, id, tracks, tracksPresence }) => 
           />
         </div>
       </div>
-      {tracks.map(({ id, name, artists, previewUrl }, index) => (
+      {tracks.map(({ id, name, artists, previewUrl, image }, index) => (
         <TracklistItem
           key={id}
           id={id}
           name={name}
+          imageSrc={image}
           artists={artists}
           trackNumber={index + 1}
           trackPresence={tracksPresence[index]}

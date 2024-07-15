@@ -10,6 +10,7 @@ import { AudioplayerTrackInfo } from "../../types";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { Severity, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
+import { As } from "../../services/dataUtils";
 
 type PlaylistCardProps = {
   name: string;
@@ -44,7 +45,7 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
     if (!type) {
       displayCustomAlert(Severity.Error, "The Playlist cannot be played");
     } else {
-      const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo(type, id!);
+      const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: As.Tracklist, type, id: id! });
 
       if (!tracksInfo.length) {
         displayCustomAlert(Severity.Error, "The Playlist cannot be played");

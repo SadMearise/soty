@@ -3,7 +3,18 @@ import { LINKS } from "./utils/constants";
 import { RequireAuth } from "./hocs";
 import { HomeLayout } from "./layout";
 import { useHistoryStack, useLogin } from "./utils/hooks";
-import { Album, ContentRestricted, Error, Home, Login, Playlist, Search, SearchWithQuery, Section } from "./pages";
+import {
+  Album,
+  ContentRestricted,
+  Error,
+  Home,
+  Login,
+  Playlist,
+  Search,
+  SearchWithQuery,
+  Section,
+  Tracks,
+} from "./pages";
 import { CATEGORY_FILTERS } from "./pages/SearchWithQuery/constants";
 
 const initSessionHistoryLength = () => {
@@ -59,6 +70,10 @@ const App = () => {
           <Route
             element={<ContentRestricted />}
             path={`${LINKS.contentRestricted.route}`}
+          />
+          <Route
+            element={<Tracks />}
+            path={`${LINKS.tracks.route}`}
           />
         </Route>
       </Route>

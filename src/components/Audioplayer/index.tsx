@@ -123,7 +123,7 @@ const Audioplayer = () => {
           />
           <audio
             ref={audioplayer}
-            src={playingTrack.previewUrl}
+            src={playingTrack.previewUrl || undefined}
             onTimeUpdate={updateSeek}
           >
             <track kind="captions" />

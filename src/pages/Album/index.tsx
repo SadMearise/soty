@@ -14,6 +14,7 @@ import useFavorite from "./hooks/useFavorite";
 import { useAlert, useTitle } from "../../utils/hooks";
 import { Severity } from "../../types/enums";
 import useAlbumData from "./hooks/useAlbumData";
+import { As } from "../../services/dataUtils";
 
 const classes = {
   section: "pb-[32px] pt-[24px]",
@@ -39,7 +40,11 @@ const Album = () => {
   const albumIsPlaying = playingPlaylistId === album.id && isPlaying;
 
   const handleAlbumPlayback = async () => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo(album.type, album.id);
+    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
+      as: As.Tracklist,
+      type: album.type,
+      id: album.id,
+    });
 
     if (!tracksInfo.length) {
       displayCustomAlert(Severity.Error, "The Album cannot be played");
@@ -61,7 +66,7 @@ const Album = () => {
             releaseDate: album.release_date,
             totalTracks: album.total_tracks,
           }}
-          artist={{
+          owner={{
             imageUrl: artist.images[2].url,
             name: artist.name,
           }}
@@ -82,6 +87,7 @@ const Album = () => {
           onPlaybackClick={handleAlbumPlayback}
         />
         <Tracklist
+          as={As.Tracklist}
           id={album.id}
           type={album.type}
           tracks={album.tracks.items.map(({ id, name, artists, preview_url: previewUrl }) => ({

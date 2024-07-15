@@ -3,7 +3,7 @@ import { RoundedButtonColor, RoundedButtonSize } from "./RoundedButton/enums";
 import { Playback } from ".";
 
 type ActionBarProps = {
-  actions: ReactNode;
+  actions?: ReactNode;
   isPlaying: boolean;
   onPlaybackClick: () => void;
 };

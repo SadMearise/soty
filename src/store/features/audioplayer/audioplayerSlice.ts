@@ -58,7 +58,9 @@ const audioplayerSlice = createSlice({
       state.tracks[state.trackIndex].presence = action.payload;
     },
     nextTrack: (state) => {
-      if (state.playingTrack) {
+      if (!state.playingTrack) return;
+
+      const initNextTrack = () => {
         if (state.trackIndex + 1 < state.tracks.length) {
           state.playingTrack = state.tracks[state.trackIndex + 1];
           state.trackIndex += 1;
@@ -66,10 +68,18 @@ const audioplayerSlice = createSlice({
           state.playingTrack = state.tracks[0];
           state.trackIndex = 0;
         }
-      }
+
+        if (!state.playingTrack?.previewUrl) {
+          initNextTrack();
+        }
+      };
+
+      initNextTrack();
     },
     prevTrack: (state) => {
-      if (state.playingTrack) {
+      if (!state.playingTrack) return;
+
+      const initPrevTrack = () => {
         if (state.trackIndex - 1 >= 0) {
           state.playingTrack = state.tracks[state.trackIndex - 1];
           state.trackIndex -= 1;
@@ -77,7 +87,13 @@ const audioplayerSlice = createSlice({
           state.playingTrack = state.tracks[state.tracks.length - 1];
           state.trackIndex = state.tracks.length - 1;
         }
-      }
+
+        if (!state.playingTrack?.previewUrl) {
+          initPrevTrack();
+        }
+      };
+
+      initPrevTrack();
     },
   },
 });

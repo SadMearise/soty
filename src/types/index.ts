@@ -1,7 +1,7 @@
 import { BaseArtist } from "../models";
 
 export type AudioplayerTrackInfo = {
-  previewUrl: string;
+  previewUrl: string | null;
   name: string;
   artists: Partial<BaseArtist>[];
   image: string | null;

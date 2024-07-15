@@ -7,5 +7,6 @@ import Section from "./Section";
 import Login from "./Login";
 import SearchWithQuery from "./SearchWithQuery";
 import ContentRestricted from "./ContentRestricted";
+import Tracks from "./Tracks";
 
-export { Album, Error, Home, Playlist, Search, SearchWithQuery, Section, Login, ContentRestricted };
+export { Album, Error, Home, Playlist, Search, SearchWithQuery, Section, Login, ContentRestricted, Tracks };

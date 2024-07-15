@@ -218,9 +218,9 @@ export interface ArtistAlbums extends PaginationInfo {
   items: ArtistAlbumsItem[];
 }
 
-export interface UserSavedItem {
+export interface UserSavedTrack {
   added_at: string;
-  item: TrackObject;
+  track: Partial<TrackObject>;
 }
 
 export interface UserSavedAlbum {
@@ -228,8 +228,8 @@ export interface UserSavedAlbum {
   album: Album;
 }
 
-export interface UserSavedItems extends PaginationInfo {
-  items: UserSavedItem[];
+export interface UserSavedTracks extends PaginationInfo {
+  items: UserSavedTrack[];
 }
 
 export interface UserSavedAlbums extends PaginationInfo {
