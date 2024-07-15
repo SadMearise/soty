@@ -36,8 +36,8 @@ const TracklistItem: FC<TracklistItemProps> = ({
     playbackWrapper: "hidden group-hover:flex",
     centerCol: "flex flex-col justify-center",
     rightCol: "flex justify-end items-center",
-    trackTitle: `text-white text-base font-normal ${isPlaying && "text-green-100"}`,
-    trackNumberText: `text-grey-100 text-base font-normal ${isPlaying && "text-green-100 hidden"} ${
+    trackTitle: `text-base font-normal ${isPlaying ? "text-green-100" : "text-white"}`,
+    trackNumberText: `text-base font-normal ${isPlaying ? "hidden" : "text-grey-100"} ${
       !disabled ? "group-hover:hidden" : ""
     } `,
     favoriteIconWrapper: "flex items-center mr-[32px] opacity-0 group-hover:opacity-100",
