@@ -17,8 +17,8 @@ type FiltersProps = {
 };
 
 const classes = {
-  filters: "mt-[7px]",
-  filterItem: "inline-block mr-[8px]",
+  filters: "flex flex-wrap items-center gap-[8px] mt-[7px]",
+  filterItem: "inline-block",
 };
 
 const Filters: FC<FiltersProps> = ({ filters, query, activeFilter, setActiveFilter }) => {
