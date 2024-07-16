@@ -5,7 +5,7 @@ import SearchController from "./SearchController";
 
 const classes = {
   header: "flex items-center h-[64px] px-6 py-[7px] bg-black/50",
-  searchBarWrapper: "flex-[0_1_364px] ml-[8px]",
+  searchBarWrapper: "flex-[0_1_364px] mx-[8px]",
   profile: "ml-auto",
 };
 
