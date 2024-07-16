@@ -59,7 +59,7 @@ const MediaLibrary = () => {
                   key={album.id}
                   imageSrc={album.images[0].url}
                   title={album.name}
-                  subtitle={`Альбом • ${album.artists.map((artist) => artist.name).join(", ")}`}
+                  subtitle={`Альбом • ${album.artists[0].name}`}
                   link={`/${LINKS.album.route}/${album.id}`}
                 />
               ))}
