@@ -6,12 +6,11 @@ import TopCols from "./TopCols";
 
 const classes = {
   wrapper: "pb-[40px] pt-[40px]",
-  top: "flex justify-between mb-[24px] pb-[40px] border-b border-solid border-dark-400",
-  bottom: "flex items-start justify-between pt-[16px]",
+  top: "flex justify-between mb-[24px] pb-[40px] border-b border-solid border-dark-400 xmd-max:flex-col xmd-max:gap-[32px] gap-[24px]",
+  bottom: "flex items-start justify-between pt-[16px] gap-[16px]",
   bottomCopy: "flex-[0_0_auto]",
   bottomText: "relative text-sm font-normal text-grey-100",
 };
-
 const FooterInfo = () => {
   return (
     <Container>
