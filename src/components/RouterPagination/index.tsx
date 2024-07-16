@@ -2,8 +2,8 @@ import { withTooltip } from "../../hocs";
 import { Tooltip } from "..";
 import { useRouterPagination } from "../../utils/hooks";
 import TransitionButton from "./TransitionButton";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { SESSION_STORAGE_KEYS } from "../../utils/constants";
+import { TooltipPosition } from "../../hocs/enums";
 
 const classes: Record<string, string> = {
   wrapper: "flex gap-[8px]",

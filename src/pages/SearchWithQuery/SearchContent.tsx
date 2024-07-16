@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Playlists } from "../../components";
-import { SubtitleType } from "../../components/Playlists/enums";
 import { Albums, Playlists as PlaylistsModel } from "../../models";
 import { FilterNames } from "./enums";
+import { SubtitleType } from "../../components/enums";
 
 type SearchContentProps = {
   searchResults: (PlaylistsModel & Albums) | null;

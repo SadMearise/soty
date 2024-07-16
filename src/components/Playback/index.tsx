@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Button, RoundedButton } from "..";
 import PlaybackIcon from "./PlaybackIcon";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
 
 type DefaultProps = {
   variant: "default";

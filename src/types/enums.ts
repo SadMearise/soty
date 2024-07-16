@@ -1,4 +1,5 @@
 export enum CssSize {
+  Xs = "xs",
   Sm = "sm",
   Xsm = "xsm",
   Md = "md",
@@ -31,32 +32,14 @@ export enum TracklistType {
   Playlist = "playlist",
 }
 
-export enum RestrictionsReason {
-  Market = "market",
-  Product = "product",
-  Explicit = "explicit",
-}
-
-export enum CopyrightType {
-  C = "C",
-  P = "P",
-}
-
-export enum AlbumType {
-  Album = "album",
-  Single = "single",
-  Compilation = "compilation",
-}
-
-export enum ReleaseDatePrecision {
-  Year = "year",
-  Month = "month",
-  Day = "day",
-}
-
 export enum Severity {
   Success = "success",
   Info = "info",
   Warning = "warning",
   Error = "error",
+}
+
+export enum MusicType {
+  CurrentUserTracks = "currentUserTracks",
+  Tracklist = "tracklist",
 }

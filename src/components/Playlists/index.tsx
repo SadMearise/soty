@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { AlbumItem, BasePlaylist } from "../../models";
 import PlaylistList from "./PlaylistList";
-import { SubtitleType } from "./enums";
 import SectionH3Title from "../SectionH3Title";
+import { SubtitleType } from "./enums";
 
 type PlaylistsProps = {
   playlists: AlbumItem[] | Partial<BasePlaylist>[];

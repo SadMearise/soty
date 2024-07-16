@@ -1,19 +1,17 @@
 import { ActionBar, FavoriteAction, Loader, Playlists, ReleaseCover, Tracklist } from "../../components";
-import { FavoriteButtonSize } from "../../components/FavoriteButton/enums";
-import { SubtitleType } from "../../components/Playlists/enums";
+import { SubtitleType, FavoriteButtonSize } from "../../components/enums";
 import { Container } from "../../containers";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { getAudioplayerTracksInfo } from "../../services";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Severity } from "../../types/enums";
+import { MusicType, Severity } from "../../types/enums";
 import { AudioplayerTrackInfo } from "../../types";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
 import { useAlert, useTitle } from "../../utils/hooks";
 import useFavorite from "../Album/hooks/useFavorite";
 import usePlaylistData from "./hooks/usePlaylistData";
-import { As } from "../../services/dataUtils";
+import { TooltipPosition } from "../../hocs/enums";
 
 const classes = {
   section: "pb-[32px] pt-[24px]",
@@ -45,7 +43,7 @@ const Playlist = () => {
 
   const handlePlaylistPlayback = async () => {
     const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
-      as: As.Tracklist,
+      as: MusicType.Tracklist,
       type: playlist.type!,
       id: playlist.id!,
     });
@@ -93,7 +91,7 @@ const Playlist = () => {
           onPlaybackClick={handlePlaylistPlayback}
         />
         <Tracklist
-          as={As.Tracklist}
+          as={MusicType.Tracklist}
           id={playlist.id}
           type={playlist.type}
           tracks={playlist.tracks.items

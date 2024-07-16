@@ -1,16 +1,15 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { PlaybackWithEqualizer } from "..";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
 import { getAudioplayerTracksInfo } from "../../services";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { AudioplayerTrackInfo } from "../../types";
 import { LINKS } from "../../utils/constants";
-import { Severity, TracklistType } from "../../types/enums";
+import { MusicType, Severity, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
-import { As } from "../../services/dataUtils";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
 
 type EverydayPlaylistProps = {
   type: TracklistType;
@@ -39,7 +38,7 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
   const handlePlayback = async () => {
     if (!id) return;
 
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: As.Tracklist, type, id });
+    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: MusicType.Tracklist, type, id });
 
     if (!tracksInfo.length) {
       displayCustomAlert(Severity.Error, "The Playlist cannot be played");

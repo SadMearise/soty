@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
-import { RoundedButtonColor, RoundedButtonSize } from "./RoundedButton/enums";
 import { Playback } from ".";
+import { RoundedButtonColor, RoundedButtonSize } from "./enums";
 
 type ActionBarProps = {
   actions?: ReactNode;

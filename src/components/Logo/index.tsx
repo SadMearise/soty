@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { LINKS, PROJECT_NAME } from "../utils/constants";
+import { LINKS, PROJECT_NAME } from "../../utils/constants";
+import { LogoSizes } from "./enums";
 
 type LogoProps = {
   logoSrc: string;
-  size?: "xs" | "sm" | "md";
+  size?: LogoSizes;
   isTitle?: boolean;
 };
 
@@ -20,7 +21,7 @@ const sizes: Record<string, string> = {
   md: "w-[60px] md-max:w-6",
 };
 
-const Logo: FC<LogoProps> = ({ logoSrc, size = "sm", isTitle = true }) => (
+const Logo: FC<LogoProps> = ({ logoSrc, size = LogoSizes.Sm, isTitle = true }) => (
   <Link
     className={classes.logo}
     to={LINKS.home.route}

@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Playback, PlaybackProps, SvgGenerator, SvgGeneratorProps } from ".";
+import { Playback, SvgGenerator } from ".";
+import { PlaybackProps, SvgGeneratorProps } from "./types";
 
 type PlaybackWithEqualizerProps = {
   isPlaying: boolean;

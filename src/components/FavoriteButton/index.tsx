@@ -1,8 +1,8 @@
 import { FC, MouseEvent, useState } from "react";
 import { Tooltip, Button } from "..";
 import { withTooltip } from "../../hocs";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { FavoriteButtonSize } from "./enums";
+import { TooltipPosition } from "../../hocs/enums";
 
 type TooltipInfo = {
   text: string;

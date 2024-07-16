@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNewReleasedPlaylists, useCategoryPlaylists, useFeaturedPlaylists } from "../../../utils/hooks";
 import { CATEGORY_IDS, LINKS } from "../../../utils/constants";
-import { SubtitleType } from "../../../components/Playlists/enums";
+import { SubtitleType } from "../../../components/enums";
 
 const useHomeData = () => {
   const [isLoading, setIsLoading] = useState(true);

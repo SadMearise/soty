@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { Loader, Playlists } from "../../components";
 import { useSectionPlaylists } from "../../utils/hooks";
 import { CARD_COUNT } from "./constants";
-import { SubtitleType } from "../../components/Playlists/enums";
+import { SubtitleType } from "../../components/enums";
 import { ERRORS } from "../../utils/constants";
 import { Container } from "../../containers";
 

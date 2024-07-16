@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { withTooltip } from "../../hocs";
 import { RoundedButton, Tooltip } from "..";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { TooltipPosition } from "../../hocs/enums";
 
 type ProfileButtonWithTooltipProps = {
   position: TooltipPosition;

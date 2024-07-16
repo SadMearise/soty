@@ -2,15 +2,14 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Playback } from "..";
 import { LINKS } from "../../utils/constants";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
 import { getAudioplayerTracksInfo } from "../../services";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
 import { AudioplayerTrackInfo } from "../../types";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { Severity, TracklistType } from "../../types/enums";
+import { MusicType, Severity, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
-import { As } from "../../services/dataUtils";
 
 type PlaylistCardProps = {
   name: string;
@@ -45,7 +44,11 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
     if (!type) {
       displayCustomAlert(Severity.Error, "The Playlist cannot be played");
     } else {
-      const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: As.Tracklist, type, id: id! });
+      const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
+        as: MusicType.Tracklist,
+        type,
+        id: id!,
+      });
 
       if (!tracksInfo.length) {
         displayCustomAlert(Severity.Error, "The Playlist cannot be played");

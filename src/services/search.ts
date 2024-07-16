@@ -1,4 +1,4 @@
-import { AlbumItems, PlaylistItems } from "../models";
+import { Albums, PlaylistItems } from "../models";
 import { HTTPMethod } from "../types/enums";
 import { ENDPOINTS, LOCAL_STORAGE_KEYS } from "../utils/constants";
 import { getLocalStorage, getQueryParameterStringFromObject } from "../utils/helpers";
@@ -14,10 +14,10 @@ type SearchItemParams = {
 };
 
 // API https://developer.spotify.com/documentation/web-api/reference/search
-export const fetchSearchItem = async (searchParams: SearchItemParams): Promise<PlaylistItems | AlbumItems> => {
+export const fetchSearchItem = async (searchParams: SearchItemParams): Promise<PlaylistItems | Albums> => {
   const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
-  const searchResult: PlaylistItems | AlbumItems = (await fetchData({
+  const searchResult: PlaylistItems | Albums = (await fetchData({
     url: `${ENDPOINTS.search}${queryString}`,
     method: HTTPMethod.Get,
     headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),

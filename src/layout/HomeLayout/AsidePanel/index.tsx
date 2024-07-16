@@ -4,6 +4,7 @@ import { NavigationItem } from "./types";
 import Navigation from "./Navigation";
 import { LINKS } from "../../../utils/constants";
 import MediaLibrary from "./MediaLibrary";
+import { LogoSizes } from "../../../components/enums";
 
 const classes = {
   aside: "flex flex-col gap-[8px] h-full",
@@ -46,7 +47,7 @@ const AsidePanel = () => {
         <div className={classes.logoWrapper}>
           <Logo
             logoSrc="/images/logo.png"
-            size="xs"
+            size={LogoSizes.Xs}
           />
         </div>
         <Navigation navigationItems={navigationItems} />

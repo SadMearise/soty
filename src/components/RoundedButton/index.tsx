@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from "react";
 import { RoundedButtonColor, RoundedButtonSize } from "./enums";
-import { AnchorProps, Button, ButtonProps } from "..";
+import { Button } from "..";
+import { AnchorProps, ButtonProps } from "../types";
 
 type RoundedButtonProps = {
   size: RoundedButtonSize;

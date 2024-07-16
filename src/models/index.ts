@@ -1,4 +1,26 @@
-import { AlbumType, CopyrightType, TracklistType, ReleaseDatePrecision, RestrictionsReason } from "../types/enums";
+import { TracklistType } from "../types/enums";
+
+enum AlbumType {
+  Album = "album",
+  Single = "single",
+  Compilation = "compilation",
+}
+enum CopyrightType {
+  C = "C",
+  P = "P",
+}
+
+enum ReleaseDatePrecision {
+  Year = "year",
+  Month = "month",
+  Day = "day",
+}
+
+enum RestrictionsReason {
+  Market = "market",
+  Product = "product",
+  Explicit = "explicit",
+}
 
 export interface Token {
   access_token: string;

@@ -1,6 +1,6 @@
 import { SOCIALS } from "./constants";
 import { RoundedButton, SvgGenerator } from "../../../components";
-import { RoundedButtonColor, RoundedButtonSize } from "../../../components/RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../../../components/enums";
 
 const classes = {
   wrapper: "flex gap-[16px]",

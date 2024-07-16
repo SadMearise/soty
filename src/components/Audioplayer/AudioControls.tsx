@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button, SvgGenerator, Playback } from "..";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
 
 type AudioControlsProps = {
   isPlaying: boolean;

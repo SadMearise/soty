@@ -2,12 +2,12 @@ import EverydayPlaylists from "./EverydayPlaylists";
 import Playlists from "./Playlists";
 import ProfileMenu from "./ProfileMenu";
 import RouterPagination from "./RouterPagination";
-import Button, { AnchorProps, ButtonProps } from "./Button";
+import Button from "./Button";
 import RoundedButton from "./RoundedButton";
 import DropdownMenu from "./DropdownMenu";
 import Loader from "./Loader";
 import Logo from "./Logo";
-import SvgGenerator, { SvgGeneratorProps } from "./SvgGenerator";
+import SvgGenerator from "./SvgGenerator";
 import Tooltip from "./Tooltip";
 import ReleaseCover from "./ReleaseCover";
 import Copyrights from "./Copyrights";
@@ -21,7 +21,7 @@ import Audioplayer from "./Audioplayer";
 import VolumeBar from "./VolumeBar";
 import RangeSlider from "./RangeSlider";
 import TrackTime from "./TrackTime";
-import Playback, { PlaybackProps } from "./Playback";
+import Playback from "./Playback";
 import PlaybackWithEqualizer from "./PlaybackWithEqualizer";
 import DefaultTrackImage from "./DefaultTrackImage";
 import Alert from "./Alert";
@@ -65,5 +65,3 @@ export {
   SectionH3Title,
   MediaLibraryItem,
 };
-
-export type { AnchorProps, ButtonProps, SvgGeneratorProps, PlaybackProps };

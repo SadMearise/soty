@@ -1,12 +1,11 @@
 import { ActionBar, Loader, ReleaseCover, Tracklist } from "../../components";
 import { Container } from "../../containers";
 import { getAudioplayerTracksInfo } from "../../services";
-import { As } from "../../services/dataUtils";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { AudioplayerTrackInfo } from "../../types";
-import { Severity } from "../../types/enums";
+import { MusicType, Severity } from "../../types/enums";
 import { ERRORS } from "../../utils/constants";
 import { useAlert } from "../../utils/hooks";
 import { CURRENT_USER_PLAYLIST_ID } from "./contantsx";
@@ -36,7 +35,7 @@ const Tracks = () => {
 
   const handlePlaylistPlayback = async () => {
     const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
-      as: As.CurrentUserTracks,
+      as: MusicType.CurrentUserTracks,
       ids: tracksIds,
       currentUserTracks: tracks.map((item) => ({
         id: item.track.id,
@@ -75,7 +74,7 @@ const Tracks = () => {
           onPlaybackClick={handlePlaylistPlayback}
         />
         <Tracklist
-          as={As.CurrentUserTracks}
+          as={MusicType.CurrentUserTracks}
           tracks={tracks.map(({ track }) => ({
             id: track.id,
             name: track.name,

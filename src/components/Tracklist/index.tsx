@@ -2,16 +2,15 @@ import { FC } from "react";
 import { withTooltip } from "../../hocs";
 import { SvgGenerator, Tooltip } from "..";
 import TracklistItem from "./TracklistItem";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingTrack } from "../../store/features/audioplayer/audioplayerSelectors";
 import { AudioplayerTrackInfo } from "../../types";
 import { getAudioplayerTracksInfo } from "../../services";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { Severity, TracklistType } from "../../types/enums";
+import { MusicType, Severity, TracklistType } from "../../types/enums";
 import { BaseArtist } from "../../models";
 import { useAlert } from "../../utils/hooks";
-import { As } from "../../services/dataUtils";
+import { TooltipPosition } from "../../hocs/enums";
 
 export type Track = {
   id: string;
@@ -22,12 +21,12 @@ export type Track = {
 };
 
 type T = {
-  as: As.Tracklist;
+  as: MusicType.Tracklist;
   type: TracklistType;
 };
 
 type P = {
-  as: As.CurrentUserTracks;
+  as: MusicType.CurrentUserTracks;
   ids: string[];
 };
 
@@ -55,13 +54,13 @@ const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props })
 
   const handleTrackPlayback = async (trackIndex: number) => {
     let tracksInfo: AudioplayerTrackInfo[] = [];
-    if (props.as === As.Tracklist) {
+    if (props.as === MusicType.Tracklist) {
       tracksInfo = await getAudioplayerTracksInfo({
         as: props.as,
         type: props.type,
         id,
       });
-    } else if (props.as === As.CurrentUserTracks) {
+    } else if (props.as === MusicType.CurrentUserTracks) {
       tracksInfo = await getAudioplayerTracksInfo({
         as: props.as,
         ids: props.ids,

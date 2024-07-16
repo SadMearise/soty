@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Logo } from "../components";
 import { LINKS } from "../utils/constants";
 import { useTitle } from "../utils/hooks";
+import { LogoSizes } from "../components/enums";
 
 type ErrorProps = {
   title: string;
@@ -33,7 +34,7 @@ const Error: FC<ErrorProps> = ({ title, text, link }) => {
         <Logo
           logoSrc="/images/logo.png"
           isTitle={false}
-          size="md"
+          size={LogoSizes.Md}
         />
       </div>
       <div className={classes.infoContainer}>

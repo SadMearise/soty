@@ -1,5 +1,5 @@
 import { Album, BaseTrack, Playlist, TrackItem, TrackObject } from "../models";
-import { TracklistType } from "../types/enums";
+import { MusicType, TracklistType } from "../types/enums";
 import { AudioplayerTrackInfo } from "../types";
 import { fetchAlbumById, fetchPlaylistById, checkUserSavedTracks } from ".";
 import { Track } from "../components/Tracklist";
@@ -20,19 +20,14 @@ export const processUserSavedTracksChunk = async (
   return processUserSavedTracksChunk(ids, 50, startIndex + maxIdsPerRequest, tracksPresence);
 };
 
-export enum As {
-  CurrentUserTracks = "currentUserTracks",
-  Tracklist = "tracklist",
-}
-
 export type TracksProps = {
-  as: As.CurrentUserTracks;
+  as: MusicType.CurrentUserTracks;
   ids: string[];
   currentUserTracks: Partial<Track>[];
 };
 
 export type TracklistProps = {
-  as: As.Tracklist;
+  as: MusicType.Tracklist;
   type: TracklistType;
   id: string;
 };
@@ -73,7 +68,7 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
     }, []);
   };
 
-  if (props.as === As.Tracklist && props.type === TracklistType.Album) {
+  if (props.as === MusicType.Tracklist && props.type === TracklistType.Album) {
     const getAlbumData = async (): Promise<{
       albumData: Album;
       ids: string[];
@@ -96,7 +91,7 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
     );
   }
 
-  if (props.as === As.Tracklist && props.type === TracklistType.Playlist) {
+  if (props.as === MusicType.Tracklist && props.type === TracklistType.Playlist) {
     const getPlaylistData = async (): Promise<{
       playlistData: Playlist;
       ids: string[];
@@ -115,7 +110,7 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
     tracksInfo = extractTracksData(tracksPresence, playlistData.tracks?.items);
   }
 
-  if (props.as === As.CurrentUserTracks) {
+  if (props.as === MusicType.CurrentUserTracks) {
     tracksPresence = await processUserSavedTracksChunk(props.ids);
 
     tracksInfo = extractTracksData(tracksPresence, props.currentUserTracks);

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { RoundedButton, SvgGenerator } from "..";
-import { RoundedButtonColor, RoundedButtonSize } from "../RoundedButton/enums";
+import { RoundedButtonColor, RoundedButtonSize } from "../enums";
 
 type TransitionButtonProps = {
   onClick: () => void;

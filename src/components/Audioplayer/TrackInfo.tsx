@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { DefaultTrackImage, FavoriteAction, ArtistsList } from "..";
 import { AudioplayerTrackInfo } from "../../types";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
-import { FavoriteButtonSize } from "../FavoriteButton/enums";
+import { FavoriteButtonSize } from "../enums";
+import { TooltipPosition } from "../../hocs/enums";
 
 type TrackInfoProps = Pick<AudioplayerTrackInfo, "image" | "name" | "artists"> & {
   isFavorite: boolean;

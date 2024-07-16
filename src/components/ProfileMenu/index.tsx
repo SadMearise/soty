@@ -2,8 +2,8 @@ import { DropdownMenu } from "..";
 import ProfileButtonWithTooltip from "./ProfileButtonWithTooltip";
 import { useCurrentUser, useLogout } from "../../utils/hooks";
 import ProfileList from "./ProfileList";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { ProfileMenuItem } from "./types";
+import { TooltipPosition } from "../../hocs/enums";
 
 const ProfileMenu = () => {
   const { user, isLoading: isLoadingUser } = useCurrentUser();

@@ -1,7 +1,7 @@
 import { MouseEvent, FC } from "react";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
 import { FavoriteButton } from "..";
-import { FavoriteButtonSize } from "../FavoriteButton/enums";
+import { FavoriteButtonSize } from "../enums";
+import { TooltipPosition } from "../../hocs/enums";
 
 type TooltipInfo = {
   text: string;

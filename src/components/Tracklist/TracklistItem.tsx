@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { FavoriteAction, ArtistsList, TrackTime, PlaybackWithEqualizer } from "..";
-import { TooltipPosition } from "../../hocs/withTooltip/enums";
-import { FavoriteButtonSize } from "../FavoriteButton/enums";
 import { PREVIEW_TRACK_DURATION_MS } from "../../utils/constants";
 import useFavoriteTrack from "./useFavoriteTrack";
 import { BaseArtist } from "../../models";
+import { FavoriteButtonSize } from "../enums";
+import { TooltipPosition } from "../../hocs/enums";
 
 type TracklistItemProps = {
   id?: string;
