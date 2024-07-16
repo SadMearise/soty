@@ -8,8 +8,8 @@ import { LogoSizes } from "../../../components/enums";
 
 const classes = {
   aside: "flex flex-col gap-[8px] h-full",
-  logoContainer: "p-6",
-  logoWrapper: "mb-3",
+  logoContainer: "p-[24px] md-max:px-[24px] md-max:py-[12px]",
+  logoWrapper: "mb-3 md-max:hidden",
   navigateIcon: "w-6 h-auto",
 };
 

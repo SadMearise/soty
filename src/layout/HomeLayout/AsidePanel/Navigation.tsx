@@ -10,6 +10,7 @@ const classes = {
   navItem: "mb-2 last:mb-0",
   navLink: "flex items-center gap-5 py-2 font-bold text-base text-grey-100 hover:text-white [&>svg]:hover:fill-white",
   navActiveLink: "[&>svg]:fill-white text-white",
+  navItemName: "md-max:hidden",
 };
 
 const Navigation: FC<NavigationProps> = ({ navigationItems }) => {
@@ -26,7 +27,7 @@ const Navigation: FC<NavigationProps> = ({ navigationItems }) => {
               className={({ isActive }) => (isActive ? `${classes.navLink} ${classes.navActiveLink}` : classes.navLink)}
             >
               {item.icon}
-              {item.name}
+              <span className={classes.navItemName}>{item.name}</span>
             </NavLink>
           </li>
         ))}

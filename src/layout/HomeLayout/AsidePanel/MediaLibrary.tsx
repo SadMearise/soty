@@ -8,9 +8,9 @@ import useMediaLibraryData from "./hooks/useMediaLibraryData";
 import { BlockContainer } from "../../../containers";
 
 const classes = {
-  container: "flex flex-col grow overflow-hidden p-[8px]",
-  header: "flex items-center gap-5 p-[8px]",
-  headerTitle: "flex items-center h-[40px] font-bold text-base text-grey-100",
+  container: "flex flex-col grow overflow-hidden p-[8px] md-max:px-[4px] md-max:py-[8px]",
+  header: "flex items-center gap-5 p-[8px] md-max:justify-center md-max:px-[8px] md-max:py-[16px]",
+  headerTitle: "flex items-center h-[40px] font-bold text-base text-grey-100 md-max:hidden",
   content: "overflow-y-auto grow",
   overlayScrollbars: "h-full scrollbar",
   icon: "w-6 h-auto",

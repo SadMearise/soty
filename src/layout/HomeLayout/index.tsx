@@ -14,7 +14,7 @@ const classes = {
   wrapper: "h-full bg-black",
   gridContainer:
     "relative grid w-full h-screen p-[8px] [grid-template-areas:'left-sidebar_main-view''now-playing-bar_now-playing-bar'] grid-rows-[1fr_auto] grid-cols-[auto_1fr]",
-  gridSidebar: "[grid-area:left-sidebar] w-[306px] mr-[8px] h-full overflow-hidden",
+  gridSidebar: "[grid-area:left-sidebar] w-[306px] mr-[8px] h-full overflow-hidden md-max:w-[72px]",
   gridMainView: "w-full [grid-area:main-view] overflow-auto",
   gridPlayingBar: "[grid-area:now-playing-bar]",
   overlayScrollbars: "h-full scrollbar",

@@ -14,7 +14,7 @@ const classes = {
   itemLink: "absolute w-full h-full top-0 left-0",
   leftSide: "relative w-[48px] h-full aspect-square shrink-0",
   leftSideImage: "block absolute h-full w-full top-0 left-0 object-cover rounded-[4px]",
-  rightSide: "flex flex-col overflow-hidden",
+  rightSide: "flex flex-col overflow-hidden md-max:hidden",
   rightSideTitle: "text-white text-base font-normal truncate",
   rightSideSubitle: "text-sm text-grey-100 font-normal truncate",
 };
