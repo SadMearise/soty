@@ -13,6 +13,7 @@ const classes = {
   formInput:
     "h-[48px] text-sm font-normal bg-dark-500 px-[36px] py-[6px] rounded-full w-full hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2)] focus:shadow-[0_0_0_2px_rgba(255,255,255,1)] placeholder-grey-400",
   formIcons: "flex justify-between px-[12px] w-full items-center absolute top-0 bottom-0 pointer-events-none",
+  closeButton: "pointer-events-auto",
 };
 
 const SearchBar: FC<SearchBarProps> = ({ value, setValue, placeholder, onKeyDown }) => {
@@ -39,7 +40,7 @@ const SearchBar: FC<SearchBarProps> = ({ value, setValue, placeholder, onKeyDown
             type="button"
             aria-label="close"
             onClick={() => setValue("")}
-            styles="pointer-events-auto"
+            styles={classes.closeButton}
           >
             <SvgGenerator
               id="close"

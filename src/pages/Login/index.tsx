@@ -8,11 +8,15 @@ type LoginProps = {
   title: string;
 };
 
+const classes = {
+  wrapper: "flex flex-col h-screen",
+};
+
 const Login: FC<LoginProps> = ({ handleLogin, title }) => {
   useTitle(title);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className={classes.wrapper}>
       <Header />
       <Main handleLogin={handleLogin} />
     </div>
