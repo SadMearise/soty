@@ -7,7 +7,7 @@ type SectionH3TitleProps = {
 };
 
 const classes = {
-  title: "font-bold text-2xl text-white truncate",
+  title: "font-bold text-2xl text-white truncate xmd-max:text-base",
   titleHover: "hover:underline",
 };
 

@@ -16,10 +16,10 @@ type PlaylistsProps = {
 
 const classes = {
   section: "mb-[16px]",
-  header: "flex items-center justify-between mb-[8px]",
+  header: "flex items-center justify-between mb-[8px] gap-[8px]",
   title: "font-bold text-2xl text-white truncate",
   titleHover: "hover:underline",
-  more: "font-bold text-sm text-nowrap text-grey-400 hover:underline",
+  more: "font-bold text-sm whitespace-nowrap text-grey-400 hover:underline",
 };
 
 const Playlists: FC<PlaylistsProps> = ({ playlists, title, subtitleType, route, singleLineList, showMoreText }) => (

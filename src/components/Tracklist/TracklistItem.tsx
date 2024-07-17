@@ -37,11 +37,11 @@ const TracklistItem: FC<TracklistItemProps> = ({
     equalizerIcon: `${isPlaying ? "block group-hover:hidden" : "hidden"}`,
     playbackWrapper: "hidden group-hover:flex",
     centerCol: "flex items-center",
-    trackImageWrapper: "relative w-[40px] h-auto aspect-square mr-[12px]",
+    trackImageWrapper: "relative w-[40px] h-auto aspect-square mr-[12px] shrink-0",
     trackImage: "absolute h-full w-full top-0 left-0 object-cover rounded-[4px]",
-    trackDescriptionWrapper: "flex flex-col justify-center",
+    trackDescriptionWrapper: "flex flex-col justify-center overflow-hidden",
     rightCol: "flex justify-end items-center",
-    trackTitle: `text-base font-normal ${isPlaying ? "text-green-100" : "text-white"}`,
+    trackTitle: `text-base font-normal truncate ${isPlaying ? "text-green-100" : "text-white"}`,
     trackNumberText: `text-base font-normal ${isPlaying ? "hidden" : "text-grey-100"} ${
       !disabled ? "group-hover:hidden" : ""
     } `,

@@ -12,7 +12,7 @@ type TrackInfoProps = Pick<AudioplayerTrackInfo, "image" | "name" | "artists"> &
 const classes = {
   imageWrapper: "relative h-[52px] aspect-square mr-[8px]",
   image: "block absolute h-full w-full top-0 left-0 object-cover",
-  trackInfoWrapper: "flex flex-col mx-[8px]",
+  trackInfoWrapper: "flex flex-col mx-[8px] overflow-hidden",
   trackName: "text-sm text-white truncate",
   favoriteIcon: "p-[8px]",
 };

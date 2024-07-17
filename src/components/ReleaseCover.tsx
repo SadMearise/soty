@@ -22,9 +22,9 @@ type ReleaseCoverProps = {
 };
 
 const classes = {
-  wrapper: "flex gap-[24px] mb-[24px]",
+  wrapper: "flex gap-[24px] mb-[24px] xmd-max:flex-col",
   cover:
-    "relative max-w-[232px] w-full h-full mt-auto aspect-square shadow-quaternary duration-100 ease-in hover:scale-default",
+    "relative max-w-[232px] min-w-[64px] w-full h-full mt-auto aspect-square shadow-quaternary duration-100 ease-in hover:scale-default",
   coverImg: "block absolute h-full w-full top-0 left-0 object-cover rounded-[4px]",
   rightSide: "flex flex-col justify-end space-y-[8px] > * + *",
   text: "text-sm font-normal truncate",

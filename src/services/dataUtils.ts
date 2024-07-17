@@ -59,7 +59,8 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
           ("preview_url" in track && track.preview_url) || ("previewUrl" in track && track.previewUrl) || null,
         name: track.name || "",
         artists: track.artists || [],
-        image: imageUrl || ("album" in track && track.album?.images[2].url) || null,
+        image:
+          imageUrl || ("album" in track && track.album?.images[2].url) || ("image" in track && track.image) || null,
         id: track.id,
         presence: tracksPresence[index],
       });
