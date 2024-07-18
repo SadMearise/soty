@@ -21,7 +21,7 @@ const ProfileMenu = () => {
         buttonElement={
           <ProfileButtonWithTooltip
             position={TooltipPosition.Bottom}
-            username={user?.display_name ? user?.display_name[0] : "Hi"}
+            username={user?.display_name || "Hi"}
           />
         }
       >

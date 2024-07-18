@@ -19,7 +19,7 @@ const ProfileButtonWithTooltip: FC<ProfileButtonWithTooltipProps> = ({ position,
       color={RoundedButtonColor.Black70}
       hover
     >
-      {username}
+      {username[0]}
     </RoundedButton>
   );
 
