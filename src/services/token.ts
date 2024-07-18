@@ -1,11 +1,11 @@
 import { Token } from "../models";
-import { CLIENT_DATA, ENDPOINTS, LOCAL_STORAGE_KEYS, URI } from "../utils/constants";
+import { CLIENT_DATA, ENDPOINTS, LOCAL_STORAGE_KEYS } from "../utils/constants";
 import { getCodeVerifier, getLocalStorage } from "../utils/helpers";
 import { fetchData } from ".";
 import { HTTPMethod } from "../types/enums";
 
 export const postToken = async (code: string): Promise<Token> => {
-  const { clientId } = CLIENT_DATA;
+  const { clientId, uri } = CLIENT_DATA;
   const codeVerifier = getCodeVerifier();
 
   const token: Token = (await fetchData({
@@ -16,7 +16,7 @@ export const postToken = async (code: string): Promise<Token> => {
       client_id: clientId,
       grant_type: "authorization_code",
       code,
-      redirect_uri: URI,
+      redirect_uri: uri,
       code_verifier: codeVerifier,
     }),
   }))!;
