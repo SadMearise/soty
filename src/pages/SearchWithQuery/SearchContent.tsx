@@ -3,9 +3,10 @@ import { Playlists } from "../../components";
 import { Albums, Playlists as PlaylistsModel } from "../../models";
 import { FilterNames } from "./enums";
 import { SubtitleType } from "../../components/enums";
+import { SearchResult } from "../../types";
 
 type SearchContentProps = {
-  searchResults: (PlaylistsModel & Albums) | null;
+  searchResults: SearchResult | null;
   filter: string;
 };
 
@@ -22,13 +23,13 @@ const SearchContent: FC<SearchContentProps> = ({ searchResults, filter }) => {
       return (
         <div className={classes.allFiltersWrapper}>
           <Playlists
-            playlists={searchResults!.albums.items}
+            playlists={(searchResults as Albums).albums.items}
             title="Альбомы"
             subtitleType={SubtitleType.DateAndArtists}
             singleLineList
           />
           <Playlists
-            playlists={searchResults!.playlists.items}
+            playlists={(searchResults as PlaylistsModel).playlists.items}
             title="Плейлисты"
             subtitleType={SubtitleType.Owner}
             singleLineList
@@ -40,7 +41,7 @@ const SearchContent: FC<SearchContentProps> = ({ searchResults, filter }) => {
       return (
         <div className={classes.filterWrapper}>
           <Playlists
-            playlists={searchResults!.albums.items}
+            playlists={(searchResults as Albums).albums.items}
             subtitleType={SubtitleType.DateAndArtists}
           />
         </div>
@@ -50,7 +51,7 @@ const SearchContent: FC<SearchContentProps> = ({ searchResults, filter }) => {
       return (
         <div className={classes.filterWrapper}>
           <Playlists
-            playlists={searchResults!.playlists.items}
+            playlists={(searchResults as PlaylistsModel).playlists.items}
             subtitleType={SubtitleType.Owner}
           />
         </div>
