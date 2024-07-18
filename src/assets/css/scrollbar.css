@@ -1,0 +1,14 @@
+.scrollbar > .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
+  max-height: 100px;
+  min-height: 30px;
+  min-width: 12px;
+  max-width: 12px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+}
+
+.scrollbar > .os-scrollbar-vertical {
+  background: transparent;
+  min-width: 16px;
+  max-width: 16px;
+}

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  position: relative;
+  color: white;
+  background-color: #121212;
+}
+
+@layer components {
+  .btn {
+    @apply inline-block cursor-pointer text-center align-middle select-none no-underline whitespace-nowrap;
+  }
+
+  .btn-default-white {
+    @apply text-base font-semibold px-8 py-2 bg-white text-black rounded-full hover:scale-default;
+  }
+
+  .btn-big-white {
+    @apply text-base font-bold border border-solid border-grey-200 px-8 py-3 bg-white text-black rounded-full hover:scale-default;
+  }
+
+  .btn-default-green {
+    @apply text-base font-semibold px-8 py-2 bg-green-100 text-black rounded-full hover:scale-default;
+  }
+
+  .btn-link {
+    @apply text-sm font-semibold px-8 bg-transparent text-white hover:underline;
+  }
+
+  .after-underline {
+    @apply after:block after:absolute after:h-0 after:w-full after:bg-grey-100 after:bottom-[-6px] after:pointer-events-none after:transition-all after:duration-200 after:ease-in active:after:h-[3px] focus:after:h-[3px];
+  }
+}
