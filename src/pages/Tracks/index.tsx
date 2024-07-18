@@ -6,8 +6,8 @@ import { playback, setTracksInfo } from "../../store/features/audioplayer/audiop
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { AudioplayerTrackInfo } from "../../types";
 import { MusicType, Severity } from "../../types/enums";
-import { ERRORS } from "../../utils/constants";
-import { useAlert } from "../../utils/hooks";
+import { ERRORS, PROJECT_NAME } from "../../utils/constants";
+import { useAlert, useTitle } from "../../utils/hooks";
 import { CURRENT_USER_PLAYLIST_ID } from "./contantsx";
 import useTracksData from "./hooks/useTracksData";
 
@@ -18,6 +18,7 @@ const classes = {
 const Tracks = () => {
   const { tracks, currentUser, isLoading, isError } = useTracksData();
   const tracksIds = tracks ? tracks.filter((item) => item.track.id).map((item) => item.track.id!) : [];
+  useTitle(`${PROJECT_NAME} - Любимые треки`);
   const { displayCustomAlert } = useAlert();
   const dispatch = useAppDispatch();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
