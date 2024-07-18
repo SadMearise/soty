@@ -1,9 +1,9 @@
 import { createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useMemo, useState } from "react";
-import { PlaylistItems, Albums } from "../../models";
+import { SearchResult } from "../../types";
 
 type SearchContextValue = {
-  searchResults: (PlaylistItems | Albums) | null;
-  setSearchResults: Dispatch<SetStateAction<(PlaylistItems | Albums) | null>>;
+  searchResults: SearchResult | null;
+  setSearchResults: Dispatch<SetStateAction<SearchResult | null>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   isError: string | null;
@@ -13,7 +13,7 @@ type SearchContextValue = {
 export const SearchContext = createContext<SearchContextValue | null>(null);
 
 export const SearchContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [searchResults, setSearchResults] = useState<(PlaylistItems | Albums) | null>(null);
+  const [searchResults, setSearchResults] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<string | null>(null);
 

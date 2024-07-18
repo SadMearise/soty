@@ -1,4 +1,4 @@
-import { BaseArtist } from "../models";
+import { Albums, BaseArtist, Playlists } from "../models";
 
 export type AudioplayerTrackInfo = {
   previewUrl: string | null;
@@ -12,3 +12,5 @@ export type AudioplayerTrackInfo = {
 export type Ids = {
   ids: string;
 };
+
+export type SearchResult = Playlists | Albums | (Playlists & Albums);
