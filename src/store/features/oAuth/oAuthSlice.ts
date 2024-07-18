@@ -7,7 +7,7 @@ import {
   getCodeChallenge,
   getTokenExpirationDate,
 } from "../../../utils/helpers";
-import { ENDPOINTS, CLIENT_DATA, LINKS, LOCAL_STORAGE_KEYS, URI } from "../../../utils/constants";
+import { ENDPOINTS, CLIENT_DATA, LINKS, LOCAL_STORAGE_KEYS } from "../../../utils/constants";
 import { postToken } from "../../../services";
 
 interface OAuthState {
@@ -31,7 +31,7 @@ export const getToken = createAsyncThunk("oAuth/getToken", async () => {
 });
 
 export const login = createAsyncThunk("oAuth/login", async () => {
-  const { clientId, scope } = CLIENT_DATA;
+  const { clientId, scope, uri } = CLIENT_DATA;
   const codeChallenge = await getCodeChallenge();
 
   const authUrl = new URL(ENDPOINTS.auth);
@@ -42,7 +42,7 @@ export const login = createAsyncThunk("oAuth/login", async () => {
     scope,
     code_challenge_method: "S256",
     code_challenge: codeChallenge,
-    redirect_uri: URI,
+    redirect_uri: uri,
   };
 
   authUrl.search = new URLSearchParams(params).toString();
