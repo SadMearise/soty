@@ -46,7 +46,7 @@ const AsidePanel = () => {
       <BlockContainer styles={classes.logoContainer}>
         <div className={classes.logoWrapper}>
           <Logo
-            logoSrc="/images/logo.png"
+            logoSrc="./images/logo.png"
             size={LogoSizes.Xs}
           />
         </div>

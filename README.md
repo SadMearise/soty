@@ -77,6 +77,7 @@ npm install
 ```
 
 4. Create environment files:
+
 - **.env**  
   Consists of three variables:
   - `VITE_CTP_CLIENT_ID`
@@ -84,14 +85,20 @@ npm install
     - Initialize them according to your data from your [Spotify personal account](https://developer.spotify.com/).
   - `VITE_CTP_SCOPE`
     - I'm using the following permissions: `user-read-private`, `user-read-email`, `playlist-modify-public`, `playlist-modify-private`, `user-library-modify`, `user-library-read`, `playlist-read-private`, `playlist-read-collaborative`.
-  
+    
 - **.env.production**  
-  Consists of the `VITE_API_URL` variable.  
-  - Initialize it with the URI of your deployment server.
+  Consists of two variables:
+  - `VITE_CTP_SERVER_URL`
+    - Initialize it with the URL of your deployment server.
+  - `VITE_CTP_BASE_URL`
+    - Initialize it with the base URL. My case `/`
 
 - **.env.development**  
-  Consists of the `VITE_API_URL` variable.  
-  - Initialize it with the URI of your local server.
+  Consists of two variables:
+  - `VITE_CTP_SERVER_URL`
+    - Initialize it with the URL of your local server.
+  - `VITE_CTP_BASE_URL`
+    - Initialize it with the base URL. My case `/soty`
 
 5. Use [scripts](#scripts) to manage the project. For example running the Project:
 

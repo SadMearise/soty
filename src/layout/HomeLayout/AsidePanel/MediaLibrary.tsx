@@ -49,7 +49,7 @@ const MediaLibrary = () => {
               defer
             >
               <MediaLibraryItem
-                imageSrc="/public/images/favorite.png"
+                imageSrc="./images/favorite.png"
                 title="Любимые треки"
                 subtitle={`Плейлист • ${getDeclension(totalTracks, ["трек", "трека", "треков"])}`}
                 link={LINKS.tracks.route}

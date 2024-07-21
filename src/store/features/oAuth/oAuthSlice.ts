@@ -7,7 +7,7 @@ import {
   getCodeChallenge,
   getTokenExpirationDate,
 } from "../../../utils/helpers";
-import { ENDPOINTS, CLIENT_DATA, LINKS, LOCAL_STORAGE_KEYS } from "../../../utils/constants";
+import { ENDPOINTS, CLIENT_DATA, LOCAL_STORAGE_KEYS } from "../../../utils/constants";
 import { postToken } from "../../../services";
 
 interface OAuthState {
@@ -31,7 +31,7 @@ export const getToken = createAsyncThunk("oAuth/getToken", async () => {
 });
 
 export const login = createAsyncThunk("oAuth/login", async () => {
-  const { clientId, scope, uri } = CLIENT_DATA;
+  const { clientId, scope, serverUrl } = CLIENT_DATA;
   const codeChallenge = await getCodeChallenge();
 
   const authUrl = new URL(ENDPOINTS.auth);
@@ -42,7 +42,7 @@ export const login = createAsyncThunk("oAuth/login", async () => {
     scope,
     code_challenge_method: "S256",
     code_challenge: codeChallenge,
-    redirect_uri: uri,
+    redirect_uri: serverUrl,
   };
 
   authUrl.search = new URLSearchParams(params).toString();
@@ -78,7 +78,8 @@ const oAuthSlice = createSlice({
       removeLocalStorage(LOCAL_STORAGE_KEYS.authProgress);
       removeLocalStorage(LOCAL_STORAGE_KEYS.codeVerifier);
 
-      window.history.replaceState({ idx: 0 }, "", LINKS.home.route);
+      const newUrl = new URL(CLIENT_DATA.baseUrl, window.location.origin);
+      window.history.replaceState({ idx: 0 }, "", newUrl);
 
       state.isAuthenticated = true;
       state.isAuthProgress = false;

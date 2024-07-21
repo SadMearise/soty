@@ -4,14 +4,16 @@ type ClientData = {
   clientSecret: string;
   clientId: string;
   scope: string;
-  uri: string;
+  serverUrl: string;
+  baseUrl: string;
 };
 
 export const CLIENT_DATA: ClientData = {
   clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET || "",
   clientId: import.meta.env.VITE_CTP_CLIENT_ID || "",
   scope: import.meta.env.VITE_CTP_SCOPE || "",
-  uri: import.meta.env.VITE_API_URL || "",
+  serverUrl: import.meta.env.VITE_CTP_SERVER_URL || "",
+  baseUrl: import.meta.env.VITE_CTP_BASE_URL || "",
 };
 
 export const ENDPOINTS = {
@@ -29,8 +31,6 @@ export const ENDPOINTS = {
   users: "https://api.spotify.com/v1/users",
   search: "https://api.spotify.com/v1/search",
 };
-
-export const URI = "http://localhost:3000/";
 
 export const LOCAL_STORAGE_KEYS = {
   authCode: "authCode",
