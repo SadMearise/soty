@@ -22,7 +22,8 @@ jobs:
           VITE_CTP_CLIENT_ID: ${{ secrets.VITE_CTP_CLIENT_ID }}
           VITE_CTP_CLIENT_SECRET: ${{ secrets.VITE_CTP_CLIENT_SECRET }}
           VITE_CTP_SCOPE: ${{ secrets.VITE_CTP_SCOPE }}
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_CTP_SERVER_URL: ${{ secrets.VITE_CTP_SERVER_URL }}
+          VITE_CTP_BASE_URL: ${{ secrets.VITE_CTP_BASE_URL }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

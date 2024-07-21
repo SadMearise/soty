@@ -5,12 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: "./",
-  };
-
-  if (command === "build") {
-    config.base = "/soty/";
-  }
+    base: command === "build" ? "/soty/" : "/",
 
   return config;
 });

@@ -5,7 +5,7 @@ import { fetchData } from ".";
 import { HTTPMethod } from "../types/enums";
 
 export const postToken = async (code: string): Promise<Token> => {
-  const { clientId, uri } = CLIENT_DATA;
+  const { clientId, serverUrl } = CLIENT_DATA;
   const codeVerifier = getCodeVerifier();
 
   const token: Token = (await fetchData({
@@ -16,7 +16,7 @@ export const postToken = async (code: string): Promise<Token> => {
       client_id: clientId,
       grant_type: "authorization_code",
       code,
-      redirect_uri: uri,
+      redirect_uri: serverUrl,
       code_verifier: codeVerifier,
     }),
   }))!;

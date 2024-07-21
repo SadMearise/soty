@@ -32,7 +32,7 @@ const Error: FC<ErrorProps> = ({ title, text, link }) => {
     <div className={classes.content}>
       <div className={classes.logoWrapper}>
         <Logo
-          logoSrc="/images/logo.png"
+          logoSrc="./images/logo.png"
           isTitle={false}
           size={LogoSizes.Md}
         />

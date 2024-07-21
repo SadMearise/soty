@@ -61,7 +61,7 @@ const Tracks = () => {
           typeText="Плейлист"
           tracksDurationMs={tracks.reduce((res, { track }) => res + Number(track.duration_ms), 0)}
           release={{
-            imageUrl: "/public/images/favorite.png",
+            imageUrl: "./images/favorite.png",
             name: "Любимые треки",
             totalTracks: tracks.length,
           }}

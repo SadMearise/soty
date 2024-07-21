@@ -69,11 +69,11 @@ const App = () => {
           />
           <Route
             element={<ContentRestricted />}
-            path={`${LINKS.contentRestricted.route}`}
+            path={LINKS.contentRestricted.route}
           />
           <Route
             element={<Tracks />}
-            path={`${LINKS.tracks.route}`}
+            path={LINKS.tracks.route}
           />
         </Route>
       </Route>
