@@ -6,7 +6,6 @@ export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
     base: command === "build" ? "/soty/" : "/",
-  };
 
   return config;
 });
