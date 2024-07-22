@@ -88,11 +88,12 @@ const Album = () => {
           as={MusicType.Tracklist}
           id={album.id}
           type={album.type}
-          tracks={album.tracks.items.map(({ id, name, artists, preview_url: previewUrl }) => ({
+          tracks={album.tracks.items.map(({ id, name, artists, preview_url: previewUrl, duration_ms: durationMs }) => ({
             id,
             name,
             artists: artists?.map(({ id, name }) => ({ id, name })),
             previewUrl,
+            durationMs,
           }))}
           tracksPresence={tracksPresence}
         />

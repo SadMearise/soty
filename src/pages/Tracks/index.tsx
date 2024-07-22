@@ -82,6 +82,7 @@ const Tracks = () => {
             artists: track.artists?.map(({ id, name }) => ({ id, name })),
             previewUrl: track.preview_url,
             image: track.album?.images[2].url,
+            durationMs: track.duration_ms,
           }))}
           id={CURRENT_USER_PLAYLIST_ID}
           ids={tracksIds}
