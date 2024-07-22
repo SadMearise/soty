@@ -17,17 +17,9 @@ import {
 } from "./pages";
 import { CATEGORY_FILTERS } from "./pages/SearchWithQuery/constants";
 
-const initSessionHistoryLength = () => {
-  if (!sessionStorage.getItem("startedHistoryLength")) {
-    sessionStorage.setItem("startedHistoryLength", `${window.history.length}`);
-  }
-};
-
 const App = () => {
   const handleLogin = useLogin();
   useHistoryStack();
-
-  initSessionHistoryLength();
 
   return (
     <Routes>

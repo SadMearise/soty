@@ -14,7 +14,7 @@ const useHistoryStack = () => {
       const newHistoryStack = [...historyStack, location.pathname];
 
       setHistoryStack(newHistoryStack);
-      sessionStorage.setItem("historyStack", JSON.stringify(newHistoryStack));
+      sessionStorage.setItem(SESSION_STORAGE_KEYS.historyStack, JSON.stringify(newHistoryStack));
     }
   }, [historyStack, location.pathname]);
 
