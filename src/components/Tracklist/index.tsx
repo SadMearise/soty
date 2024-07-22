@@ -18,6 +18,7 @@ export type Track = {
   artists: Partial<Pick<BaseArtist, "name" | "id">>[];
   image: string;
   previewUrl: string | null;
+  durationMs: number;
 };
 
 type T = {
@@ -99,11 +100,12 @@ const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props })
           />
         </div>
       </div>
-      {tracks.map(({ id, name, artists, previewUrl, image }, index) => (
+      {tracks.map(({ id, name, artists, previewUrl, image, durationMs }, index) => (
         <TracklistItem
           key={id}
           id={id}
           name={name}
+          durationMs={durationMs}
           imageSrc={image}
           artists={artists}
           trackNumber={index + 1}

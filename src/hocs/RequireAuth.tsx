@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { LINKS } from "../utils/constants";
+import { LINKS, SESSION_STORAGE_KEYS } from "../utils/constants";
 import { selectIsAuthenticated, selectIsAuthProgress } from "../store/features/oAuth/oAuthSelectors";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { getToken } from "../store/features/oAuth/oAuthSlice";
@@ -10,6 +10,12 @@ const RequireAuth = () => {
   const isAuthProgress = useAppSelector(selectIsAuthProgress);
   const isAuth = useAppSelector(selectIsAuthenticated);
 
+  const initSessionHistoryLength = () => {
+    if (!sessionStorage.getItem(SESSION_STORAGE_KEYS.startedHistoryLength)) {
+      sessionStorage.setItem(SESSION_STORAGE_KEYS.startedHistoryLength, `${window.history.length}`);
+    }
+  };
+
   if (isAuthProgress) {
     dispatch(getToken());
 
@@ -17,6 +23,7 @@ const RequireAuth = () => {
   }
 
   if (isAuth) {
+    initSessionHistoryLength();
     return <Outlet />;
   }
 

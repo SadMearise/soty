@@ -97,10 +97,11 @@ const Playlist = () => {
           tracks={playlist.tracks.items
             .filter(({ track }) => track)
             .map(({ track }) => ({
-              id: track!.id,
-              name: track!.name,
-              artists: track!.artists?.map(({ id, name }) => ({ id, name })),
-              previewUrl: track!.preview_url,
+              id: track?.id,
+              name: track?.name,
+              artists: track?.artists?.map(({ id, name }) => ({ id, name })),
+              previewUrl: track?.preview_url,
+              durationMs: track?.duration_ms,
             }))}
           tracksPresence={tracksPresence}
         />

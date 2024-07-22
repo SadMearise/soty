@@ -9,6 +9,7 @@ import { TooltipPosition } from "../../hocs/enums";
 type TracklistItemProps = {
   id?: string;
   name?: string;
+  durationMs?: number;
   imageSrc?: string;
   artists?: Partial<Pick<BaseArtist, "name" | "id">>[];
   disabled?: boolean;
@@ -21,6 +22,7 @@ type TracklistItemProps = {
 const TracklistItem: FC<TracklistItemProps> = ({
   id,
   name,
+  durationMs,
   imageSrc,
   artists,
   disabled,
@@ -30,6 +32,8 @@ const TracklistItem: FC<TracklistItemProps> = ({
   onPlaybackClick,
 }) => {
   const { isFavorite, onFavoriteClick } = useFavoriteTrack(trackPresence, id);
+
+  const trackDurationMs = durationMs && durationMs < PREVIEW_TRACK_DURATION_MS ? durationMs : PREVIEW_TRACK_DURATION_MS;
 
   const classes = {
     row: "relative grid grid-cols-[16px_minmax(120px,_4fr)_1fr] gap-[16px] px-[16px] h-[56px] hover:bg-white/10 hover:rounded-[4px] group",
@@ -98,7 +102,7 @@ const TracklistItem: FC<TracklistItemProps> = ({
               iconSize={FavoriteButtonSize.Sm}
             />
           </div>
-          <TrackTime trackDurationMs={PREVIEW_TRACK_DURATION_MS} />
+          <TrackTime trackDurationMs={trackDurationMs} />
         </div>
       </div>
     )
