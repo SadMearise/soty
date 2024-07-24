@@ -4,8 +4,8 @@ import { Loader, MediaLibraryItem, SvgGenerator } from "../../../components";
 import { getDeclension } from "../../../utils/helpers";
 import { LINKS } from "../../../utils/constants";
 import { useScrollbar } from "../../../utils/hooks";
-import useMediaLibraryData from "./hooks/useMediaLibraryData";
 import { BlockContainer } from "../../../containers";
+import useMediaLibraryData from "./hooks/useMediaLibraryData";
 
 const classes = {
   container: "flex flex-col grow overflow-hidden p-[8px] md-max:px-[4px] md-max:py-[8px]",
@@ -17,7 +17,8 @@ const classes = {
 };
 
 const MediaLibrary = () => {
-  const { userAlbums, userPlaylists, totalTracks, isLoading } = useMediaLibraryData();
+  const { totalFavoriteTracks, isFavoriteAlbums, isFavoritePlaylists, isLoading } = useMediaLibraryData();
+
   const { scrollContainerRef } = useScrollbar();
 
   return (
@@ -51,27 +52,35 @@ const MediaLibrary = () => {
               <MediaLibraryItem
                 imageSrc="./images/favorite.png"
                 title="Любимые треки"
-                subtitle={`Плейлист • ${getDeclension(totalTracks, ["трек", "трека", "треков"])}`}
+                subtitle={`Плейлист • ${getDeclension(totalFavoriteTracks, ["трек", "трека", "треков"])}`}
                 link={LINKS.tracks.route}
               />
-              {userAlbums.map(({ album }) => (
-                <MediaLibraryItem
-                  key={album.id}
-                  imageSrc={album.images[0].url}
-                  title={album.name}
-                  subtitle={`Альбом • ${album.artists[0].name}`}
-                  link={`/${LINKS.album.route}/${album.id}`}
-                />
-              ))}
-              {userPlaylists.map((playlist) => (
-                <MediaLibraryItem
-                  key={playlist.id}
-                  imageSrc={playlist.images && playlist.images[0].url}
-                  title={playlist.name}
-                  subtitle={`Плейлист • ${playlist.owner?.display_name}`}
-                  link={`/${LINKS.playlist.route}/${playlist.id}`}
-                />
-              ))}
+              {isFavoriteAlbums.map((album) => {
+                return (
+                  album.id && (
+                    <MediaLibraryItem
+                      key={album.id}
+                      imageSrc={album.imageUrl}
+                      title={album.name}
+                      subtitle={`Альбом • ${album.artistName || "unknown"}`}
+                      link={`/${LINKS.album.route}/${album.id}`}
+                    />
+                  )
+                );
+              })}
+              {isFavoritePlaylists.map((playlist) => {
+                return (
+                  playlist.id && (
+                    <MediaLibraryItem
+                      key={playlist.id}
+                      imageSrc={playlist.imageUrl}
+                      title={playlist.name}
+                      subtitle={`Плейлист • ${playlist.ownerName}`}
+                      link={`/${LINKS.playlist.route}/${playlist.id}`}
+                    />
+                  )
+                );
+              })}
             </OverlayScrollbarsComponent>
           </div>
         </>

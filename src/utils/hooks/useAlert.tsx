@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { initAlert, showAlert } from "../../store/features/alert/alertSlice";
 import { useAppDispatch } from "../../store/hooks";
@@ -14,10 +15,13 @@ const useAlert = () => {
     dispatch(showAlert(newState));
   };
 
-  const displayCustomAlert = (severity: Severity, message: string) => {
-    dispatch(initAlert({ severity, message }));
-    dispatch(showAlert(true));
-  };
+  const displayCustomAlert = useCallback(
+    (severity: Severity, message: string) => {
+      dispatch(initAlert({ severity, message }));
+      dispatch(showAlert(true));
+    },
+    [dispatch]
+  );
 
   return { alertVisibility, alertMessage, alertSeverity, setShowError, displayCustomAlert };
 };

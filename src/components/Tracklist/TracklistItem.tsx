@@ -31,7 +31,7 @@ const TracklistItem: FC<TracklistItemProps> = ({
   isPlaying,
   onPlaybackClick,
 }) => {
-  const { isFavorite, onFavoriteClick } = useFavoriteTrack(trackPresence, id);
+  const { isFavorite, handleFavoriteClick } = useFavoriteTrack(trackPresence, id);
 
   const trackDurationMs = durationMs && durationMs < PREVIEW_TRACK_DURATION_MS ? durationMs : PREVIEW_TRACK_DURATION_MS;
 
@@ -93,7 +93,7 @@ const TracklistItem: FC<TracklistItemProps> = ({
         <div className={`${classes.rightCol}${disabled ? ` ${classes.disabled}` : ""}`}>
           <div className={classes.favoriteIconWrapper}>
             <FavoriteAction
-              onFavoriteClick={onFavoriteClick}
+              onFavoriteClick={handleFavoriteClick}
               isFavorite={isFavorite}
               tooltip={{
                 text: isFavorite ? "Удалить из медиатеки" : "Добавить в медиатеку",

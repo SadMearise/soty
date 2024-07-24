@@ -1,38 +1,41 @@
 import { useEffect, useState } from "react";
-import { BasePlaylist, UserSavedAlbum } from "../../../../models";
-import { fetchUserSavedAlbums } from "../../../../services/albums";
-import { fetchCurrentUserSavedPlaylists } from "../../../../services/playlists";
-import { fetchUserSavedTracks } from "../../../../services/tracks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import {
+  selectIsFavoriteAlbums,
+  selectIsFavoritePlaylists,
+  selectIsLoadingAlbums,
+  selectIsLoadingPlaylists,
+  selectIsLoadingTracks,
+  selectTotalFavoriteTracks,
+} from "../../../../store/features/favoriteItems/favoriteItemsSelectors";
+import {
+  fetchFavoriteAlbums,
+  fetchFavoritePlaylists,
+  fetchFavoriteTracks,
+} from "../../../../store/features/favoriteItems/favoriteItemsSlice";
 
 const useMediaLibraryData = () => {
-  const [userAlbums, setUserAlbums] = useState<UserSavedAlbum[]>([]);
-  const [userPlaylists, setUserPlaylists] = useState<Partial<BasePlaylist>[]>([]);
-  const [totalTracks, setTotalTracks] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const totalFavoriteTracks = useAppSelector(selectTotalFavoriteTracks);
+  const isFavoriteAlbums = useAppSelector(selectIsFavoriteAlbums);
+  const isFavoritePlaylists = useAppSelector(selectIsFavoritePlaylists);
+  const isLoadingAlbums = useAppSelector(selectIsLoadingAlbums);
+  const isLoadingPlaylists = useAppSelector(selectIsLoadingPlaylists);
+  const isLoadingTracks = useAppSelector(selectIsLoadingTracks);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
+    dispatch(fetchFavoriteTracks());
+    dispatch(fetchFavoriteAlbums());
+    dispatch(fetchFavoritePlaylists());
+  }, [dispatch]);
 
-      const userAlbums = await fetchUserSavedAlbums({});
+  useEffect(() => {
+    setIsLoading(isLoadingAlbums || isLoadingPlaylists || isLoadingTracks);
+  }, [isLoadingAlbums, isLoadingPlaylists, isLoadingTracks]);
 
-      setUserAlbums(userAlbums.items);
-
-      const userPlaylists = await fetchCurrentUserSavedPlaylists({});
-
-      setUserPlaylists(userPlaylists.items);
-
-      const userTracks = await fetchUserSavedTracks({});
-
-      setTotalTracks(userTracks.total);
-
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  return { userAlbums, userPlaylists, totalTracks, isLoading };
+  return { totalFavoriteTracks, isFavoriteAlbums, isFavoritePlaylists, isLoading };
 };
 
 export default useMediaLibraryData;
