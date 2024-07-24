@@ -1,11 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { AlertState } from "./types";
 import { Severity } from "../../../types/enums";
-
-interface AlertState {
-  isVisibility: boolean;
-  message: string;
-  severity: Severity;
-}
 
 const initialState: AlertState = {
   isVisibility: false,
