@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { SvgGeneratorId } from "../types/enums";
 
 export type SvgGeneratorProps = {
-  id: string;
+  id: SvgGeneratorId;
   size?: string;
   className?: string;
   colorFill?: string;
@@ -9,7 +10,7 @@ export type SvgGeneratorProps = {
 
 const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill }) => {
   switch (id) {
-    case "play":
+    case SvgGeneratorId.Play:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +28,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M8 5v14l11-7z" />
         </svg>
       );
-    case "pause":
+    case SvgGeneratorId.Pause:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +46,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
         </svg>
       );
-    case "prevArrow":
+    case SvgGeneratorId.PrevArrow:
       return (
         <svg
           data-encore-id="icon"
@@ -61,7 +62,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z" />
         </svg>
       );
-    case "nextArrow":
+    case SvgGeneratorId.NextArrow:
       return (
         <svg
           data-encore-id="icon"
@@ -77,7 +78,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z" />
         </svg>
       );
-    case "home":
+    case SvgGeneratorId.Home:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +109,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           </g>
         </svg>
       );
-    case "search":
+    case SvgGeneratorId.Search:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +140,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           </g>
         </svg>
       );
-    case "schedule":
+    case SvgGeneratorId.Schedule:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +159,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
         </svg>
       );
-    case "skipNext":
+    case SvgGeneratorId.SkipNext:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +173,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M660-240v-480h80v480h-80Zm-440 0v-480l360 240-360 240Zm80-240Zm0 90 136-90-136-90v180Z" />
         </svg>
       );
-    case "skipPrev":
+    case SvgGeneratorId.SkipPrev:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +187,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M220-240v-480h80v480h-80Zm520 0L380-480l360-240v480Zm-80-240Zm0 90v-180l-136 90 136 90Z" />
         </svg>
       );
-    case "musicNote":
+    case SvgGeneratorId.MusicNote:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +201,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z" />
         </svg>
       );
-    case "equalizer":
+    case SvgGeneratorId.Equalizer:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +242,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           />
         </svg>
       );
-    case "instagram":
+    case SvgGeneratorId.Instagram:
       return (
         <svg
           data-encore-id="icon"
@@ -258,7 +259,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M8 3.892a4.108 4.108 0 1 0 0 8.216 4.108 4.108 0 0 0 0-8.216zm0 6.775a2.668 2.668 0 1 1 0-5.335 2.668 2.668 0 0 1 0 5.335zm4.27-5.978a.96.96 0 1 0 0-1.92.96.96 0 0 0 0 1.92z" />
         </svg>
       );
-    case "twitter":
+    case SvgGeneratorId.Twitter:
       return (
         <svg
           data-encore-id="icon"
@@ -274,7 +275,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M13.54 3.889a2.968 2.968 0 0 0 1.333-1.683 5.937 5.937 0 0 1-1.929.738 2.992 2.992 0 0 0-.996-.706 2.98 2.98 0 0 0-1.218-.254 2.92 2.92 0 0 0-2.143.889 2.929 2.929 0 0 0-.889 2.15c0 .212.027.442.08.691a8.475 8.475 0 0 1-3.484-.932A8.536 8.536 0 0 1 1.532 2.54a2.993 2.993 0 0 0-.413 1.523c0 .519.12 1 .361 1.445.24.445.57.805.988 1.08a2.873 2.873 0 0 1-1.373-.374v.04c0 .725.23 1.365.69 1.92a2.97 2.97 0 0 0 1.739 1.048 2.937 2.937 0 0 1-1.365.056 2.94 2.94 0 0 0 1.063 1.5 2.945 2.945 0 0 0 1.77.603 5.944 5.944 0 0 1-3.77 1.302c-.243 0-.484-.016-.722-.048A8.414 8.414 0 0 0 5.15 14c.905 0 1.763-.12 2.572-.361.81-.24 1.526-.57 2.147-.988a9.044 9.044 0 0 0 1.683-1.46c.5-.556.911-1.155 1.234-1.798a9.532 9.532 0 0 0 .738-1.988 8.417 8.417 0 0 0 .246-2.429 6.177 6.177 0 0 0 1.508-1.563c-.56.249-1.14.407-1.738.476z" />
         </svg>
       );
-    case "facebook":
+    case SvgGeneratorId.Facebook:
       return (
         <svg
           data-encore-id="icon"
@@ -290,7 +291,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M16 8a8 8 0 1 0-9.25 7.903v-5.59H4.719V8H6.75V6.237c0-2.005 1.194-3.112 3.022-3.112.875 0 1.79.156 1.79.156V5.25h-1.008c-.994 0-1.304.617-1.304 1.25V8h2.219l-.355 2.313H9.25v5.59A8.002 8.002 0 0 0 16 8z" />
         </svg>
       );
-    case "close":
+    case SvgGeneratorId.Close:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +305,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
         </svg>
       );
-    case "error":
+    case SvgGeneratorId.Error:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -318,7 +319,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
         </svg>
       );
-    case "warning":
+    case SvgGeneratorId.Warning:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +333,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z" />
         </svg>
       );
-    case "info":
+    case SvgGeneratorId.Info:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -346,7 +347,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
         </svg>
       );
-    case "success":
+    case SvgGeneratorId.Success:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -360,7 +361,7 @@ const SvgGenerator: FC<SvgGeneratorProps> = ({ id, size, className, colorFill })
           <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q65 0 123 19t107 53l-58 59q-38-24-81-37.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-18-2-36t-6-35l65-65q11 32 17 66t6 70q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-56-216L254-466l56-56 114 114 400-401 56 56-456 457Z" />
         </svg>
       );
-    case "media":
+    case SvgGeneratorId.Media:
       return (
         <svg
           role="img"

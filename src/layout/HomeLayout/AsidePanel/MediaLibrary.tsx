@@ -6,6 +6,7 @@ import { LINKS } from "../../../utils/constants";
 import { useScrollbar } from "../../../utils/hooks";
 import { BlockContainer } from "../../../containers";
 import useMediaLibraryData from "./hooks/useMediaLibraryData";
+import { SvgGeneratorId } from "../../../types/enums";
 
 const classes = {
   container: "flex flex-col grow overflow-hidden p-[8px] md-max:px-[4px] md-max:py-[8px]",
@@ -29,7 +30,7 @@ const MediaLibrary = () => {
         <>
           <div className={classes.header}>
             <SvgGenerator
-              id="media"
+              id={SvgGeneratorId.Media}
               className={classes.icon}
               size="24px"
               colorFill="fill-grey-100"

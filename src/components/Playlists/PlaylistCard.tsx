@@ -10,6 +10,7 @@ import { AudioplayerTrackInfo } from "../../types";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { MusicType, Severity, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
+import { PlaybackVariant } from "../Playback/enums";
 
 type PlaylistCardProps = {
   name: string;
@@ -72,7 +73,7 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
           <div className={classes.playbackWrapper}>
             <Playback
               isPlaying={playlistIsPlaying}
-              variant="rounded"
+              variant={PlaybackVariant.Rounded}
               roundedButtonSize={RoundedButtonSize.Xmd}
               roundedButtonColor={RoundedButtonColor.Green}
               iconColorFill="fill-black"

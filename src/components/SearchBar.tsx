@@ -1,5 +1,6 @@
 import { FC, SetStateAction, Dispatch, KeyboardEvent } from "react";
 import { Button, SvgGenerator } from ".";
+import { SvgGeneratorId } from "../types/enums";
 
 type SearchBarProps = {
   value: string;
@@ -30,7 +31,7 @@ const SearchBar: FC<SearchBarProps> = ({ value, setValue, placeholder, onKeyDown
       </form>
       <div className={classes.formIcons}>
         <SvgGenerator
-          id="search"
+          id={SvgGeneratorId.Search}
           size="16px"
           colorFill="fill-white"
         />
@@ -43,7 +44,7 @@ const SearchBar: FC<SearchBarProps> = ({ value, setValue, placeholder, onKeyDown
             styles={classes.closeButton}
           >
             <SvgGenerator
-              id="close"
+              id={SvgGeneratorId.Close}
               size="16px"
               colorFill="fill-white"
             />

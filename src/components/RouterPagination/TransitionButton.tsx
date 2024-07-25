@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { RoundedButton, SvgGenerator } from "..";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { SvgGeneratorId } from "../../types/enums";
 
 type TransitionButtonProps = {
   onClick: () => void;
   isDisabled: boolean;
   label: string;
-  svgId: string;
+  svgId: SvgGeneratorId;
 };
 
 const TransitionButton: FC<TransitionButtonProps> = ({ onClick, isDisabled, label, svgId }) => (

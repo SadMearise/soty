@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { SvgGenerator, Tooltip } from "..";
 import { withTooltip } from "../../hocs";
 import { TooltipPosition } from "../../hocs/enums";
+import { SvgGeneratorId } from "../../types/enums";
 
 type PlaybackIconProps = {
   isPlaying: boolean;
@@ -12,7 +13,7 @@ type PlaybackIconProps = {
 const PlaybackIcon: FC<PlaybackIconProps> = ({ isPlaying, colorFill, size }) => {
   const pauseIcon = () => (
     <SvgGenerator
-      id="pause"
+      id={SvgGeneratorId.Pause}
       colorFill={colorFill}
       size={size}
     />
@@ -20,7 +21,7 @@ const PlaybackIcon: FC<PlaybackIconProps> = ({ isPlaying, colorFill, size }) => 
 
   const playIcon = () => (
     <SvgGenerator
-      id="play"
+      id={SvgGeneratorId.Play}
       colorFill={colorFill}
       size={size}
     />

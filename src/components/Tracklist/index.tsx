@@ -7,7 +7,7 @@ import { selectIsPlaying, selectPlayingTrack } from "../../store/features/audiop
 import { AudioplayerTrackInfo } from "../../types";
 import { getAudioplayerTracksInfo } from "../../services";
 import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { MusicType, Severity, TracklistType } from "../../types/enums";
+import { MusicType, Severity, SvgGeneratorId, TracklistType } from "../../types/enums";
 import { BaseArtist } from "../../models";
 import { useAlert } from "../../utils/hooks";
 import { TooltipPosition } from "../../hocs/enums";
@@ -80,7 +80,7 @@ const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props })
   const DurationIconWithTooltip = withTooltip(
     () => (
       <SvgGenerator
-        id="schedule"
+        id={SvgGeneratorId.Schedule}
         colorFill="fill-grey-100"
         size="19px"
       />

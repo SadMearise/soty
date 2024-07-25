@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import { LINKS } from "../../../utils/constants";
 import MediaLibrary from "./MediaLibrary";
 import { LogoSizes } from "../../../components/enums";
+import { SvgGeneratorId } from "../../../types/enums";
 
 const classes = {
   aside: "flex flex-col gap-[8px] h-full",
@@ -20,7 +21,7 @@ const navigationItems: NavigationItem[] = [
     label: "home",
     icon: (
       <SvgGenerator
-        id="home"
+        id={SvgGeneratorId.Home}
         className={classes.navigateIcon}
         size="24px"
       />
@@ -32,7 +33,7 @@ const navigationItems: NavigationItem[] = [
     label: "search",
     icon: (
       <SvgGenerator
-        id="search"
+        id={SvgGeneratorId.Search}
         className={classes.navigateIcon}
         size="24px"
       />

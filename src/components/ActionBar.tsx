@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Playback } from ".";
 import { RoundedButtonColor, RoundedButtonSize } from "./enums";
+import { PlaybackVariant } from "./Playback/enums";
 
 type ActionBarProps = {
   actions?: ReactNode;
@@ -19,7 +20,7 @@ const ActionBar: FC<ActionBarProps> = ({ actions, isPlaying, onPlaybackClick }) 
       <div className={classes.playback}>
         <Playback
           isPlaying={isPlaying}
-          variant="rounded"
+          variant={PlaybackVariant.Rounded}
           roundedButtonSize={RoundedButtonSize.LgAdaptive}
           roundedButtonColor={RoundedButtonColor.Green}
           iconColorFill="fill-black"

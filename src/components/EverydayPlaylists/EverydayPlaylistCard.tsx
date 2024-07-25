@@ -7,9 +7,10 @@ import { playback, setTracksInfo } from "../../store/features/audioplayer/audiop
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { AudioplayerTrackInfo } from "../../types";
 import { LINKS } from "../../utils/constants";
-import { MusicType, Severity, TracklistType } from "../../types/enums";
+import { MusicType, Severity, SvgGeneratorId, TracklistType } from "../../types/enums";
 import { useAlert } from "../../utils/hooks";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { PlaybackVariant } from "../Playback/enums";
 
 type EverydayPlaylistProps = {
   type: TracklistType;
@@ -64,13 +65,13 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
           <PlaybackWithEqualizer
             isPlaying={playlistIsPlaying}
             equalizer={{
-              id: "equalizer",
+              id: SvgGeneratorId.Equalizer,
               colorFill: "fill-green-100",
               size: "16px",
             }}
             playback={{
               isPlaying: playlistIsPlaying,
-              variant: "rounded",
+              variant: PlaybackVariant.Rounded,
               roundedButtonSize: RoundedButtonSize.MdAdaptive,
               roundedButtonColor: RoundedButtonColor.Green,
               iconColorFill: "fill-black",

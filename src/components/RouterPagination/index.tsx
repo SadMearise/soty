@@ -4,6 +4,7 @@ import { useRouterPagination } from "../../utils/hooks";
 import TransitionButton from "./TransitionButton";
 import { SESSION_STORAGE_KEYS } from "../../utils/constants";
 import { TooltipPosition } from "../../hocs/enums";
+import { SvgGeneratorId } from "../../types/enums";
 
 const classes: Record<string, string> = {
   wrapper: "flex gap-[8px]",
@@ -26,7 +27,7 @@ const RouterPagination = () => {
       onClick={goBack}
       isDisabled={prevButtonIsDisabled}
       label="previous button"
-      svgId="prevArrow"
+      svgId={SvgGeneratorId.PrevArrow}
     />
   );
 
@@ -35,7 +36,7 @@ const RouterPagination = () => {
       onClick={goForward}
       isDisabled={nextButtonIsDisabled}
       label="next button"
-      svgId="nextArrow"
+      svgId={SvgGeneratorId.NextArrow}
     />
   );
 

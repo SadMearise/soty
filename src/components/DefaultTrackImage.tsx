@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { SvgGenerator } from ".";
+import { SvgGeneratorId } from "../types/enums";
 
 type DefaultTrackImageProps = {
   iconSize: string;
@@ -14,7 +15,7 @@ const DefaultTrackImage: FC<DefaultTrackImageProps> = ({ iconSize }) => {
   return (
     <div className={classes.imageWrapper}>
       <SvgGenerator
-        id="musicNote"
+        id={SvgGeneratorId.MusicNote}
         colorFill="fill-grey-400"
         size={iconSize}
         className={classes.icon}

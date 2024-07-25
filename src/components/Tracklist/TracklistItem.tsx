@@ -5,6 +5,8 @@ import useFavoriteTrack from "./useFavoriteTrack";
 import { BaseArtist } from "../../models";
 import { FavoriteButtonSize } from "../enums";
 import { TooltipPosition } from "../../hocs/enums";
+import { PlaybackVariant } from "../Playback/enums";
+import { SvgGeneratorId } from "../../types/enums";
 
 type TracklistItemProps = {
   id?: string;
@@ -61,13 +63,13 @@ const TracklistItem: FC<TracklistItemProps> = ({
           <PlaybackWithEqualizer
             isPlaying={isPlaying}
             equalizer={{
-              id: "equalizer",
+              id: SvgGeneratorId.Equalizer,
               colorFill: "fill-green-100",
               size: "16px",
             }}
             playback={{
               isPlaying,
-              variant: "default",
+              variant: PlaybackVariant.Default,
               colorFill: "fill-white",
               size: "20px",
               onClick: onPlaybackClick,
