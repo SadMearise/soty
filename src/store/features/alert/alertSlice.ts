@@ -1,27 +1,23 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AlertState } from "./types";
-import { Severity } from "../../../types/enums";
+import { Alert, AlertState } from "./types";
 
 const initialState: AlertState = {
-  isVisibility: false,
-  message: "An error occurred",
-  severity: Severity.Error,
+  alerts: [],
 };
 
 const alertSlice = createSlice({
   name: "alert",
   initialState,
   reducers: {
-    showAlert: (state, action: PayloadAction<boolean>) => {
-      state.isVisibility = action.payload;
+    addAlert: (state, action: PayloadAction<Alert>) => {
+      state.alerts.push(action.payload);
     },
-    initAlert: (state, action: PayloadAction<Pick<AlertState, "message" | "severity">>) => {
-      state.message = action.payload.message;
-      state.severity = action.payload.severity;
+    removeAlert: (state, action: PayloadAction<number>) => {
+      state.alerts = state.alerts.filter((alert) => alert.id !== action.payload);
     },
   },
 });
 
-export const { showAlert, initAlert } = alertSlice.actions;
+export const { addAlert, removeAlert } = alertSlice.actions;
 
 export default alertSlice;

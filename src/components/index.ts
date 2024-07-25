@@ -24,12 +24,12 @@ import TrackTime from "./TrackTime";
 import Playback from "./Playback";
 import PlaybackWithEqualizer from "./PlaybackWithEqualizer";
 import DefaultTrackImage from "./DefaultTrackImage";
-import Alert from "./Alert";
 import SearchBar from "./SearchBar";
 import TagButton from "./TagButton";
 import CategoryCard from "./CategoryCard";
 import SectionH3Title from "./SectionH3Title";
 import MediaLibraryItem from "./MediaLibraryItem";
+import Alerts from "./Alerts";
 
 export {
   EverydayPlaylists,
@@ -58,10 +58,10 @@ export {
   Playback,
   PlaybackWithEqualizer,
   DefaultTrackImage,
-  Alert,
   SearchBar,
   TagButton,
   CategoryCard,
   SectionH3Title,
   MediaLibraryItem,
+  Alerts,
 };

@@ -1,29 +1,28 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { initAlert, showAlert } from "../../store/features/alert/alertSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { selectIsVisibility, selectMessage, selectSeverity } from "../../store/features/alert/alertSelectors";
 import { Severity } from "../../types/enums";
+import { selectAlerts } from "../../store/features/alert/alertSelectors";
+import { addAlert, removeAlert } from "../../store/features/alert/alertSlice";
 
 const useAlert = () => {
   const dispatch = useAppDispatch();
-  const alertVisibility = useSelector(selectIsVisibility);
-  const alertMessage = useSelector(selectMessage);
-  const alertSeverity = useSelector(selectSeverity);
-
-  const setShowError = (newState: boolean) => {
-    dispatch(showAlert(newState));
-  };
+  const alerts = useSelector(selectAlerts);
 
   const displayCustomAlert = useCallback(
     (severity: Severity, message: string) => {
-      dispatch(initAlert({ severity, message }));
-      dispatch(showAlert(true));
+      const id = new Date().getTime();
+
+      dispatch(addAlert({ id, severity, message }));
+
+      setTimeout(() => {
+        dispatch(removeAlert(id));
+      }, 3000);
     },
     [dispatch]
   );
 
-  return { alertVisibility, alertMessage, alertSeverity, setShowError, displayCustomAlert };
+  return { alerts, displayCustomAlert };
 };
 
 export default useAlert;
