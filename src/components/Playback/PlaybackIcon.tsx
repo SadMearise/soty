@@ -36,7 +36,7 @@ const PlaybackIcon: FC<PlaybackIconProps> = ({ isPlaying, colorFill, size }) => 
     />
   ) : (
     <PlayIconWithTooltip
-      tooltipText="Включить трек"
+      tooltipText="Слушать"
       position={TooltipPosition.Top}
     />
   );
