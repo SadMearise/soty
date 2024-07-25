@@ -12,6 +12,9 @@ import { PREVIEW_TRACK_DURATION_MS } from "../../utils/constants";
 import TrackInfo from "./TrackInfo";
 import AudioControls from "./AudioControls";
 import { removeUserSavedTracks, saveTracksForCurrentUser } from "../../services";
+import { decreaseFavoriteTracks, increaseFavoriteTracks } from "../../store/features/favoriteItems/favoriteItemsSlice";
+import { useAlert } from "../../utils/hooks";
+import { Severity } from "../../types/enums";
 
 const classes = {
   wrapper: "flex items-center justify-between h-full",
@@ -27,6 +30,7 @@ const classes = {
 
 const Audioplayer = () => {
   const dispatch = useAppDispatch();
+  const { displayCustomAlert } = useAlert();
   const audioplayer = useRef<HTMLAudioElement>(null);
   const playingTrack = useAppSelector(selectPlayingTrack);
   const isPlaying = useAppSelector(selectIsPlaying);
@@ -37,15 +41,37 @@ const Audioplayer = () => {
     async (isFavorite: boolean) => {
       dispatch(setTrackPresence(isFavorite));
 
-      if (!playingTrack || !playingTrack.id) return;
+      if (!playingTrack?.id) return;
 
-      if (!isFavorite) {
-        await removeUserSavedTracks({ ids: playingTrack.id });
-      } else {
-        await saveTracksForCurrentUser({ ids: playingTrack.id });
+      const handleSuccess = (message: string) => {
+        if (!isFavorite) {
+          dispatch(decreaseFavoriteTracks());
+        } else {
+          dispatch(increaseFavoriteTracks());
+        }
+
+        displayCustomAlert(Severity.Success, message);
+      };
+
+      const handleError = (message: string) => {
+        displayCustomAlert(Severity.Error, message);
+      };
+
+      try {
+        if (!isFavorite) {
+          await removeUserSavedTracks({ ids: playingTrack.id });
+
+          handleSuccess("Removed from the media library");
+        } else {
+          await saveTracksForCurrentUser({ ids: playingTrack.id });
+
+          handleSuccess("Added to the media library");
+        }
+      } catch (err) {
+        handleError(isFavorite ? "Failed to add track to media library" : "Failed to remove track from media library");
       }
     },
-    [dispatch, playingTrack]
+    [dispatch, displayCustomAlert, playingTrack]
   );
 
   const playOrPause = () => {

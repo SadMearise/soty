@@ -5,6 +5,7 @@ import { selectPlayingTrack } from "../../store/features/audioplayer/audioplayer
 import { setTrackPresence } from "../../store/features/audioplayer/audioplayerSlice";
 import { useAlert } from "../../utils/hooks";
 import { Severity } from "../../types/enums";
+import { decreaseFavoriteTracks, increaseFavoriteTracks } from "../../store/features/favoriteItems/favoriteItemsSlice";
 
 const useFavoriteTrack = (trackPresence: boolean, trackId?: string) => {
   const dispatch = useAppDispatch();
@@ -12,12 +13,30 @@ const useFavoriteTrack = (trackPresence: boolean, trackId?: string) => {
   const playingTrack = useAppSelector(selectPlayingTrack);
   const [isFavorite, setIsFavorite] = useState(trackPresence);
 
-  const onFavoriteClick = async (isFavorite: boolean) => {
+  const handleFavoriteClick = async (isFavorite: boolean) => {
+    const handleSuccess = (message: string) => {
+      if (!isFavorite) {
+        dispatch(decreaseFavoriteTracks());
+      } else {
+        dispatch(increaseFavoriteTracks());
+      }
+
+      displayCustomAlert(Severity.Success, message);
+    };
+
+    const handleError = (message: string) => {
+      displayCustomAlert(Severity.Error, message);
+    };
+
     try {
       if (!isFavorite) {
         await removeUserSavedTracks({ ids: trackId! });
+
+        handleSuccess("Removed from the media library");
       } else {
         await saveTracksForCurrentUser({ ids: trackId! });
+
+        handleSuccess("Added to the media library");
       }
 
       if (playingTrack && playingTrack.id === trackId) {
@@ -26,11 +45,7 @@ const useFavoriteTrack = (trackPresence: boolean, trackId?: string) => {
 
       setIsFavorite(isFavorite);
     } catch (err) {
-      if (!isFavorite) {
-        displayCustomAlert(Severity.Error, "Failed to remove track from media library");
-      } else {
-        displayCustomAlert(Severity.Error, "Failed to add track to media library");
-      }
+      handleError(isFavorite ? "Failed to add track to media library" : "Failed to remove track from media library");
     }
   };
 
@@ -46,7 +61,7 @@ const useFavoriteTrack = (trackPresence: boolean, trackId?: string) => {
     fetchData();
   }, [playingTrack, trackId]);
 
-  return { isFavorite, onFavoriteClick };
+  return { isFavorite, handleFavoriteClick };
 };
 
 export default useFavoriteTrack;

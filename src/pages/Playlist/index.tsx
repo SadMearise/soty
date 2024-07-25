@@ -9,9 +9,9 @@ import { MusicType, Severity } from "../../types/enums";
 import { AudioplayerTrackInfo } from "../../types";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
 import { useAlert, useTitle } from "../../utils/hooks";
-import useFavorite from "../Album/hooks/useFavorite";
 import usePlaylistData from "./hooks/usePlaylistData";
 import { TooltipPosition } from "../../hocs/enums";
+import useFavorite from "./hooks/useFavorite";
 
 const classes = {
   section: "pb-[32px] pt-[24px]",
@@ -20,7 +20,7 @@ const classes = {
 const Playlist = () => {
   const { playlist, userProfile, tracksPresence, playlistPresence, userPlaylists, isLoading, isError } =
     usePlaylistData();
-  const { isFavorite, handleFavoriteClick } = useFavorite(playlistPresence, playlist?.id);
+  const { isFavorite, handleFavoriteClick } = useFavorite(playlistPresence, playlist);
   useTitle(
     playlist?.name && userProfile?.display_name
       ? `${playlist.name} - playlist by ${userProfile.display_name} | ${PROJECT_NAME}`

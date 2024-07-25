@@ -1,18 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AudioplayerTrackInfo } from "../../../types";
-
-interface PlaybackAction {
-  playingPlaylistId?: string | null;
-  trackIndex?: number;
-}
-
-interface AudioplayerState {
-  tracks: AudioplayerTrackInfo[];
-  playingTrack: AudioplayerTrackInfo | null;
-  isPlaying: boolean;
-  playingPlaylistId: string | null;
-  trackIndex: number;
-}
+import { AudioplayerState, PlaybackAction } from "./types";
 
 const initialState: AudioplayerState = {
   tracks: [],

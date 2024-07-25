@@ -20,7 +20,7 @@ const classes = {
 
 const Album = () => {
   const { album, artist, artistAlbums, tracksPresence, albumsPresence, isLoading, isError } = useAlbumData();
-  const { isFavorite, handleFavoriteClick } = useFavorite(albumsPresence, album?.id);
+  const { isFavorite, handleFavoriteClick } = useFavorite(albumsPresence, album);
   useTitle(album && artist ? `${album.name} - Album by ${artist.name} | ${PROJECT_NAME}` : null);
   const { displayCustomAlert } = useAlert();
   const dispatch = useAppDispatch();

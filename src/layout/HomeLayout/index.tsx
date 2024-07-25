@@ -1,7 +1,6 @@
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "../../assets/css/scrollbar.css";
 import { BlockContainer } from "../../containers";
-import { Alert } from "../../components";
 import Footer from "./Footer";
 import { useOverlayScrollToTop, useScrollbar } from "../../utils/hooks";
 import useAlert from "../../utils/hooks/useAlert";
@@ -9,6 +8,9 @@ import Header from "./Header";
 import Main from "./Main";
 import AsidePanel from "./AsidePanel";
 import { SearchContextProvider } from "../../context/SearchContext";
+import { useAppDispatch } from "../../store/hooks";
+import { removeAlert } from "../../store/features/alert/alertSlice";
+import { Alerts } from "../../components";
 
 const classes = {
   wrapper: "h-full bg-black",
@@ -23,10 +25,16 @@ const classes = {
 };
 
 const HomeLayout = () => {
-  const { alertVisibility, alertMessage, alertSeverity, setShowError } = useAlert();
+  const dispatch = useAppDispatch();
+  const { alerts } = useAlert();
+
   const { scrollContainerRef } = useScrollbar();
 
   useOverlayScrollToTop(scrollContainerRef);
+
+  const handleCloseAlert = (id: number) => {
+    dispatch(removeAlert(id));
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -59,11 +67,9 @@ const HomeLayout = () => {
           <Footer />
         </div>
         <div className={classes.alertWrapper}>
-          <Alert
-            message={alertMessage}
-            showError={alertVisibility}
-            severity={alertSeverity}
-            setShowError={setShowError}
+          <Alerts
+            alerts={alerts}
+            onClose={handleCloseAlert}
           />
         </div>
       </div>

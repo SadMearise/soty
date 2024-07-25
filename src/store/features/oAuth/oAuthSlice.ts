@@ -9,11 +9,7 @@ import {
 } from "../../../utils/helpers";
 import { ENDPOINTS, CLIENT_DATA, LOCAL_STORAGE_KEYS } from "../../../utils/constants";
 import { postToken } from "../../../services";
-
-interface OAuthState {
-  isAuthenticated: boolean;
-  isAuthProgress: boolean;
-}
+import { OAuthState } from "./types";
 
 const initialState: OAuthState = {
   isAuthenticated: Boolean(getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)),
