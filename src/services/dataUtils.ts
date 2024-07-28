@@ -32,7 +32,7 @@ export type TracklistProps = {
   id: string;
 };
 
-type GetAudioplayerTracksInfoProps = TracksProps | TracklistProps;
+export type GetAudioplayerTracksInfoProps = TracksProps | TracklistProps;
 
 export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTracksInfoProps) => {
   let tracksInfo: AudioplayerTrackInfo[] = [];
@@ -63,6 +63,8 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
           imageUrl || ("album" in track && track.album?.images[2].url) || ("image" in track && track.image) || null,
         id: track.id,
         presence: tracksPresence[index],
+        durationMs:
+          ("durationMs" in track && track.durationMs) || ("duration_ms" in track && track.duration_ms) || undefined,
       });
 
       return res;

@@ -1,14 +1,11 @@
 import { ActionBar, FavoriteAction, Loader, Playlists, ReleaseCover, Tracklist } from "../../components";
 import { SubtitleType, FavoriteButtonSize } from "../../components/enums";
 import { Container } from "../../containers";
-import { getAudioplayerTracksInfo } from "../../services";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { MusicType, Severity } from "../../types/enums";
-import { AudioplayerTrackInfo } from "../../types";
+import { useAppSelector } from "../../store/hooks";
+import { MusicType } from "../../types/enums";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
-import { useAlert, useTitle } from "../../utils/hooks";
+import { useHandlePlayback, useTitle } from "../../utils/hooks";
 import usePlaylistData from "./hooks/usePlaylistData";
 import { TooltipPosition } from "../../hocs/enums";
 import useFavorite from "./hooks/useFavorite";
@@ -18,6 +15,7 @@ const classes = {
 };
 
 const Playlist = () => {
+  const handlePlayback = useHandlePlayback();
   const { playlist, userProfile, tracksPresence, playlistPresence, userPlaylists, isLoading, isError } =
     usePlaylistData();
   const { isFavorite, handleFavoriteClick } = useFavorite(playlistPresence, playlist);
@@ -26,8 +24,6 @@ const Playlist = () => {
       ? `${playlist.name} - playlist by ${userProfile.display_name} | ${PROJECT_NAME}`
       : null
   );
-  const dispatch = useAppDispatch();
-  const { displayCustomAlert } = useAlert();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
   const isPlaying = useAppSelector(selectIsPlaying);
 
@@ -41,19 +37,16 @@ const Playlist = () => {
 
   const playlistIsPlaying = playingPlaylistId === playlist?.id && isPlaying;
 
-  const handlePlaylistPlayback = async () => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
-      as: MusicType.Tracklist,
-      type: playlist.type!,
-      id: playlist.id!,
-    });
-
-    if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Playlist cannot be played");
-    } else {
-      dispatch(setTracksInfo(tracksInfo));
-      dispatch(playback({ playingPlaylistId: playlist?.id }));
-    }
+  const handlePlaylistPlaybackClick = async () => {
+    handlePlayback(
+      {
+        as: MusicType.Tracklist,
+        type: playlist.type!,
+        id: playlist.id!,
+      },
+      { playingPlaylistId: playlist?.id },
+      "The Playlist cannot be played"
+    );
   };
 
   return (
@@ -88,7 +81,7 @@ const Playlist = () => {
             />
           }
           isPlaying={playlistIsPlaying}
-          onPlaybackClick={handlePlaylistPlayback}
+          onPlaybackClick={handlePlaylistPlaybackClick}
         />
         <Tracklist
           as={MusicType.Tracklist}

@@ -143,10 +143,15 @@ const Audioplayer = () => {
             />
           </div>
           <TrackDurationBar
-            trackDuration={PREVIEW_TRACK_DURATION_MS}
+            trackDuration={
+              playingTrack.durationMs && playingTrack.durationMs < PREVIEW_TRACK_DURATION_MS
+                ? playingTrack.durationMs
+                : PREVIEW_TRACK_DURATION_MS
+            }
             currentTrackTime={currentTrackTime}
             changeSeek={changeSeek}
           />
+
           <audio
             ref={audioplayer}
             src={playingTrack.previewUrl || undefined}

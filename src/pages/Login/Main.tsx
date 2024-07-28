@@ -3,7 +3,7 @@ import { PROJECT_NAME } from "../../utils/constants";
 import { Button } from "../../components";
 
 type MainProps = {
-  handleLogin: () => void;
+  onLoginClick: () => void;
 };
 
 const classes: Record<string, string> = {
@@ -15,7 +15,7 @@ const classes: Record<string, string> = {
   button: "btn btn-default-green w-full",
 };
 
-const Main: FC<MainProps> = ({ handleLogin }) => (
+const Main: FC<MainProps> = ({ onLoginClick }) => (
   <main className={classes.main}>
     <section className={classes.section}>
       <div className={classes.container}>
@@ -26,7 +26,7 @@ const Main: FC<MainProps> = ({ handleLogin }) => (
             className={classes.button}
             aria-label="login"
             type="button"
-            onClick={handleLogin}
+            onClick={onLoginClick}
           >
             Войти
           </Button>

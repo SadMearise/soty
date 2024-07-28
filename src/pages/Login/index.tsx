@@ -4,7 +4,7 @@ import Main from "./Main";
 import { useTitle } from "../../utils/hooks";
 
 type LoginProps = {
-  handleLogin: () => void;
+  onLoginClick: () => void;
   title: string;
 };
 
@@ -12,13 +12,13 @@ const classes = {
   wrapper: "flex flex-col h-screen",
 };
 
-const Login: FC<LoginProps> = ({ handleLogin, title }) => {
+const Login: FC<LoginProps> = ({ onLoginClick, title }) => {
   useTitle(title);
 
   return (
     <div className={classes.wrapper}>
       <Header />
-      <Main handleLogin={handleLogin} />
+      <Main onLoginClick={onLoginClick} />
     </div>
   );
 };

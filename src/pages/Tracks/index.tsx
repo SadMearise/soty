@@ -1,13 +1,10 @@
 import { ActionBar, Loader, ReleaseCover, Tracklist } from "../../components";
 import { Container } from "../../containers";
-import { getAudioplayerTracksInfo } from "../../services";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { AudioplayerTrackInfo } from "../../types";
-import { MusicType, Severity } from "../../types/enums";
+import { useAppSelector } from "../../store/hooks";
+import { MusicType } from "../../types/enums";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
-import { useAlert, useTitle } from "../../utils/hooks";
+import { useHandlePlayback, useTitle } from "../../utils/hooks";
 import { CURRENT_USER_PLAYLIST_ID } from "./contantsx";
 import useTracksData from "./hooks/useTracksData";
 
@@ -16,11 +13,10 @@ const classes = {
 };
 
 const Tracks = () => {
+  const handlePlayback = useHandlePlayback();
   const { tracks, currentUser, isLoading, isError } = useTracksData();
   const tracksIds = tracks ? tracks.filter((item) => item.track.id).map((item) => item.track.id!) : [];
   useTitle(`${PROJECT_NAME} - Любимые треки`);
-  const { displayCustomAlert } = useAlert();
-  const dispatch = useAppDispatch();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
   const isPlaying = useAppSelector(selectIsPlaying);
 
@@ -34,24 +30,21 @@ const Tracks = () => {
 
   const playlistIsPlaying = playingPlaylistId === CURRENT_USER_PLAYLIST_ID && isPlaying;
 
-  const handlePlaylistPlayback = async () => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
-      as: MusicType.CurrentUserTracks,
-      ids: tracksIds,
-      currentUserTracks: tracks.map((item) => ({
-        id: item.track.id,
-        name: item.track.name,
-        artists: item.track.artists?.map(({ id, name }) => ({ id, name })),
-        previewUrl: item.track.preview_url,
-      })),
-    });
-
-    if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Playlist cannot be played");
-    } else {
-      dispatch(setTracksInfo(tracksInfo));
-      dispatch(playback({ playingPlaylistId: CURRENT_USER_PLAYLIST_ID }));
-    }
+  const handlePlaylistPlaybackClick = async () => {
+    handlePlayback(
+      {
+        as: MusicType.CurrentUserTracks,
+        ids: tracksIds,
+        currentUserTracks: tracks.map((item) => ({
+          id: item.track.id,
+          name: item.track.name,
+          artists: item.track.artists?.map(({ id, name }) => ({ id, name })),
+          previewUrl: item.track.preview_url,
+        })),
+      },
+      { playingPlaylistId: CURRENT_USER_PLAYLIST_ID },
+      "The Playlist cannot be played"
+    );
   };
 
   return (
@@ -72,7 +65,7 @@ const Tracks = () => {
         />
         <ActionBar
           isPlaying={playlistIsPlaying}
-          onPlaybackClick={handlePlaylistPlayback}
+          onPlaybackClick={handlePlaylistPlaybackClick}
         />
         <Tracklist
           as={MusicType.CurrentUserTracks}

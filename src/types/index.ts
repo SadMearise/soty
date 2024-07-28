@@ -7,6 +7,7 @@ export type AudioplayerTrackInfo = {
   image: string | null;
   presence: boolean;
   id?: string;
+  durationMs?: number;
 };
 
 export type Ids = {

@@ -2,15 +2,13 @@ import { FC } from "react";
 import { withTooltip } from "../../hocs";
 import { SvgGenerator, Tooltip } from "..";
 import TracklistItem from "./TracklistItem";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingTrack } from "../../store/features/audioplayer/audioplayerSelectors";
-import { AudioplayerTrackInfo } from "../../types";
-import { getAudioplayerTracksInfo } from "../../services";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
 import { MusicType, Severity, SvgGeneratorId, TracklistType } from "../../types/enums";
 import { BaseArtist } from "../../models";
-import { useAlert } from "../../utils/hooks";
+import { useAlert, useHandlePlayback } from "../../utils/hooks";
 import { TooltipPosition } from "../../hocs/enums";
+import { GetAudioplayerTracksInfoProps } from "../../services/dataUtils";
 
 export type Track = {
   id: string;
@@ -48,33 +46,34 @@ const classes = {
 };
 
 const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props }) => {
-  const dispatch = useAppDispatch();
   const { displayCustomAlert } = useAlert();
+  const handlePlayback = useHandlePlayback();
   const isPlaying = useAppSelector(selectIsPlaying);
   const playingTrack = useAppSelector(selectPlayingTrack);
 
   const handleTrackPlayback = async (trackIndex: number) => {
-    let tracksInfo: AudioplayerTrackInfo[] = [];
+    const errorMessage = "The Track cannot be played";
+    let getAudioplayerTracksInfoProps: GetAudioplayerTracksInfoProps;
+
     if (props.as === MusicType.Tracklist) {
-      tracksInfo = await getAudioplayerTracksInfo({
+      getAudioplayerTracksInfoProps = {
         as: props.as,
         type: props.type,
         id,
-      });
+      };
     } else if (props.as === MusicType.CurrentUserTracks) {
-      tracksInfo = await getAudioplayerTracksInfo({
+      getAudioplayerTracksInfoProps = {
         as: props.as,
         ids: props.ids,
         currentUserTracks: tracks,
-      });
+      };
+    } else {
+      displayCustomAlert(Severity.Error, errorMessage);
+
+      return;
     }
 
-    if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Track cannot be played");
-    } else {
-      dispatch(setTracksInfo(tracksInfo));
-      dispatch(playback({ playingPlaylistId: id, trackIndex }));
-    }
+    handlePlayback(getAudioplayerTracksInfoProps, { playingPlaylistId: id, trackIndex }, errorMessage);
   };
 
   const DurationIconWithTooltip = withTooltip(
