@@ -2,15 +2,16 @@ import { FC } from "react";
 import { Button, RoundedButton } from "..";
 import PlaybackIcon from "./PlaybackIcon";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { PlaybackVariant } from "./enums";
 
 type DefaultProps = {
-  variant: "default";
+  variant: PlaybackVariant.Default;
   colorFill: string;
   size: string;
 };
 
 type RoundedProps = {
-  variant: "rounded";
+  variant: PlaybackVariant.Rounded;
   roundedButtonColor: RoundedButtonColor;
   roundedButtonSize: RoundedButtonSize;
   iconColorFill: string;
@@ -23,7 +24,7 @@ export type PlaybackProps = {
 } & (DefaultProps | RoundedProps);
 
 const Playback: FC<PlaybackProps> = ({ isPlaying, onClick, ...props }) => {
-  if (props.variant === "rounded") {
+  if (props.variant === PlaybackVariant.Rounded) {
     return (
       <RoundedButton
         as="button"

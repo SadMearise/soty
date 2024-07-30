@@ -2,14 +2,11 @@ import { getAlbumReleaseDate } from "../../utils/helpers";
 import { Playlists, ReleaseCover, Copyrights, Tracklist, Loader, ActionBar, FavoriteAction } from "../../components";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
 import { Container } from "../../containers";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { AudioplayerTrackInfo } from "../../types";
-import { getAudioplayerTracksInfo } from "../../services";
 import useFavorite from "./hooks/useFavorite";
-import { useAlert, useTitle } from "../../utils/hooks";
-import { MusicType, Severity } from "../../types/enums";
+import { useHandlePlayback, useTitle } from "../../utils/hooks";
+import { MusicType } from "../../types/enums";
 import useAlbumData from "./hooks/useAlbumData";
 import { FavoriteButtonSize, SubtitleType } from "../../components/enums";
 import { TooltipPosition } from "../../hocs/enums";
@@ -19,11 +16,10 @@ const classes = {
 };
 
 const Album = () => {
+  const handlePlayback = useHandlePlayback();
   const { album, artist, artistAlbums, tracksPresence, albumsPresence, isLoading, isError } = useAlbumData();
   const { isFavorite, handleFavoriteClick } = useFavorite(albumsPresence, album);
   useTitle(album && artist ? `${album.name} - Album by ${artist.name} | ${PROJECT_NAME}` : null);
-  const { displayCustomAlert } = useAlert();
-  const dispatch = useAppDispatch();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
   const isPlaying = useAppSelector(selectIsPlaying);
 
@@ -37,19 +33,16 @@ const Album = () => {
 
   const albumIsPlaying = playingPlaylistId === album.id && isPlaying;
 
-  const handleAlbumPlayback = async () => {
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
-      as: MusicType.Tracklist,
-      type: album.type,
-      id: album.id,
-    });
-
-    if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Album cannot be played");
-    } else {
-      dispatch(setTracksInfo(tracksInfo));
-      dispatch(playback({ playingPlaylistId: album.id }));
-    }
+  const handleAlbumPlaybackClick = async () => {
+    handlePlayback(
+      {
+        as: MusicType.Tracklist,
+        type: album.type,
+        id: album.id,
+      },
+      { playingPlaylistId: album.id },
+      "The Album cannot be played"
+    );
   };
 
   return (
@@ -82,7 +75,7 @@ const Album = () => {
             />
           }
           isPlaying={albumIsPlaying}
-          onPlaybackClick={handleAlbumPlayback}
+          onPlaybackClick={handleAlbumPlaybackClick}
         />
         <Tracklist
           as={MusicType.Tracklist}

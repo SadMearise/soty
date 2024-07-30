@@ -12,9 +12,10 @@ import { PREVIEW_TRACK_DURATION_MS } from "../../utils/constants";
 import TrackInfo from "./TrackInfo";
 import AudioControls from "./AudioControls";
 import { removeUserSavedTracks, saveTracksForCurrentUser } from "../../services";
-import { decreaseFavoriteTracks, increaseFavoriteTracks } from "../../store/features/favoriteItems/favoriteItemsSlice";
 import { useAlert } from "../../utils/hooks";
 import { Severity } from "../../types/enums";
+import { addFavoriteTrack, removeFavoriteTrack } from "../../store/features/favoriteItems/favoriteItemsSlice";
+import { TracklistItem } from "../../types";
 
 const classes = {
   wrapper: "flex items-center justify-between h-full",
@@ -30,6 +31,9 @@ const classes = {
 
 const Audioplayer = () => {
   const dispatch = useAppDispatch();
+
+  const [isProcessingFavoriteClick, setIsProcessingFavoriteClick] = useState(false);
+
   const { displayCustomAlert } = useAlert();
   const audioplayer = useRef<HTMLAudioElement>(null);
   const playingTrack = useAppSelector(selectPlayingTrack);
@@ -39,22 +43,38 @@ const Audioplayer = () => {
 
   const handleFavoriteClick = useCallback(
     async (isFavorite: boolean) => {
+      if (isProcessingFavoriteClick) return;
+
+      setIsProcessingFavoriteClick(true);
+
       dispatch(setTrackPresence(isFavorite));
-
-      if (!playingTrack?.id) return;
-
-      const handleSuccess = (message: string) => {
-        if (!isFavorite) {
-          dispatch(decreaseFavoriteTracks());
-        } else {
-          dispatch(increaseFavoriteTracks());
-        }
-
-        displayCustomAlert(Severity.Success, message);
-      };
 
       const handleError = (message: string) => {
         displayCustomAlert(Severity.Error, message);
+      };
+
+      if (!playingTrack || !playingTrack.id) {
+        handleError("Something went wrong");
+
+        return;
+      }
+
+      const handleSuccess = (message: string) => {
+        if (!isFavorite) {
+          dispatch(removeFavoriteTrack(playingTrack.id as string));
+        } else {
+          const favoriteTrack: TracklistItem = {
+            id: playingTrack.id,
+            name: playingTrack.name,
+            artists: playingTrack.artists,
+            image: playingTrack.image,
+            previewUrl: playingTrack.previewUrl,
+            durationMs: playingTrack.durationMs,
+          };
+          dispatch(addFavoriteTrack(favoriteTrack));
+        }
+
+        displayCustomAlert(Severity.Success, message);
       };
 
       try {
@@ -70,8 +90,10 @@ const Audioplayer = () => {
       } catch (err) {
         handleError(isFavorite ? "Failed to add track to media library" : "Failed to remove track from media library");
       }
+
+      setIsProcessingFavoriteClick(false);
     },
-    [dispatch, displayCustomAlert, playingTrack]
+    [dispatch, displayCustomAlert, isProcessingFavoriteClick, playingTrack]
   );
 
   const playOrPause = () => {
@@ -143,10 +165,15 @@ const Audioplayer = () => {
             />
           </div>
           <TrackDurationBar
-            trackDuration={PREVIEW_TRACK_DURATION_MS}
+            trackDuration={
+              playingTrack.durationMs && playingTrack.durationMs < PREVIEW_TRACK_DURATION_MS
+                ? playingTrack.durationMs
+                : PREVIEW_TRACK_DURATION_MS
+            }
             currentTrackTime={currentTrackTime}
             changeSeek={changeSeek}
           />
+
           <audio
             ref={audioplayer}
             src={playingTrack.previewUrl || undefined}

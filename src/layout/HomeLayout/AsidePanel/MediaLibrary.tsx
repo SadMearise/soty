@@ -6,6 +6,7 @@ import { LINKS } from "../../../utils/constants";
 import { useScrollbar } from "../../../utils/hooks";
 import { BlockContainer } from "../../../containers";
 import useMediaLibraryData from "./hooks/useMediaLibraryData";
+import { SvgGeneratorId } from "../../../types/enums";
 
 const classes = {
   container: "flex flex-col grow overflow-hidden p-[8px] md-max:px-[4px] md-max:py-[8px]",
@@ -17,7 +18,7 @@ const classes = {
 };
 
 const MediaLibrary = () => {
-  const { totalFavoriteTracks, isFavoriteAlbums, isFavoritePlaylists, isLoading } = useMediaLibraryData();
+  const { favoriteTracks, favoriteAlbums, favoritePlaylists, isLoading } = useMediaLibraryData();
 
   const { scrollContainerRef } = useScrollbar();
 
@@ -29,7 +30,7 @@ const MediaLibrary = () => {
         <>
           <div className={classes.header}>
             <SvgGenerator
-              id="media"
+              id={SvgGeneratorId.Media}
               className={classes.icon}
               size="24px"
               colorFill="fill-grey-100"
@@ -52,10 +53,10 @@ const MediaLibrary = () => {
               <MediaLibraryItem
                 imageSrc="./images/favorite.png"
                 title="Любимые треки"
-                subtitle={`Плейлист • ${getDeclension(totalFavoriteTracks, ["трек", "трека", "треков"])}`}
+                subtitle={`Плейлист • ${getDeclension(favoriteTracks.length, ["трек", "трека", "треков"])}`}
                 link={LINKS.tracks.route}
               />
-              {isFavoriteAlbums.map((album) => {
+              {favoriteAlbums.map((album) => {
                 return (
                   album.id && (
                     <MediaLibraryItem
@@ -68,7 +69,7 @@ const MediaLibrary = () => {
                   )
                 );
               })}
-              {isFavoritePlaylists.map((playlist) => {
+              {favoritePlaylists.map((playlist) => {
                 return (
                   playlist.id && (
                     <MediaLibraryItem

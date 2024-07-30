@@ -43,3 +43,26 @@ export enum MusicType {
   CurrentUserTracks = "currentUserTracks",
   Tracklist = "tracklist",
 }
+
+export enum SvgGeneratorId {
+  Play = "play",
+  Pause = "pause",
+  PrevArrow = "prevArrow",
+  NextArrow = "nextArrow",
+  Home = "home",
+  Search = "search",
+  Schedule = "schedule",
+  SkipNext = "skipNext",
+  SkipPrev = "skipPrev",
+  MusicNote = "musicNote",
+  Equalizer = "equalizer",
+  Instagram = "instagram",
+  Twitter = "twitter",
+  Facebook = "facebook",
+  Close = "close",
+  Error = "error",
+  Warning = "warning",
+  Info = "info",
+  Success = "success",
+  Media = "media",
+}

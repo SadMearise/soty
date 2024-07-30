@@ -1,13 +1,17 @@
 import { Albums, BaseArtist, Playlists } from "../models";
 
-export type AudioplayerTrackInfo = {
-  previewUrl: string | null;
-  name: string;
-  artists: Partial<BaseArtist>[];
-  image: string | null;
-  presence: boolean;
+export type TracklistItem = {
   id?: string;
+  name?: string;
+  artists?: Partial<Pick<BaseArtist, "name" | "id">>[];
+  image?: string;
+  previewUrl?: string | null;
+  durationMs?: number;
 };
+
+export type AudioplayerTrackInfo = {
+  presence: boolean;
+} & TracklistItem;
 
 export type Ids = {
   ids: string;

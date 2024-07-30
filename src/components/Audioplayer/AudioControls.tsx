@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Button, SvgGenerator, Playback } from "..";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { PlaybackVariant } from "../Playback/enums";
+import { SvgGeneratorId } from "../../types/enums";
 
 type AudioControlsProps = {
   isPlaying: boolean;
@@ -31,14 +33,14 @@ const AudioControls: FC<AudioControlsProps> = ({
         onClick={onSkipBackwardClick}
       >
         <SvgGenerator
-          id="skipPrev"
+          id={SvgGeneratorId.SkipPrev}
           size="28px"
           colorFill="fill-white/70"
           className={classes.hover}
         />
       </Button>
       <Playback
-        variant="rounded"
+        variant={PlaybackVariant.Rounded}
         isPlaying={isPlaying}
         roundedButtonColor={RoundedButtonColor.White}
         roundedButtonSize={RoundedButtonSize.Xsm}
@@ -53,7 +55,7 @@ const AudioControls: FC<AudioControlsProps> = ({
         onClick={onSkipForwardClick}
       >
         <SvgGenerator
-          id="skipNext"
+          id={SvgGeneratorId.SkipNext}
           size="28px"
           colorFill="fill-white/70"
           className={classes.hover}

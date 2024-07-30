@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import { Playback } from "..";
 import { LINKS } from "../../utils/constants";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
-import { getAudioplayerTracksInfo } from "../../services";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
-import { AudioplayerTrackInfo } from "../../types";
+import { useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
 import { MusicType, Severity, TracklistType } from "../../types/enums";
-import { useAlert } from "../../utils/hooks";
+import { useAlert, useHandlePlayback } from "../../utils/hooks";
+import { PlaybackVariant } from "../Playback/enums";
 
 type PlaylistCardProps = {
   name: string;
@@ -20,7 +18,7 @@ type PlaylistCardProps = {
 };
 
 const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitle }) => {
-  const dispatch = useAppDispatch();
+  const handlePlayback = useHandlePlayback();
   const { displayCustomAlert } = useAlert();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
   const isPlaying = useAppSelector(selectIsPlaying);
@@ -40,23 +38,24 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
     itemLink: "absolute w-full h-full top-0 left-0",
   };
 
-  const handlePlayback = async () => {
-    if (!type) {
-      displayCustomAlert(Severity.Error, "The Playlist cannot be played");
-    } else {
-      const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({
+  const handlePlaybackClick = async () => {
+    const errorMessage = "The Playlist cannot be played";
+
+    if (!type || !id) {
+      displayCustomAlert(Severity.Error, errorMessage);
+
+      return;
+    }
+
+    handlePlayback(
+      {
         as: MusicType.Tracklist,
         type,
-        id: id!,
-      });
-
-      if (!tracksInfo.length) {
-        displayCustomAlert(Severity.Error, "The Playlist cannot be played");
-      } else {
-        dispatch(setTracksInfo(tracksInfo));
-        dispatch(playback({ playingPlaylistId: id }));
-      }
-    }
+        id,
+      },
+      { playingPlaylistId: id },
+      errorMessage
+    );
   };
 
   return (
@@ -72,11 +71,11 @@ const PlaylistCard: FC<PlaylistCardProps> = ({ id, type, imageUrl, name, subtitl
           <div className={classes.playbackWrapper}>
             <Playback
               isPlaying={playlistIsPlaying}
-              variant="rounded"
+              variant={PlaybackVariant.Rounded}
               roundedButtonSize={RoundedButtonSize.Xmd}
               roundedButtonColor={RoundedButtonColor.Green}
               iconColorFill="fill-black"
-              onClick={handlePlayback}
+              onClick={handlePlaybackClick}
               shadow
             />
           </div>

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button, SvgGenerator } from "..";
-import { Severity } from "../../types/enums";
+import { Severity, SvgGeneratorId } from "../../types/enums";
 
 type AlertProps = {
   message: string;
@@ -16,6 +16,13 @@ const colors = {
 };
 
 const Alert: FC<AlertProps> = ({ message, severity, onClose }) => {
+  const svgIds = {
+    [Severity.Success]: SvgGeneratorId.Success,
+    [Severity.Warning]: SvgGeneratorId.Warning,
+    [Severity.Error]: SvgGeneratorId.Error,
+    [Severity.Info]: SvgGeneratorId.Info,
+  };
+
   const classes = {
     wrapper: `flex min-w-[300px] rounded py-[6px] px-[16px] ${colors[severity]}`,
     severityIcon: "mr-[8px]",
@@ -26,7 +33,7 @@ const Alert: FC<AlertProps> = ({ message, severity, onClose }) => {
   return (
     <div className={classes.wrapper}>
       <SvgGenerator
-        id={severity}
+        id={svgIds[severity]}
         size="22px"
         colorFill="fill-white"
         className={classes.severityIcon}
@@ -40,7 +47,7 @@ const Alert: FC<AlertProps> = ({ message, severity, onClose }) => {
         onClick={onClose}
       >
         <SvgGenerator
-          id="close"
+          id={SvgGeneratorId.Close}
           size="22px"
           colorFill="fill-white"
         />

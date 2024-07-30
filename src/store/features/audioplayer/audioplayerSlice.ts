@@ -18,7 +18,6 @@ const audioplayerSlice = createSlice({
       const { playingPlaylistId, trackIndex } = action.payload;
 
       const isTrackIndex = typeof trackIndex === "number";
-
       if (
         state.isPlaying &&
         state.playingPlaylistId === playingPlaylistId &&
@@ -27,10 +26,11 @@ const audioplayerSlice = createSlice({
         state.isPlaying = false;
       } else {
         state.playingTrack = isTrackIndex ? state.tracks[trackIndex] : state.tracks[state.trackIndex];
-        state.isPlaying = true;
         state.trackIndex = isTrackIndex ? trackIndex : state.trackIndex;
 
         if (playingPlaylistId) state.playingPlaylistId = playingPlaylistId;
+
+        state.isPlaying = true;
       }
     },
     setTracksInfo: (state, action: PayloadAction<AudioplayerTrackInfo[]>) => {

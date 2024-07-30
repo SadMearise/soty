@@ -1,15 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { PlaybackWithEqualizer } from "..";
-import { getAudioplayerTracksInfo } from "../../services";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { playback, setTracksInfo } from "../../store/features/audioplayer/audioplayerSlice";
+import { useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { AudioplayerTrackInfo } from "../../types";
 import { LINKS } from "../../utils/constants";
-import { MusicType, Severity, TracklistType } from "../../types/enums";
-import { useAlert } from "../../utils/hooks";
+import { MusicType, Severity, SvgGeneratorId, TracklistType } from "../../types/enums";
+import { useAlert, useHandlePlayback } from "../../utils/hooks";
 import { RoundedButtonColor, RoundedButtonSize } from "../enums";
+import { PlaybackVariant } from "../Playback/enums";
 
 type EverydayPlaylistProps = {
   type: TracklistType;
@@ -19,7 +17,7 @@ type EverydayPlaylistProps = {
 };
 
 const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, name }) => {
-  const dispatch = useAppDispatch();
+  const handlePlayback = useHandlePlayback();
   const { displayCustomAlert } = useAlert();
   const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
   const isPlaying = useAppSelector(selectIsPlaying);
@@ -35,17 +33,16 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
     rightColWrapper: "w-12 h-12 2xl-max:w-9 2xl-max:h-9 mr-[16px]",
   };
 
-  const handlePlayback = async () => {
-    if (!id) return;
+  const handlePlaybackClick = async () => {
+    const errorMessage = "The Playlist cannot be played";
 
-    const tracksInfo: AudioplayerTrackInfo[] = await getAudioplayerTracksInfo({ as: MusicType.Tracklist, type, id });
+    if (!id) {
+      displayCustomAlert(Severity.Error, errorMessage);
 
-    if (!tracksInfo.length) {
-      displayCustomAlert(Severity.Error, "The Playlist cannot be played");
-    } else {
-      dispatch(setTracksInfo(tracksInfo));
-      dispatch(playback({ playingPlaylistId: id }));
+      return;
     }
+
+    handlePlayback({ as: MusicType.Tracklist, type, id }, { playingPlaylistId: id }, errorMessage);
   };
 
   return (
@@ -64,17 +61,17 @@ const EverydayPlaylistCard: FC<EverydayPlaylistProps> = ({ type, id, imageUrl, n
           <PlaybackWithEqualizer
             isPlaying={playlistIsPlaying}
             equalizer={{
-              id: "equalizer",
+              id: SvgGeneratorId.Equalizer,
               colorFill: "fill-green-100",
               size: "16px",
             }}
             playback={{
               isPlaying: playlistIsPlaying,
-              variant: "rounded",
+              variant: PlaybackVariant.Rounded,
               roundedButtonSize: RoundedButtonSize.MdAdaptive,
               roundedButtonColor: RoundedButtonColor.Green,
               iconColorFill: "fill-black",
-              onClick: handlePlayback,
+              onClick: handlePlaybackClick,
               shadow: true,
             }}
             playbackVisibility

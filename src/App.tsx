@@ -73,7 +73,7 @@ const App = () => {
       <Route
         element={
           <Login
-            handleLogin={handleLogin}
+            onLoginClick={handleLogin}
             title={LINKS.login.title}
           />
         }

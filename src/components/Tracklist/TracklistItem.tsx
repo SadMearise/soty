@@ -2,36 +2,32 @@ import { FC } from "react";
 import { FavoriteAction, ArtistsList, TrackTime, PlaybackWithEqualizer } from "..";
 import { PREVIEW_TRACK_DURATION_MS } from "../../utils/constants";
 import useFavoriteTrack from "./useFavoriteTrack";
-import { BaseArtist } from "../../models";
 import { FavoriteButtonSize } from "../enums";
 import { TooltipPosition } from "../../hocs/enums";
+import { PlaybackVariant } from "../Playback/enums";
+import { SvgGeneratorId } from "../../types/enums";
+import { AudioplayerTrackInfo } from "../../types";
 
 type TracklistItemProps = {
-  id?: string;
-  name?: string;
-  durationMs?: number;
-  imageSrc?: string;
-  artists?: Partial<Pick<BaseArtist, "name" | "id">>[];
   disabled?: boolean;
   trackNumber: number;
-  trackPresence: boolean;
   isPlaying: boolean;
   onPlaybackClick: () => void;
-};
+} & AudioplayerTrackInfo;
 
 const TracklistItem: FC<TracklistItemProps> = ({
   id,
   name,
   durationMs,
-  imageSrc,
+  image,
   artists,
   disabled,
   trackNumber,
-  trackPresence,
+  presence,
   isPlaying,
   onPlaybackClick,
 }) => {
-  const { isFavorite, handleFavoriteClick } = useFavoriteTrack(trackPresence, id);
+  const { isFavorite, handleFavoriteClick } = useFavoriteTrack({ id, name, durationMs, image, artists }, presence);
 
   const trackDurationMs = durationMs && durationMs < PREVIEW_TRACK_DURATION_MS ? durationMs : PREVIEW_TRACK_DURATION_MS;
 
@@ -61,13 +57,13 @@ const TracklistItem: FC<TracklistItemProps> = ({
           <PlaybackWithEqualizer
             isPlaying={isPlaying}
             equalizer={{
-              id: "equalizer",
+              id: SvgGeneratorId.Equalizer,
               colorFill: "fill-green-100",
               size: "16px",
             }}
             playback={{
               isPlaying,
-              variant: "default",
+              variant: PlaybackVariant.Default,
               colorFill: "fill-white",
               size: "20px",
               onClick: onPlaybackClick,
@@ -77,10 +73,10 @@ const TracklistItem: FC<TracklistItemProps> = ({
           <span className={classes.trackNumberText}>{trackNumber}</span>
         </div>
         <div className={classes.centerCol}>
-          {imageSrc && (
+          {image && (
             <div className={classes.trackImageWrapper}>
               <img
-                src={imageSrc}
+                src={image}
                 className={classes.trackImage}
               />
             </div>

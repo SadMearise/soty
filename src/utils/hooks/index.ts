@@ -12,6 +12,7 @@ import useScrollbar from "./useScrollbar";
 import useOverlayScrollToTop from "./useOverlayScrollToTop";
 import useHistoryStack from "./useHistoryStack";
 import useAlert from "./useAlert";
+import useHandlePlayback from "./useHandlePlayback";
 
 export {
   useCategoryPlaylists,
@@ -28,4 +29,5 @@ export {
   useHistoryStack,
   useAlert,
   useCurrentUser,
+  useHandlePlayback,
 };

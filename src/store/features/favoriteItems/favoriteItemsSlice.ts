@@ -3,11 +3,13 @@ import { fetchUserSavedAlbums } from "../../../services/albums";
 import { fetchCurrentUserSavedPlaylists } from "../../../services/playlists";
 import { fetchUserSavedTracks } from "../../../services/tracks";
 import { FavoriteAlbum, FavoriteItemsState, FavoritePlaylist } from "./types";
+import { UserSavedTrack } from "../../../models";
+import { TracklistItem } from "../../../types";
 
 const initialState: FavoriteItemsState = {
-  isFavoriteAlbums: [],
-  isFavoritePlaylists: [],
-  totalFavoriteTracks: 0,
+  favoriteAlbums: [],
+  favoritePlaylists: [],
+  favoriteTracks: [],
   isLoadingAlbums: true,
   isLoadingPlaylists: true,
   isLoadingTracks: true,
@@ -36,9 +38,30 @@ export const fetchFavoritePlaylists = createAsyncThunk("favoriteItems/fetchFavor
 });
 
 export const fetchFavoriteTracks = createAsyncThunk("favoriteItems/fetchFavoriteTracks", async () => {
-  const userTracks = await fetchUserSavedTracks({});
+  const fetchData = async (offset = 0, accumulatedTracks: UserSavedTrack[] = []): Promise<UserSavedTrack[]> => {
+    const limit = 20;
 
-  return userTracks.total;
+    const response = await fetchUserSavedTracks({ offset, limit });
+
+    const tracks = [...accumulatedTracks, ...response.items];
+
+    if (tracks.length < response.total) {
+      return fetchData(offset + limit, tracks);
+    }
+
+    return tracks;
+  };
+
+  const userTracks = await fetchData();
+
+  return userTracks.map(({ track }) => ({
+    id: track.id,
+    name: track.name,
+    artists: track.artists?.map(({ id, name }) => ({ id, name })),
+    previewUrl: track.preview_url,
+    image: track.album?.images[2].url,
+    durationMs: track.duration_ms,
+  }));
 });
 
 const favoriteItemsSlice = createSlice({
@@ -46,26 +69,26 @@ const favoriteItemsSlice = createSlice({
   initialState,
   reducers: {
     addFavoriteAlbum: (state, action: PayloadAction<FavoriteAlbum>) => {
-      state.isFavoriteAlbums.unshift(action.payload);
+      state.favoriteAlbums.unshift(action.payload);
     },
     removeFavoriteAlbum: (state, action: PayloadAction<FavoriteAlbum>) => {
-      state.isFavoriteAlbums = state.isFavoriteAlbums.filter(
+      state.favoriteAlbums = state.favoriteAlbums.filter(
         (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
       );
     },
     addFavoritePlaylist: (state, action: PayloadAction<FavoritePlaylist>) => {
-      state.isFavoritePlaylists.unshift(action.payload);
+      state.favoritePlaylists.unshift(action.payload);
     },
     removeFavoritePlaylist: (state, action: PayloadAction<FavoritePlaylist>) => {
-      state.isFavoritePlaylists = state.isFavoritePlaylists.filter(
+      state.favoritePlaylists = state.favoritePlaylists.filter(
         (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
       );
     },
-    increaseFavoriteTracks: (state) => {
-      state.totalFavoriteTracks += 1;
+    addFavoriteTrack: (state, action: PayloadAction<TracklistItem>) => {
+      state.favoriteTracks.unshift(action.payload);
     },
-    decreaseFavoriteTracks: (state) => {
-      state.totalFavoriteTracks -= 1;
+    removeFavoriteTrack: (state, action: PayloadAction<string>) => {
+      state.favoriteTracks = state.favoriteTracks.filter((item) => action.payload !== item.id);
     },
   },
   extraReducers: (builder) => {
@@ -74,7 +97,7 @@ const favoriteItemsSlice = createSlice({
     });
     builder.addCase(fetchFavoriteAlbums.fulfilled, (state, action) => {
       state.isLoadingAlbums = false;
-      state.isFavoriteAlbums = action.payload;
+      state.favoriteAlbums = action.payload;
     });
     builder.addCase(fetchFavoriteAlbums.rejected, (state) => {
       state.isLoadingAlbums = false;
@@ -84,7 +107,7 @@ const favoriteItemsSlice = createSlice({
     });
     builder.addCase(fetchFavoritePlaylists.fulfilled, (state, action) => {
       state.isLoadingPlaylists = false;
-      state.isFavoritePlaylists = action.payload;
+      state.favoritePlaylists = action.payload;
     });
     builder.addCase(fetchFavoritePlaylists.rejected, (state) => {
       state.isLoadingPlaylists = false;
@@ -94,7 +117,7 @@ const favoriteItemsSlice = createSlice({
     });
     builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
       state.isLoadingTracks = false;
-      state.totalFavoriteTracks = action.payload;
+      state.favoriteTracks = action.payload;
     });
     builder.addCase(fetchFavoriteTracks.rejected, (state) => {
       state.isLoadingTracks = false;
@@ -107,8 +130,8 @@ export const {
   removeFavoriteAlbum,
   addFavoritePlaylist,
   removeFavoritePlaylist,
-  increaseFavoriteTracks,
-  decreaseFavoriteTracks,
+  addFavoriteTrack,
+  removeFavoriteTrack,
 } = favoriteItemsSlice.actions;
 
 export default favoriteItemsSlice;
