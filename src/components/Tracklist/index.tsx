@@ -5,19 +5,10 @@ import TracklistItem from "./TracklistItem";
 import { useAppSelector } from "../../store/hooks";
 import { selectIsPlaying, selectPlayingTrack } from "../../store/features/audioplayer/audioplayerSelectors";
 import { MusicType, Severity, SvgGeneratorId, TracklistType } from "../../types/enums";
-import { BaseArtist } from "../../models";
 import { useAlert, useHandlePlayback } from "../../utils/hooks";
 import { TooltipPosition } from "../../hocs/enums";
 import { GetAudioplayerTracksInfoProps } from "../../services/dataUtils";
-
-export type Track = {
-  id: string;
-  name: string;
-  artists: Partial<Pick<BaseArtist, "name" | "id">>[];
-  image: string;
-  previewUrl: string | null;
-  durationMs: number;
-};
+import { TracklistItem as TracklistItemType } from "../../types";
 
 type T = {
   as: MusicType.Tracklist;
@@ -31,7 +22,7 @@ type P = {
 
 type TracklistProps = {
   id: string;
-  tracks: Partial<Track>[];
+  tracks: Partial<TracklistItemType>[];
   tracksPresence: boolean[];
 } & (T | P);
 
@@ -105,10 +96,10 @@ const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props })
           id={id}
           name={name}
           durationMs={durationMs}
-          imageSrc={image}
+          image={image}
           artists={artists}
           trackNumber={index + 1}
-          trackPresence={tracksPresence[index]}
+          presence={tracksPresence[index]}
           isPlaying={playingTrack ? isPlaying && id === playingTrack.id : false}
           onPlaybackClick={() => handleTrackPlayback(index)}
           disabled={!previewUrl}

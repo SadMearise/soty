@@ -1,8 +1,7 @@
 import { Album, BaseTrack, Playlist, TrackItem, TrackObject } from "../models";
 import { MusicType, TracklistType } from "../types/enums";
-import { AudioplayerTrackInfo } from "../types";
+import { AudioplayerTrackInfo, TracklistItem } from "../types";
 import { fetchAlbumById, fetchPlaylistById, checkUserSavedTracks } from ".";
-import { Track } from "../components/Tracklist";
 
 export const processUserSavedTracksChunk = async (
   ids: string[],
@@ -23,7 +22,7 @@ export const processUserSavedTracksChunk = async (
 export type TracksProps = {
   as: MusicType.CurrentUserTracks;
   ids: string[];
-  currentUserTracks: Partial<Track>[];
+  currentUserTracks: TracklistItem[];
 };
 
 export type TracklistProps = {
@@ -40,18 +39,18 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
 
   const extractTracksData = (
     tracksPresence: boolean[],
-    items?: Partial<BaseTrack>[] | Partial<TrackItem>[] | Track[],
+    items?: BaseTrack[] | Partial<TrackItem>[] | TracklistItem[],
     imageUrl?: string
   ) => {
     if (!items) return [];
 
     return items.reduce((res: AudioplayerTrackInfo[], item, index) => {
-      let track: Partial<BaseTrack> | Partial<TrackObject> | Track;
+      let track: BaseTrack | TrackObject | TracklistItem;
 
       if ("track" in item) {
         track = (item as Partial<TrackItem>).track!;
       } else {
-        track = item as Partial<BaseTrack> | Track;
+        track = item as BaseTrack | TracklistItem;
       }
 
       res.push({
@@ -60,7 +59,10 @@ export const getAudioplayerTracksInfo = async ({ ...props }: GetAudioplayerTrack
         name: track.name || "",
         artists: track.artists || [],
         image:
-          imageUrl || ("album" in track && track.album?.images[2].url) || ("image" in track && track.image) || null,
+          imageUrl ||
+          ("album" in track && track.album?.images[2].url) ||
+          ("image" in track && track.image) ||
+          undefined,
         id: track.id,
         presence: tracksPresence[index],
         durationMs:

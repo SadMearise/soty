@@ -1,7 +1,5 @@
 import { ActionBar, Loader, ReleaseCover, Tracklist } from "../../components";
 import { Container } from "../../containers";
-import { selectIsPlaying, selectPlayingPlaylistId } from "../../store/features/audioplayer/audioplayerSelectors";
-import { useAppSelector } from "../../store/hooks";
 import { MusicType } from "../../types/enums";
 import { ERRORS, PROJECT_NAME } from "../../utils/constants";
 import { useHandlePlayback, useTitle } from "../../utils/hooks";
@@ -13,18 +11,16 @@ const classes = {
 };
 
 const Tracks = () => {
+  const { currentUser, tracks, playingPlaylistId, isPlaying, tracksIds, isLoading } = useTracksData();
   const handlePlayback = useHandlePlayback();
-  const { tracks, currentUser, isLoading, isError } = useTracksData();
-  const tracksIds = tracks ? tracks.filter((item) => item.track.id).map((item) => item.track.id!) : [];
+
   useTitle(`${PROJECT_NAME} - Любимые треки`);
-  const playingPlaylistId = useAppSelector(selectPlayingPlaylistId);
-  const isPlaying = useAppSelector(selectIsPlaying);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (isError || !currentUser) {
+  if (!tracks.length || !currentUser) {
     throw Error(ERRORS.nodata);
   }
 
@@ -35,11 +31,11 @@ const Tracks = () => {
       {
         as: MusicType.CurrentUserTracks,
         ids: tracksIds,
-        currentUserTracks: tracks.map((item) => ({
-          id: item.track.id,
-          name: item.track.name,
-          artists: item.track.artists?.map(({ id, name }) => ({ id, name })),
-          previewUrl: item.track.preview_url,
+        currentUserTracks: tracks.map(({ id, name, artists, previewUrl }) => ({
+          id,
+          name,
+          artists,
+          previewUrl,
         })),
       },
       { playingPlaylistId: CURRENT_USER_PLAYLIST_ID },
@@ -52,7 +48,7 @@ const Tracks = () => {
       <section className={classes.section}>
         <ReleaseCover
           typeText="Плейлист"
-          tracksDurationMs={tracks.reduce((res, { track }) => res + Number(track.duration_ms), 0)}
+          tracksDurationMs={tracks.reduce((res, curr) => res + Number(curr.durationMs), 0)}
           release={{
             imageUrl: "./images/favorite.png",
             name: "Любимые треки",
@@ -69,13 +65,13 @@ const Tracks = () => {
         />
         <Tracklist
           as={MusicType.CurrentUserTracks}
-          tracks={tracks.map(({ track }) => ({
-            id: track.id,
-            name: track.name,
-            artists: track.artists?.map(({ id, name }) => ({ id, name })),
-            previewUrl: track.preview_url,
-            image: track.album?.images[2].url,
-            durationMs: track.duration_ms,
+          tracks={tracks.map(({ id, name, artists, previewUrl, image, durationMs }) => ({
+            id,
+            name,
+            artists,
+            previewUrl,
+            image,
+            durationMs,
           }))}
           id={CURRENT_USER_PLAYLIST_ID}
           ids={tracksIds}

@@ -120,19 +120,19 @@ export interface LinkedFrom extends Partial<BaseInfo> {
 }
 
 export interface BaseTrack extends Partial<BaseInfo> {
-  artists: Partial<BaseArtist>[];
-  available_markets: string[];
-  disc_number: number;
-  duration_ms: number;
-  explicit: boolean;
-  is_playable: boolean;
-  linked_from: Partial<LinkedFrom>;
-  restrictions: Partial<Restrictions>;
-  name: string;
-  preview_url: string | null;
-  track_number: number;
-  type: "track";
-  is_local: boolean;
+  artists?: Partial<BaseArtist>[];
+  available_markets?: string[];
+  disc_number?: number;
+  duration_ms?: number;
+  explicit?: boolean;
+  is_playable?: boolean;
+  linked_from?: Partial<LinkedFrom>;
+  restrictions?: Partial<Restrictions>;
+  name?: string;
+  preview_url?: string | null;
+  track_number?: number;
+  type?: "track";
+  is_local?: boolean;
 }
 
 export interface TracksLink {
@@ -141,7 +141,7 @@ export interface TracksLink {
 }
 
 export interface Tracks extends PaginationInfo {
-  items: Partial<BaseTrack>[];
+  items: BaseTrack[];
 }
 
 export interface AlbumItem extends BaseInfo {
@@ -176,10 +176,10 @@ export interface BasePlaylist extends Partial<BaseInfo> {
 }
 
 export interface TrackObject extends Partial<Omit<BaseTrack, "artists">> {
-  album: AlbumItem;
-  artists: Artist[];
-  external_ids: Partial<ExternalIds>;
-  popularity: number;
+  album?: AlbumItem;
+  artists?: Artist[];
+  external_ids?: Partial<ExternalIds>;
+  popularity?: number;
 }
 
 export interface AddedBy extends Partial<BaseInfo> {
@@ -191,7 +191,7 @@ export interface TrackItem {
   added_at: string;
   added_by: Partial<AddedBy>;
   is_local: boolean;
-  track: Partial<TrackObject>;
+  track: TrackObject;
 }
 
 export interface Playlist extends Partial<Omit<BasePlaylist, "tracks">> {
@@ -242,7 +242,7 @@ export interface ArtistAlbums extends PaginationInfo {
 
 export interface UserSavedTrack {
   added_at: string;
-  track: Partial<TrackObject>;
+  track: TrackObject;
 }
 
 export interface UserSavedAlbum {

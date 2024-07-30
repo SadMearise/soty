@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
-  selectIsFavoriteAlbums,
-  selectIsFavoritePlaylists,
+  selectFavoriteAlbums,
+  selectFavoritePlaylists,
   selectIsLoadingAlbums,
   selectIsLoadingPlaylists,
   selectIsLoadingTracks,
-  selectTotalFavoriteTracks,
+  selectFavoriteTracks,
 } from "../../../../store/features/favoriteItems/favoriteItemsSelectors";
 import {
   fetchFavoriteAlbums,
@@ -16,9 +16,9 @@ import {
 
 const useMediaLibraryData = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const totalFavoriteTracks = useAppSelector(selectTotalFavoriteTracks);
-  const isFavoriteAlbums = useAppSelector(selectIsFavoriteAlbums);
-  const isFavoritePlaylists = useAppSelector(selectIsFavoritePlaylists);
+  const favoriteTracks = useAppSelector(selectFavoriteTracks);
+  const favoriteAlbums = useAppSelector(selectFavoriteAlbums);
+  const favoritePlaylists = useAppSelector(selectFavoritePlaylists);
   const isLoadingAlbums = useAppSelector(selectIsLoadingAlbums);
   const isLoadingPlaylists = useAppSelector(selectIsLoadingPlaylists);
   const isLoadingTracks = useAppSelector(selectIsLoadingTracks);
@@ -35,7 +35,7 @@ const useMediaLibraryData = () => {
     setIsLoading(isLoadingAlbums || isLoadingPlaylists || isLoadingTracks);
   }, [isLoadingAlbums, isLoadingPlaylists, isLoadingTracks]);
 
-  return { totalFavoriteTracks, isFavoriteAlbums, isFavoritePlaylists, isLoading };
+  return { favoriteTracks, favoriteAlbums, favoritePlaylists, isLoading };
 };
 
 export default useMediaLibraryData;

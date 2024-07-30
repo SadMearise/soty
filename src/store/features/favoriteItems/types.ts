@@ -1,3 +1,5 @@
+import { TracklistItem } from "../../../types";
+
 interface FavoriteBase {
   id?: string;
   name?: string;
@@ -13,9 +15,9 @@ export interface FavoritePlaylist extends FavoriteBase {
 }
 
 export interface FavoriteItemsState {
-  isFavoriteAlbums: FavoriteAlbum[];
-  isFavoritePlaylists: FavoritePlaylist[];
-  totalFavoriteTracks: number;
+  favoriteAlbums: FavoriteAlbum[];
+  favoritePlaylists: FavoritePlaylist[];
+  favoriteTracks: TracklistItem[];
   isLoadingAlbums: boolean;
   isLoadingPlaylists: boolean;
   isLoadingTracks: boolean;

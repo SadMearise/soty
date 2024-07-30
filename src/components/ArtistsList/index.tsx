@@ -3,7 +3,7 @@ import { BaseArtist } from "../../models";
 import TranslateAnimation from "./TranslateAnimation";
 
 type ArtistsListProps = {
-  artists: Partial<Pick<BaseArtist, "name" | "id">>[];
+  artists?: Partial<Pick<BaseArtist, "name" | "id">>[];
 };
 
 const classes = {
@@ -14,6 +14,10 @@ const classes = {
 
 const ArtistsList: FC<ArtistsListProps> = ({ artists }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  if (!artists) {
+    return "unknown";
+  }
 
   return (
     <div

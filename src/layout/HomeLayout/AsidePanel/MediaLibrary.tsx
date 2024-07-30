@@ -18,7 +18,7 @@ const classes = {
 };
 
 const MediaLibrary = () => {
-  const { totalFavoriteTracks, isFavoriteAlbums, isFavoritePlaylists, isLoading } = useMediaLibraryData();
+  const { favoriteTracks, favoriteAlbums, favoritePlaylists, isLoading } = useMediaLibraryData();
 
   const { scrollContainerRef } = useScrollbar();
 
@@ -53,10 +53,10 @@ const MediaLibrary = () => {
               <MediaLibraryItem
                 imageSrc="./images/favorite.png"
                 title="Любимые треки"
-                subtitle={`Плейлист • ${getDeclension(totalFavoriteTracks, ["трек", "трека", "треков"])}`}
+                subtitle={`Плейлист • ${getDeclension(favoriteTracks.length, ["трек", "трека", "треков"])}`}
                 link={LINKS.tracks.route}
               />
-              {isFavoriteAlbums.map((album) => {
+              {favoriteAlbums.map((album) => {
                 return (
                   album.id && (
                     <MediaLibraryItem
@@ -69,7 +69,7 @@ const MediaLibrary = () => {
                   )
                 );
               })}
-              {isFavoritePlaylists.map((playlist) => {
+              {favoritePlaylists.map((playlist) => {
                 return (
                   playlist.id && (
                     <MediaLibraryItem
