@@ -1,3 +1,4 @@
+import { SvgGeneratorId } from "../../../types/enums";
 import { PROJECT_NAME } from "../../../utils/constants";
 
 export const TOP_COLS = [
@@ -51,7 +52,7 @@ export const BOTTOM_LINKS = [
 ];
 
 export const SOCIALS = [
-  { id: "instagram", href: "https://www.instagram.com/spotify/" },
-  { id: "twitter", href: "https://twitter.com/spotify" },
-  { id: "facebook", href: "https://www.facebook.com/Spotify" },
+  { id: SvgGeneratorId.Instagram, href: "https://www.instagram.com/spotify/" },
+  { id: SvgGeneratorId.Twitter, href: "https://twitter.com/spotify" },
+  { id: SvgGeneratorId.Facebook, href: "https://www.facebook.com/Spotify" },
 ];
