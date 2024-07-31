@@ -38,12 +38,18 @@ const audioplayerSlice = createSlice({
         state.tracks = action.payload;
       }
     },
-    setTrackPresence: (state, action: PayloadAction<boolean>) => {
-      if (state.playingTrack) {
-        state.playingTrack.presence = action.payload;
+    setTrackPresence: (state, action: PayloadAction<{ id: string; presence: boolean }>) => {
+      if (state.playingTrack && state.playingTrack.id === action.payload.id) {
+        state.playingTrack.presence = action.payload.presence;
       }
 
-      state.tracks[state.trackIndex].presence = action.payload;
+      state.tracks = state.tracks.map((track) => {
+        if (track.id === action.payload.id) {
+          return { ...track, presence: action.payload.presence };
+        }
+
+        return track;
+      });
     },
     nextTrack: (state) => {
       if (!state.playingTrack) return;

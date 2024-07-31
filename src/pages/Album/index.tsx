@@ -89,6 +89,7 @@ const Album = () => {
             durationMs,
           }))}
           tracksPresence={tracksPresence}
+          coverImage={album.images[0].url}
         />
         <Copyrights
           releaseDate={getAlbumReleaseDate(album.release_date.split("-"))}

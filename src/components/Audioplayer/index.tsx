@@ -47,8 +47,6 @@ const Audioplayer = () => {
 
       setIsProcessingFavoriteClick(true);
 
-      dispatch(setTrackPresence(isFavorite));
-
       const handleError = (message: string) => {
         displayCustomAlert(Severity.Error, message);
       };
@@ -87,6 +85,8 @@ const Audioplayer = () => {
 
           handleSuccess("Added to the media library");
         }
+
+        dispatch(setTrackPresence({ id: playingTrack.id, presence: isFavorite }));
       } catch (err) {
         handleError(isFavorite ? "Failed to add track to media library" : "Failed to remove track from media library");
       }

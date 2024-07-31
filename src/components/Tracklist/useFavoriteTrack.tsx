@@ -8,7 +8,7 @@ import { Severity } from "../../types/enums";
 import { addFavoriteTrack, removeFavoriteTrack } from "../../store/features/favoriteItems/favoriteItemsSlice";
 import { TracklistItem } from "../../types";
 
-const useFavoriteTrack = (tracklistItem: TracklistItem, presence: boolean) => {
+const useFavoriteTrack = (tracklistItem: TracklistItem, presence: boolean, coverImage?: string) => {
   const dispatch = useAppDispatch();
 
   const [isProcessingFavoriteClick, setIsProcessingFavoriteClick] = useState(false);
@@ -36,13 +36,14 @@ const useFavoriteTrack = (tracklistItem: TracklistItem, presence: boolean) => {
           id: tracklistItem.id,
           name: tracklistItem.name,
           artists: tracklistItem.artists,
-          image: tracklistItem.image,
+          image: coverImage,
           previewUrl: tracklistItem.previewUrl,
           durationMs: tracklistItem.durationMs,
         };
         dispatch(addFavoriteTrack(favoriteTrack));
       }
 
+      dispatch(setTrackPresence({ id: tracklistItem.id!, presence: isFavorite }));
       displayCustomAlert(Severity.Success, message);
     };
 
@@ -62,7 +63,7 @@ const useFavoriteTrack = (tracklistItem: TracklistItem, presence: boolean) => {
       }
 
       if (playingTrack && playingTrack.id === tracklistItem.id) {
-        dispatch(setTrackPresence(isFavorite));
+        dispatch(setTrackPresence({ id: playingTrack.id, presence: isFavorite }));
       }
 
       setIsFavorite(isFavorite);

@@ -9,7 +9,7 @@ import { SvgGeneratorId } from "../../types/enums";
 import { AudioplayerTrackInfo } from "../../types";
 
 type TracklistItemProps = {
-  disabled?: boolean;
+  coverImage?: string;
   trackNumber: number;
   isPlaying: boolean;
   onPlaybackClick: () => void;
@@ -21,15 +21,22 @@ const TracklistItem: FC<TracklistItemProps> = ({
   durationMs,
   image,
   artists,
-  disabled,
+  previewUrl,
   trackNumber,
   presence,
   isPlaying,
+  coverImage,
   onPlaybackClick,
 }) => {
-  const { isFavorite, handleFavoriteClick } = useFavoriteTrack({ id, name, durationMs, image, artists }, presence);
+  const { isFavorite, handleFavoriteClick } = useFavoriteTrack(
+    { id, name, durationMs, artists, previewUrl },
+    presence,
+    coverImage
+  );
 
   const trackDurationMs = durationMs && durationMs < PREVIEW_TRACK_DURATION_MS ? durationMs : PREVIEW_TRACK_DURATION_MS;
+
+  const disabled = !previewUrl;
 
   const classes = {
     row: "relative grid grid-cols-[16px_minmax(120px,_4fr)_1fr] gap-[16px] px-[16px] h-[56px] hover:bg-white/10 hover:rounded-[4px] group",

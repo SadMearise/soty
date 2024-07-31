@@ -97,6 +97,7 @@ const Playlist = () => {
               durationMs: track?.duration_ms,
             }))}
           tracksPresence={tracksPresence}
+          coverImage={playlist.images?.[0]?.url ?? undefined}
         />
         {userPlaylists && Boolean(userPlaylists.length) && (
           <Playlists
