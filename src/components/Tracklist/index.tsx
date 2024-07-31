@@ -24,6 +24,7 @@ type TracklistProps = {
   id: string;
   tracks: Partial<TracklistItemType>[];
   tracksPresence: boolean[];
+  coverImage?: string;
 } & (T | P);
 
 const classes = {
@@ -36,7 +37,7 @@ const classes = {
   text: "text-sm font-normal text-grey-100",
 };
 
-const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props }) => {
+const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, coverImage, ...props }) => {
   const { displayCustomAlert } = useAlert();
   const handlePlayback = useHandlePlayback();
   const isPlaying = useAppSelector(selectIsPlaying);
@@ -102,7 +103,8 @@ const Tracklist: FC<TracklistProps> = ({ tracks, tracksPresence, id, ...props })
           presence={tracksPresence[index]}
           isPlaying={playingTrack ? isPlaying && id === playingTrack.id : false}
           onPlaybackClick={() => handleTrackPlayback(index)}
-          disabled={!previewUrl}
+          previewUrl={previewUrl}
+          coverImage={coverImage}
         />
       ))}
     </div>
