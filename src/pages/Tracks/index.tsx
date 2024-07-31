@@ -31,11 +31,12 @@ const Tracks = () => {
       {
         as: MusicType.CurrentUserTracks,
         ids: tracksIds,
-        currentUserTracks: tracks.map(({ id, name, artists, previewUrl }) => ({
+        currentUserTracks: tracks.map(({ id, name, artists, previewUrl, image }) => ({
           id,
           name,
           artists,
           previewUrl,
+          image,
         })),
       },
       { playingPlaylistId: CURRENT_USER_PLAYLIST_ID },
