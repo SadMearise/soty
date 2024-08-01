@@ -20,6 +20,7 @@ const classes = {
   gridMainView: "w-full [grid-area:main-view] overflow-auto",
   gridPlayingBar: "[grid-area:now-playing-bar]",
   overlayScrollbars: "h-full scrollbar",
+  contentWrapper: "h-full flex flex-col",
   headerWrapper: "sticky top-0 z-20",
   alertWrapper: "absolute right-1/2 translate-x-[50%] bottom-[102px] z-10",
 };
@@ -55,12 +56,14 @@ const HomeLayout = () => {
             }}
             defer
           >
-            <SearchContextProvider>
-              <div className={classes.headerWrapper}>
-                <Header />
-              </div>
-              <Main />
-            </SearchContextProvider>
+            <div className={classes.contentWrapper}>
+              <SearchContextProvider>
+                <div className={classes.headerWrapper}>
+                  <Header />
+                </div>
+                <Main />
+              </SearchContextProvider>
+            </div>
           </OverlayScrollbarsComponent>
         </BlockContainer>
         <div className={classes.gridPlayingBar}>
