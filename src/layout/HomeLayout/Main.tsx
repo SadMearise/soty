@@ -3,7 +3,7 @@ import { ErrorBoundary } from "../../components";
 import FooterInfo from "./FooterInfo";
 
 const classes = {
-  main: "flex flex-col h-full",
+  main: "flex flex-col h-full justify-between",
   contentWrapper: "flex-[1_0_auto]",
   footerInfoWrapper: "flex-[0_0_auto]",
 };
