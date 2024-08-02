@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SearchBar } from "../../../components";
 import { LINKS } from "../../../utils/constants";
@@ -9,53 +9,53 @@ import { useDebounce } from "../../../utils/hooks";
 const SearchController = () => {
   const { query } = useParams();
   const [value, setValue] = useState(decodeURIComponent(query || ""));
-  const debouncedValue = useDebounce(value, 300);
+  const debouncedValue = useDebounce(value, 400);
   const navigate = useNavigate();
   const { setSearchResults, setIsLoading, setIsError } = useSearchContext();
 
-  const fetchSearchData = async (q: string) => {
-    try {
-      setIsLoading(true);
-      const response = await fetchSearchItem({ q, type: ["album", "playlist"] });
+  const fetchSearchData = useCallback(
+    async (q: string) => {
+      try {
+        setIsLoading(true);
+        const response = await fetchSearchItem({ q, type: ["album", "playlist"] });
 
-      setSearchResults(response);
-    } catch (err) {
-      if (err instanceof Error) {
-        setIsError(err.message);
+        setSearchResults(response);
+      } catch (err) {
+        if (err instanceof Error) {
+          setIsError(err.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    },
+    [setIsError, setIsLoading, setSearchResults]
+  );
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, value: string) => {
-    if (event.key === "Enter") {
+  const handleSearch = useCallback(
+    (searchValue: string) => {
       setIsError(null);
-      event.preventDefault();
 
-      if (value.length > 0) {
-        fetchSearchData(value);
+      if (searchValue.length > 0) {
+        fetchSearchData(searchValue);
       } else {
         setSearchResults(null);
       }
-      if (value.trim()) {
-        navigate(`${LINKS.search.route}/${encodeURIComponent(value)}`);
+      if (searchValue.trim()) {
+        navigate(`${LINKS.search.route}/${encodeURIComponent(searchValue)}`);
       } else {
         navigate(`${LINKS.search.route}`);
       }
-    }
-  };
+    },
+    [fetchSearchData, navigate, setIsError, setSearchResults]
+  );
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   useEffect(() => {
-    if (debouncedValue.length > 0) {
-      fetchSearchData(debouncedValue);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedValue]);
+    handleSearch(debouncedValue);
+  }, [debouncedValue, handleSearch]);
 
   return (
     <SearchBar
@@ -63,7 +63,6 @@ const SearchController = () => {
       onChangeInput={handleChangeInput}
       onClickResetButton={() => setValue("")}
       placeholder="Что хочешь включить?"
-      onKeyDown={(event) => handleKeyDown(event, value)}
     />
   );
 };
