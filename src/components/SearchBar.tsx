@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, ChangeEvent, MouseEvent } from "react";
+import { FC, ChangeEvent, MouseEvent } from "react";
 import { Button, SvgGenerator } from ".";
 import { SvgGeneratorId } from "../types/enums";
 
@@ -7,7 +7,6 @@ type SearchBarProps = {
   placeholder: string;
   onChangeInput: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickResetButton: (event: MouseEvent<HTMLElement>) => void;
-  onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const classes = {
@@ -18,7 +17,7 @@ const classes = {
   resetButton: "pointer-events-auto",
 };
 
-const SearchBar: FC<SearchBarProps> = ({ value, placeholder, onChangeInput, onClickResetButton, onKeyDown }) => {
+const SearchBar: FC<SearchBarProps> = ({ value, placeholder, onChangeInput, onClickResetButton }) => {
   return (
     <div className={classes.formWrapper}>
       <form role="search">
@@ -27,7 +26,11 @@ const SearchBar: FC<SearchBarProps> = ({ value, placeholder, onChangeInput, onCl
           placeholder={placeholder}
           onChange={onChangeInput}
           value={value}
-          onKeyDown={onKeyDown}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+            }
+          }}
         />
       </form>
       <div className={classes.formIcons}>
