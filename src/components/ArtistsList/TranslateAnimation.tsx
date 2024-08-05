@@ -24,7 +24,7 @@ type TranslateAnimationProps = {
 const TranslateAnimation: FC<PropsWithChildren<TranslateAnimationProps>> = ({ children, wrapperRef }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [translateValue, setTranslateValue] = useState(0);
-  const debouncedWindowWidth = useDebounce(windowWidth, 5000);
+  const debouncedWindowWidth = useDebounce(windowWidth, 500);
 
   const animationRule = css`
     ${translateAnimation(translateValue)} 16s linear infinite 2s;
