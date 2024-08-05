@@ -24,10 +24,7 @@ const ArtistsList: FC<ArtistsListProps> = ({ artists }) => {
       className={classes.wrapper}
       ref={wrapperRef}
     >
-      <TranslateAnimation
-        wrapperRef={wrapperRef}
-        dependencies={[artists]}
-      >
+      <TranslateAnimation wrapperRef={wrapperRef}>
         {artists.map((artist, index) => {
           return (
             artist.id && (
