@@ -117,7 +117,7 @@ Error generating stack: `+s.message+`
     75% {
       transform: translateX(0);
     }
-  `,IE=({children:e,wrapperRef:t})=>{const[n,r]=S.exports.useState(window.innerWidth),[o,s]=S.exports.useState(0),i=W4(n,5e3),l=f0`
+  `,IE=({children:e,wrapperRef:t})=>{const[n,r]=S.exports.useState(window.innerWidth),[o,s]=S.exports.useState(0),i=W4(n,500),l=f0`
     ${_E(o)} 16s linear infinite 2s;
   `,a=P1.div`
     animation: ${l};
