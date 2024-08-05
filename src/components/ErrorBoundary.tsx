@@ -32,14 +32,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render() {
     const { hasError } = this.state;
-    const { children } = this.props;
+    const { children, location } = this.props;
 
-    if (hasError) {
+    if (hasError && location) {
       return (
         <Error
           title="Что-то пошло не так"
           text="Обновите страницу"
-          link={{ route: "/", text: "Обновить" }}
+          link={{ route: location.pathname, text: "Обновить" }}
         />
       );
     }
