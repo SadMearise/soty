@@ -19,7 +19,6 @@ export const fetchData = async <T>({ url, method, headers, body }: DataArgs): Pr
       headers,
       body,
     });
-
     if (response.status === HTTPStatusCode.Unauthorized) {
       if (!tokenIsUpdating) {
         tokenIsUpdating = true;
