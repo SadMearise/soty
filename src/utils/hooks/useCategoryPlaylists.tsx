@@ -7,6 +7,7 @@ const useCategoryPlaylists = (id: string, params?: CategoryPlaylistsParams) => {
   const [categoryPlaylists, setCategoryPlaylists] = useState<BasePlaylist[]>([]);
   const [categoryPlaylistsPath, setCategoryPlaylistsPath] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +15,11 @@ const useCategoryPlaylists = (id: string, params?: CategoryPlaylistsParams) => {
 
       const data = await fetchCategoryPlaylistsById(id, params);
 
-      if (!data) return;
+      if (!data) {
+        setIsError(true);
+
+        return;
+      }
 
       setCategoryPlaylistsPath(getUrlPathAndSearch(data.playlists.href));
       setCategoryPlaylists(data.playlists.items as BasePlaylist[]);
@@ -24,7 +29,7 @@ const useCategoryPlaylists = (id: string, params?: CategoryPlaylistsParams) => {
     fetchData();
   }, [id, params]);
 
-  return { categoryPlaylistsPath, categoryPlaylists, isLoading };
+  return { categoryPlaylistsPath, categoryPlaylists, isLoading, isError };
 };
 
 export default useCategoryPlaylists;

@@ -5,6 +5,7 @@ import { FeaturedPlaylistsParams, fetchFeaturedPlaylists } from "../../services"
 const useFeaturedPlaylists = (params?: FeaturedPlaylistsParams) => {
   const [featuredPlaylists, setFeaturedPlaylists] = useState<BasePlaylist[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +13,11 @@ const useFeaturedPlaylists = (params?: FeaturedPlaylistsParams) => {
 
       const data = await fetchFeaturedPlaylists(params);
 
-      if (!data) return;
+      if (!data) {
+        setIsError(true);
+
+        return;
+      }
 
       setFeaturedPlaylists(data.playlists.items as BasePlaylist[]);
       setIsLoading(false);
@@ -21,7 +26,7 @@ const useFeaturedPlaylists = (params?: FeaturedPlaylistsParams) => {
     fetchData();
   }, [params]);
 
-  return { featuredPlaylists, isLoading };
+  return { featuredPlaylists, isLoading, isError };
 };
 
 export default useFeaturedPlaylists;

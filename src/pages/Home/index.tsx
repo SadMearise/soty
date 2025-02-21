@@ -4,15 +4,20 @@ import { useTitle } from "../../utils/hooks";
 import { LINKS } from "../../utils/constants";
 import { Container } from "../../containers";
 import useHomeData from "./hooks/useHomeData";
+import ContentRestricted from "../ContentRestricted";
 
 const classes = {
   wrapper: "flex flex-col gap-[24px] pt-[8px] pb-[32px]",
 };
 
 const Home = () => {
-  const { featuredPlaylists, playlistsList, isLoading } = useHomeData();
+  const { featuredPlaylists, playlistsList, isLoading, isError } = useHomeData();
 
   useTitle(LINKS.home.title);
+
+  if (isError) {
+    return <ContentRestricted />;
+  }
 
   if (isLoading) {
     return <Loader />;
