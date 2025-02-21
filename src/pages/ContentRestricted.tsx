@@ -1,7 +1,7 @@
 const classes = {
-  wrapper: "text-center color-white pt-[15%]",
+  wrapper: "text-center color-white pt-[15%] pb-[15%]",
   title: "text-2xl font-bold",
-  descriptionWrapper: "flex flex-col gap-[6px] text-base pt-[10px] pb-[30px]",
+  descriptionWrapper: "flex flex-col gap-[6px] text-base pt-[10px] pb-[30px] px-4",
 };
 
 const ContentRestricted = () => {
