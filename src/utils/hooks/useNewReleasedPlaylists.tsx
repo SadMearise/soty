@@ -7,6 +7,7 @@ const useNewReleasedPlaylists = (params?: NewReleasesParams) => {
   const [newReleasedPlaylists, setNewReleasedPlaylists] = useState<AlbumItem[]>([]);
   const [newReleasedPlaylistsPath, setNewReleasedPlaylistsPath] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +15,11 @@ const useNewReleasedPlaylists = (params?: NewReleasesParams) => {
 
       const data = await fetchNewReleases(params);
 
-      if (!data) return;
+      if (!data) {
+        setIsError(true);
+
+        return;
+      }
 
       setNewReleasedPlaylistsPath(getUrlPathAndSearch(data.albums.href));
       setNewReleasedPlaylists(data.albums.items);
@@ -24,7 +29,7 @@ const useNewReleasedPlaylists = (params?: NewReleasesParams) => {
     fetchData();
   }, [params]);
 
-  return { newReleasedPlaylistsPath, newReleasedPlaylists, isLoading };
+  return { newReleasedPlaylistsPath, newReleasedPlaylists, isLoading, isError };
 };
 
 export default useNewReleasedPlaylists;

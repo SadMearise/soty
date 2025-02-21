@@ -13,16 +13,20 @@ export type FeaturedPlaylistsParams = {
 };
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-featured-playlists
-export const fetchFeaturedPlaylists = async (params?: FeaturedPlaylistsParams): Promise<Playlists> => {
+export const fetchFeaturedPlaylists = async (params?: FeaturedPlaylistsParams): Promise<Playlists | null> => {
   const queryString = params ? `${getQueryParameterStringFromObject(params)}` : "";
 
-  const featuredPlaylists: Playlists = (await fetchData({
-    url: `${ENDPOINTS.featuredPlaylists}${queryString}`,
-    method: HTTPMethod.Get,
-    headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
-  }))!;
+  try {
+    const featuredPlaylists: Playlists = (await fetchData({
+      url: `${ENDPOINTS.featuredPlaylists}${queryString}`,
+      method: HTTPMethod.Get,
+      headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
+    }))!;
 
-  return featuredPlaylists;
+    return featuredPlaylists;
+  } catch {
+    return null;
+  }
 };
 
 export type CategoryPlaylistsParams = {
@@ -34,16 +38,20 @@ export type CategoryPlaylistsParams = {
 export const fetchCategoryPlaylistsById = async (
   id: string,
   searchParams?: CategoryPlaylistsParams
-): Promise<Playlists> => {
+): Promise<Playlists | null> => {
   const queryString = searchParams ? `${getQueryParameterStringFromObject(searchParams)}` : "";
 
-  const categoryPlaylists: Playlists = (await fetchData({
-    url: `${ENDPOINTS.categories}/${id}/playlists${queryString}`,
-    method: HTTPMethod.Get,
-    headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
-  }))!;
+  try {
+    const categoryPlaylists: Playlists = (await fetchData({
+      url: `${ENDPOINTS.categories}/${id}/playlists${queryString}`,
+      method: HTTPMethod.Get,
+      headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
+    }))!;
 
-  return categoryPlaylists;
+    return categoryPlaylists;
+  } catch {
+    return null;
+  }
 };
 
 export type PlaylistParams = {

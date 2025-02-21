@@ -1,4 +1,6 @@
-# Soty - Web Player: Music for everyone
+# Soty - Web Player: Music for everyone(Deprecated)
+
+## Unfortunately, due to Spotify's updated API policy, some key endpoints used in the application are no longer available, resulting in partial loss of functionality.
 
 ![Project Status](https://img.shields.io/badge/status-finished-brightgreen.svg)
 
@@ -86,9 +88,9 @@ npm install
     - Initialize them according to your data from your [Spotify personal account](https://developer.spotify.com/).
   - `VITE_CTP_SCOPE`
     - I'm using the following permissions: `user-read-private`, `user-read-email`, `playlist-modify-public`, `playlist-modify-private`, `user-library-modify`, `user-library-read`, `playlist-read-private`, `playlist-read-collaborative`.
-    
 - **.env.production**  
   Consists of two variables:
+
   - `VITE_CTP_SERVER_URL`
     - Initialize it with the URL of your deployment server.
   - `VITE_CTP_BASE_URL`

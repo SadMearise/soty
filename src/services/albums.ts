@@ -11,16 +11,20 @@ export type NewReleasesParams = {
 };
 
 // API https://developer.spotify.com/documentation/web-api/reference/get-new-releases
-export const fetchNewReleases = async (params?: NewReleasesParams): Promise<Albums> => {
+export const fetchNewReleases = async (params?: NewReleasesParams): Promise<Albums | null> => {
   const queryString = params ? `${getQueryParameterStringFromObject(params)}` : "";
 
-  const newReleases: Albums = (await fetchData({
-    url: `${ENDPOINTS.newReleases}${queryString}`,
-    method: HTTPMethod.Get,
-    headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
-  }))!;
+  try {
+    const newReleases: Albums = (await fetchData({
+      url: `${ENDPOINTS.newReleases}${queryString}`,
+      method: HTTPMethod.Get,
+      headers: new Headers({ Authorization: `Bearer ${getLocalStorage(LOCAL_STORAGE_KEYS.accessToken)}` }),
+    }))!;
 
-  return newReleases;
+    return newReleases;
+  } catch {
+    return null;
+  }
 };
 
 export type AlbumParams = {

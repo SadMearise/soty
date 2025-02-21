@@ -3,7 +3,7 @@ import { SearchResult } from "../types";
 import { HTTPMethod } from "../types/enums";
 import { ENDPOINTS, LOCAL_STORAGE_KEYS } from "../utils/constants";
 import { getLocalStorage, getQueryParameterStringFromObject } from "../utils/helpers";
-import { fetchData } from "./fetchDataPattern";
+import { fetchData } from ".";
 
 type SearchItemParams = {
   q: string;
