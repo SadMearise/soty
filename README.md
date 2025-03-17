@@ -5,6 +5,7 @@
 ![Project Status](https://img.shields.io/badge/status-finished-brightgreen.svg)
 
 [Preview](https://sadmearise.github.io/soty/)
+![Preview](public/images/preview.jpg)
 
 ## Navigation
 
